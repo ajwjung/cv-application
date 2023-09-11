@@ -1,2 +1,3 @@
-# cv-application
-A web application that helps you build a CV
+# CV Application
+
+A web application that helps build a custom CV.
