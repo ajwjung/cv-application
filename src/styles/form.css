@@ -1,0 +1,48 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    text-align: start;
+}
+
+fieldset {
+    display: flex;
+    padding: 0;
+    border: none;
+    gap: 5px;
+}
+
+#projectDescription {
+    width: 100%;
+}
+
+/* General Info */
+.first,
+.last {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Education */
+.jobExperience {
+    flex-direction: column;
+}
+
+.dates {
+    display: flex;
+    gap: 30px;
+}
+
+.start,
+.end {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Skills */
+.skillsList > li > * {
+    padding: 0 5px;
+}
