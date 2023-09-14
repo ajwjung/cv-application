@@ -1,8 +1,21 @@
 import "../styles/form.css"
 
-function GeneralFields() {
+function GeneralFields({ handleSubmit }) {
+    function clearFormFields() {
+        const inputFields = document.querySelectorAll("#generalForm input")
+        inputFields.forEach(input => input.value = "");
+    }
+
     return (
-        <form className="generalForm" onSubmit={(e) => e.preventDefault()} action="#">
+        <form 
+            id="generalForm" 
+            action="" 
+            onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+                clearFormFields();
+            }}
+        >
             <fieldset className="fullName">
                 <div className="first">
                     <label htmlFor="firstName">First Name</label>
@@ -35,7 +48,7 @@ function GeneralFields() {
             />
             <label htmlFor="phoneNumber">Phone Number</label>
             <input 
-                type="number" 
+                type="tel" 
                 name="phoneNumber" 
                 id="phoneNumber" 
                 placeholder="Phone Number" 
@@ -46,4 +59,14 @@ function GeneralFields() {
     )
 }
 
-export default GeneralFields;
+function GeneralSection({ firstName, lastName, email, phoneNumber }) {
+    return (
+        <section className="generalInfo">
+            <h2>{firstName + " " + lastName}</h2>
+            <p>{email}</p>
+            <p>{phoneNumber}</p>
+        </section>
+    )
+}
+
+export { GeneralFields, GeneralSection };
