@@ -20,10 +20,21 @@ fieldset {
 }
 
 /* General Info */
+.generalWrapper {
+    position: relative;
+}
+
 .first,
 .last {
     display: flex;
     flex-direction: column;
+}
+
+.editInfo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
 }
 
 /* Education */

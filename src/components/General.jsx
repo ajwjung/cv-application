@@ -1,4 +1,5 @@
 import "../styles/form.css"
+import { useState } from "react";
 
 function GeneralFields({ handleSubmit }) {
     function clearFormFields() {
@@ -60,12 +61,38 @@ function GeneralFields({ handleSubmit }) {
 }
 
 function GeneralSection({ firstName, lastName, email, phoneNumber }) {
+    const [buttonHoverStyle, setButtonHoverStyle] = useState({display: "none"});
+    const [sectionHoverStyle, setSectionHoverStyle] = useState({});
+    
+    function handleMouseEnter() {
+        setButtonHoverStyle({display: "block"});
+        setSectionHoverStyle({opacity: "50%"})
+    }
+
+    function handleMouseLeave() {
+        setButtonHoverStyle({display: "none"});
+        setSectionHoverStyle({})
+    }
+
     return (
-        <section className="generalInfo">
-            <h2>{firstName + " " + lastName}</h2>
-            <p>{email}</p>
-            <p>{phoneNumber}</p>
-        </section>
+        <div 
+            className="generalWrapper"
+            onMouseEnter={handleMouseEnter} 
+            onMouseLeave={handleMouseLeave}
+        >
+            <section className="generalInfo" style={sectionHoverStyle} >
+                <h2>{firstName + " " + lastName}</h2>
+                <p>{email}</p>
+                <p>{phoneNumber}</p>
+            </section>
+            <button 
+                style={buttonHoverStyle} 
+                className="editInfo" 
+                type="button"
+            >
+                Edit
+            </button>
+        </div>
     )
 }
 
