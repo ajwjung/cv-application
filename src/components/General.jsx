@@ -1,7 +1,7 @@
 import "../styles/form.css"
 import { useState } from "react";
 
-function GeneralFields({ handleSubmit }) {
+function GeneralFields({ handleSubmit, submitButtonText }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#generalForm input")
         inputFields.forEach(input => input.value = "");
@@ -55,12 +55,12 @@ function GeneralFields({ handleSubmit }) {
                 placeholder="Phone Number" 
                 required
             />
-            <button type="submit">Add Information</button>
+            <button className="saveInfo" type="submit">{submitButtonText}</button>
         </form>
     )
 }
 
-function GeneralSection({ firstName, lastName, email, phoneNumber }) {
+function GeneralSection({ firstName, lastName, email, phoneNumber, handleEdit }) {
     const [buttonHoverStyle, setButtonHoverStyle] = useState({display: "none"});
     const [sectionHoverStyle, setSectionHoverStyle] = useState({});
     
@@ -88,6 +88,7 @@ function GeneralSection({ firstName, lastName, email, phoneNumber }) {
             <button 
                 style={buttonHoverStyle} 
                 className="editInfo" 
+                onClick={() => handleEdit()}
                 type="button"
             >
                 Edit
