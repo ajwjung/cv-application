@@ -38,6 +38,11 @@ fieldset {
 }
 
 /* Education */
+.educationWrapper {
+    position: relative;
+}
+
+/* Experience */
 .jobExperience {
     flex-direction: column;
 }

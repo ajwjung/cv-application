@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/App.css"
 import { GeneralFields, GeneralSection } from "./General.jsx"
-// import EducationFields from "./Education.jsx"
+import { EducationFields, EducationSection } from "./Education.jsx"
 // import ExperienceFields from "./Experience.jsx"
 // import ProjectFields from "./Projects.jsx"
 // import SkillsFields from "./Skills.jsx"
@@ -13,10 +13,20 @@ function FormFields() {
         email: "johndoe@email.com",
         phoneNumber: "111-111-1111",
     });
-
+    const [educationInfo, setEducationInfo] = useState({
+        schoolName: "University of California, Los Angeles",
+        location: "Los Angeles, CA",
+        titleOfStudy: "Bachelor of Arts in Business",
+        startDate: "June 2019",
+        endDate: "May 2023",
+        additionalInfo: [{
+            id: 0,
+            text: ""
+        }],
+    });
     const [submitButtonText, setSubmitButtonText] = useState("Add Information");
 
-    function handleSubmit() {
+    function handleGeneralSubmit() {
         const form = document.forms.generalForm;
         const formData = new FormData(form);
         const formValues = Object.fromEntries(formData);
@@ -25,8 +35,41 @@ function FormFields() {
         setSubmitButtonText("Add Information");   
     }
 
-    function handleEdit() {
-        // grab all form inputs and put the state values back correctly
+    function handleEducationSubmit() {
+        const form = document.forms.educationForm;
+        const formData = new FormData(form);
+        const formValues = Object.fromEntries(formData);
+
+        setEducationInfo({...educationInfo, ...formValues,
+            additionalInfo: educationInfo.additionalInfo.map(info => {
+                if (info.id === educationInfo.additionalInfo.length - 1) {
+                    return {
+                        ...info,
+                        text: formValues.additionalInfo,
+                    }
+                } else {
+                    return info;
+                }
+            })
+        });
+
+        setSubmitButtonText("Add Information");
+        console.log("Form values:", formValues);
+        console.log("Submitted data:", educationInfo)
+    }
+
+    function handleAddEducationInput() {
+        setEducationInfo({...educationInfo, 
+            additionalInfo: [...educationInfo.additionalInfo, {
+                id: educationInfo.additionalInfo.length,
+                text: ""
+            }]
+        })
+
+        console.log(educationInfo);
+    }
+
+    function handleGeneralEdit() {
         const allGeneralInputs = document.querySelectorAll("#generalForm input");
         allGeneralInputs.forEach(input => {
             if (input.id === "firstName") {
@@ -49,17 +92,56 @@ function FormFields() {
         setSubmitButtonText("Update Information");
     }
 
+    function handleEducationEdit() {
+        const allEducationInputs = document.querySelectorAll("#educationForm input");
+        allEducationInputs.forEach(input => {
+            if (input.id === "schoolName") {
+                input.value = educationInfo.schoolName;
+            }
+
+            if (input.id === "location") {
+                input.value = educationInfo.location;
+            }
+
+            if (input.id === "titleOfStudy") {
+                input.value = educationInfo.titleOfStudy;
+            }
+
+            if (input.id === "startDate") {
+                input.value = educationInfo.startDate;
+            }
+
+            if (input.id === "endDate") {
+                input.value = educationInfo.endDate;
+            }
+
+            educationInfo.additionalInfo.forEach(infoObj => {
+                if (input.id === "additionalInfo" + infoObj.id) {
+                    input.value = educationInfo.additionalInfo[infoObj.id].text;
+                }
+            })
+        })
+
+        setSubmitButtonText("Update Information");
+    }
+
+
     return (
         <>
             <h1>Form Fields</h1>
             <h2>General Information</h2>
             <GeneralFields
-                handleSubmit={handleSubmit}  
+                handleSubmit={handleGeneralSubmit}  
                 submitButtonText={submitButtonText}
             />
-            {/* <h2>Education</h2>
-            <EducationFields />
-            <h2>Work Experience</h2>
+            <h2>Education</h2>
+            <EducationFields
+                handleSubmit={handleEducationSubmit}
+                additionalInfo={educationInfo.additionalInfo}
+                handleAddEducationInput={handleAddEducationInput}
+                submitButtonText={submitButtonText}
+            />
+            {/* <h2>Work Experience</h2>
             <ExperienceFields />
             <h2>Projects (optional)</h2>
             <ProjectFields />
@@ -71,7 +153,16 @@ function FormFields() {
                 lastName={generalInfo.lastName}
                 email={generalInfo.email}
                 phoneNumber={generalInfo.phoneNumber}
-                handleEdit={handleEdit}
+                handleEdit={handleGeneralEdit}
+            />
+            <EducationSection
+                schoolName={educationInfo.schoolName}
+                location={educationInfo.location}
+                titleOfStudy={educationInfo.titleOfStudy}
+                startDate={educationInfo.startDate}
+                endDate={educationInfo.endDate}
+                additionalInfo={educationInfo.additionalInfo}
+                handleEdit={handleEducationEdit}
             />
         </>
     )
