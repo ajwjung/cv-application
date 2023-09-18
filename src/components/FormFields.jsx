@@ -12,6 +12,7 @@ function FormFields() {
         lastName: "Doe",
         email: "johndoe@email.com",
         phoneNumber: "111-111-1111",
+        isEdit: false,
     });
     const [educationInfo, setEducationInfo] = useState({
         schoolName: "University of California, Los Angeles",
@@ -23,16 +24,19 @@ function FormFields() {
             id: 0,
             text: ""
         }],
+        isEdit: false,
     });
-    const [submitButtonText, setSubmitButtonText] = useState("Add Information");
 
     function handleGeneralSubmit() {
         const form = document.forms.generalForm;
         const formData = new FormData(form);
         const formValues = Object.fromEntries(formData);
 
-        setGeneralInfo({...generalInfo, ...formValues});
-        setSubmitButtonText("Add Information");   
+        setGeneralInfo({
+            ...generalInfo, 
+            ...formValues, 
+            isEdit: false
+        });
     }
 
     function handleEducationSubmit() {
@@ -40,7 +44,9 @@ function FormFields() {
         const formData = new FormData(form);
         const formValues = Object.fromEntries(formData);
 
-        setEducationInfo({...educationInfo, ...formValues,
+        setEducationInfo({
+            ...educationInfo, 
+            ...formValues,
             additionalInfo: educationInfo.additionalInfo.map(info => {
                 if (info.id === educationInfo.additionalInfo.length - 1) {
                     return {
@@ -50,12 +56,9 @@ function FormFields() {
                 } else {
                     return info;
                 }
-            })
+            }),
+            isEdit: false,
         });
-
-        setSubmitButtonText("Add Information");
-        console.log("Form values:", formValues);
-        console.log("Submitted data:", educationInfo)
     }
 
     function handleAddEducationInput() {
@@ -65,12 +68,11 @@ function FormFields() {
                 text: ""
             }]
         })
-
-        console.log(educationInfo);
     }
 
     function handleGeneralEdit() {
         const allGeneralInputs = document.querySelectorAll("#generalForm input");
+
         allGeneralInputs.forEach(input => {
             if (input.id === "firstName") {
                 input.value = generalInfo.firstName;
@@ -89,11 +91,12 @@ function FormFields() {
             }
         })
 
-        setSubmitButtonText("Update Information");
+        setGeneralInfo({...generalInfo, isEdit: true});
     }
 
     function handleEducationEdit() {
         const allEducationInputs = document.querySelectorAll("#educationForm input");
+        
         allEducationInputs.forEach(input => {
             if (input.id === "schoolName") {
                 input.value = educationInfo.schoolName;
@@ -120,9 +123,9 @@ function FormFields() {
                     input.value = educationInfo.additionalInfo[infoObj.id].text;
                 }
             })
-        })
 
-        setSubmitButtonText("Update Information");
+            setEducationInfo({...educationInfo, isEdit: true});
+        })
     }
 
 
@@ -132,14 +135,14 @@ function FormFields() {
             <h2>General Information</h2>
             <GeneralFields
                 handleSubmit={handleGeneralSubmit}  
-                submitButtonText={submitButtonText}
+                editStatus={generalInfo.isEdit}
             />
             <h2>Education</h2>
             <EducationFields
                 handleSubmit={handleEducationSubmit}
                 additionalInfo={educationInfo.additionalInfo}
                 handleAddEducationInput={handleAddEducationInput}
-                submitButtonText={submitButtonText}
+                editStatus={educationInfo.isEdit}
             />
             {/* <h2>Work Experience</h2>
             <ExperienceFields />

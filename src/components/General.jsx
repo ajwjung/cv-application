@@ -1,7 +1,7 @@
 import "../styles/form.css"
 import { useState } from "react";
 
-function GeneralFields({ handleSubmit, submitButtonText }) {
+function GeneralFields({ handleSubmit, editStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#generalForm input")
         inputFields.forEach(input => input.value = "");
@@ -55,7 +55,11 @@ function GeneralFields({ handleSubmit, submitButtonText }) {
                 placeholder="Phone Number" 
                 required
             />
-            <button className="saveInfo" type="submit">{submitButtonText}</button>
+            <button className="saveInfo" type="submit">{
+                editStatus 
+                ? "Update Information" 
+                : "Add Information"
+            }</button>
         </form>
     )
 }

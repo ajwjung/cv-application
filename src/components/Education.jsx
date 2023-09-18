@@ -1,7 +1,7 @@
 import "../styles/form.css"
 import { useState } from "react";
 
-function EducationFields({ handleSubmit, additionalInfo, handleAddEducationInput, submitButtonText }) {
+function EducationFields({ handleSubmit, additionalInfo, handleAddEducationInput, editStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#educationForm input")
         inputFields.forEach(input => input.value = "");
@@ -86,7 +86,11 @@ function EducationFields({ handleSubmit, additionalInfo, handleAddEducationInput
                 })}
             </fieldset>
             <button onClick={() => {handleAddEducationInput(); console.log("additional", additionalInfo)}} type="button">Add Additional Info</button>
-            <button type="submit">{submitButtonText}</button>
+            <button type="submit">{
+                editStatus 
+                ? "Update Information" 
+                : "Add Information"
+            }</button>
         </form>
     )
 }
