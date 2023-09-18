@@ -123,7 +123,7 @@ function EducationSection({ schoolName, location, titleOfStudy, startDate, endDa
                 <p>{titleOfStudy}</p>
                 {/* Only add list if there is text to display */}
                 {
-                    additionalInfo[0].text && 
+                    additionalInfo.some(info => info.text) && 
                     <ul>
                         {additionalInfo.map(info => {
                             return (info.text && <li key={info.id}>{info.text}</li>)
