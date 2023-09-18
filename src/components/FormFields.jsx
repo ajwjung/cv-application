@@ -43,20 +43,19 @@ function FormFields() {
         const form = document.forms.educationForm;
         const formData = new FormData(form);
         const formValues = Object.fromEntries(formData);
+        const allAdditionalInfo = formData.getAll("additionalInfo").filter(val => val);
 
         setEducationInfo({
             ...educationInfo, 
             ...formValues,
-            additionalInfo: educationInfo.additionalInfo.map(info => {
-                if (info.id === educationInfo.additionalInfo.length - 1) {
+            additionalInfo: educationInfo.additionalInfo
+                .map(info => {
                     return {
                         ...info,
-                        text: formValues.additionalInfo,
+                        text: allAdditionalInfo[info.id]
                     }
-                } else {
-                    return info;
-                }
-            }),
+                })
+                .filter(info => info.text),
             isEdit: false,
         });
     }
@@ -124,8 +123,9 @@ function FormFields() {
                 }
             })
 
-            setEducationInfo({...educationInfo, isEdit: true});
         })
+        
+        setEducationInfo({...educationInfo, isEdit: true});
     }
 
 
