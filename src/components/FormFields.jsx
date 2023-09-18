@@ -44,18 +44,22 @@ function FormFields() {
         const formData = new FormData(form);
         const formValues = Object.fromEntries(formData);
         const allAdditionalInfo = formData.getAll("additionalInfo").filter(val => val);
+        const updatedObjects = educationInfo.additionalInfo
+            .map(info => {
+                return {
+                    ...info,
+                    text: allAdditionalInfo[info.id]
+                        ? allAdditionalInfo[info.id]
+                        : ""
+                }
+            });
 
         setEducationInfo({
             ...educationInfo, 
             ...formValues,
-            additionalInfo: educationInfo.additionalInfo
-                .map(info => {
-                    return {
-                        ...info,
-                        text: allAdditionalInfo[info.id]
-                    }
-                })
-                .filter(info => info.text),
+            additionalInfo: updatedObjects.length > 1
+                ? updatedObjects.filter(info => info.text)
+                : updatedObjects,
             isEdit: false,
         });
     }
