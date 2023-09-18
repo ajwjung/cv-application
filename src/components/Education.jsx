@@ -121,13 +121,15 @@ function EducationSection({ schoolName, location, titleOfStudy, startDate, endDa
                     <p>{startDate + " - " + endDate}</p>
                 </div>
                 <p>{titleOfStudy}</p>
-                <ul>
-                    {additionalInfo.map(info => {
-                        return (
-                            <li key={info.id}>{info.text}</li>
-                        )
-                    })}
-                </ul>
+                {/* Only add list if there is text to display */}
+                {
+                    additionalInfo[0].text && 
+                    <ul>
+                        {additionalInfo.map(info => {
+                            return (info.text && <li key={info.id}>{info.text}</li>)
+                        })}
+                    </ul>
+                }
             </section>
             <button 
                 style={buttonHoverStyle} 
