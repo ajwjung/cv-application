@@ -42,6 +42,10 @@ fieldset {
     position: relative;
 }
 
+.additionalInfoFields {
+    flex-direction: column;
+}
+
 /* Experience */
 .jobExperience {
     flex-direction: column;
