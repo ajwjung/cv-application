@@ -59,6 +59,15 @@ function FormFields() {
         });
     }
 
+    function handleAddAdditionalInfo() {
+        const additionalInfoFields = document.querySelector(".additionalInfoFields");
+        const newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.name = "additionalInfo";
+        newInput.placeholder = "Additional info (e.g., relevant coursework)"
+        additionalInfoFields.appendChild(newInput)
+    }
+
     function handleGeneralEdit() {
         const allGeneralInputs = document.querySelectorAll("#generalForm input");
 
@@ -94,6 +103,7 @@ function FormFields() {
             <h2>Education</h2>
             <EducationFields
                 handleSubmit={handleEducationSubmit}
+                handleAddAdditionalInfo={handleAddAdditionalInfo}
                 additionalInfo={educationInfo.additionalInfo}
                 editStatus={educationInfo.isEdit}
             />

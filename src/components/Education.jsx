@@ -1,7 +1,7 @@
 import "../styles/form.css"
 import { useState } from "react";
 
-function EducationFields({ handleSubmit, editStatus }) {
+function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#educationForm input")
         inputFields.forEach(input => input.value = "");
@@ -64,14 +64,15 @@ function EducationFields({ handleSubmit, editStatus }) {
                     />
                 </div>
             </fieldset>
-            <label htmlFor="additionalInfo">Additional Information (optional)</label>
-            <input 
-                type="text" 
-                name="additionalInfo"
-                id="additionalInfo"
-                placeholder="Additional info (e.g., relevant coursework)"
-            />
-            <button onClick={(e) => e.preventDefault()} type="button">Add Additional Info</button>
+            <fieldset className="additionalInfoFields">
+                <legend>Additional Information (optional)</legend>
+                <input
+                    type="text"
+                    name="additionalInfo"
+                    placeholder="Additional info (e.g., relevant coursework)"
+                />
+            </fieldset>
+            <button onClick={() => handleAddAdditionalInfo()} type="button">Add Additional Info</button>
             <button type="submit">{
                 editStatus 
                 ? "Update Information" 
@@ -104,6 +105,7 @@ function EducationSection({ educationInfo }) {
                         onMouseEnter={handleMouseEnter} 
                         onMouseLeave={handleMouseLeave}
                         style={entryHoverStyle} 
+                        id={"entry" + index}
                         key={"entry" + index}
                     >
                         <div className="educationDetails">
