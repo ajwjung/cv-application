@@ -14,18 +14,20 @@ function FormFields() {
         phoneNumber: "111-111-1111",
         isEdit: false,
     });
-    const [educationInfo, setEducationInfo] = useState({
-        schoolName: "University of California, Los Angeles",
-        location: "Los Angeles, CA",
-        titleOfStudy: "Bachelor of Arts in Business",
-        startDate: "June 2019",
-        endDate: "May 2023",
-        additionalInfo: [{
-            id: 0,
-            text: ""
-        }],
-        isEdit: false,
-    });
+    const [educationInfo, setEducationInfo] = useState([
+        {
+            schoolName: "University of California, Los Angeles",
+            location: "Los Angeles, CA",
+            titleOfStudy: "Bachelor of Arts in Business",
+            startDate: "June 2019",
+            endDate: "May 2023",
+            additionalInfo: [{
+                id: 0,
+                text: ""
+            }],
+            isEdit: false,
+        }
+    ]);
 
     function handleGeneralSubmit() {
         const form = document.forms.generalForm;
@@ -44,33 +46,16 @@ function FormFields() {
         const formData = new FormData(form);
         const formValues = Object.fromEntries(formData);
         const allAdditionalInfo = formData.getAll("additionalInfo").filter(val => val);
-        const updatedObjects = educationInfo.additionalInfo
-            .map(info => {
-                return {
-                    ...info,
-                    text: allAdditionalInfo[info.id]
-                        ? allAdditionalInfo[info.id]
-                        : ""
-                }
-            });
 
-        setEducationInfo({
-            ...educationInfo, 
-            ...formValues,
-            additionalInfo: updatedObjects.length > 1
-                ? updatedObjects.filter(info => info.text)
-                : updatedObjects,
-            isEdit: false,
-        });
-    }
-
-    function handleAddEducationInput() {
-        setEducationInfo({...educationInfo, 
-            additionalInfo: [...educationInfo.additionalInfo, {
-                id: educationInfo.additionalInfo.length,
-                text: ""
-            }]
-        })
+        // Add entry as new object to the state
+        setEducationInfo([
+            ...educationInfo,
+            {
+                ...formValues,
+                additionalInfo: allAdditionalInfo,
+                isEdit: false,
+            }
+        ]);
     }
 
     function handleGeneralEdit() {
@@ -97,42 +82,6 @@ function FormFields() {
         setGeneralInfo({...generalInfo, isEdit: true});
     }
 
-    function handleEducationEdit() {
-        const allEducationInputs = document.querySelectorAll("#educationForm input");
-        
-        allEducationInputs.forEach(input => {
-            if (input.id === "schoolName") {
-                input.value = educationInfo.schoolName;
-            }
-
-            if (input.id === "location") {
-                input.value = educationInfo.location;
-            }
-
-            if (input.id === "titleOfStudy") {
-                input.value = educationInfo.titleOfStudy;
-            }
-
-            if (input.id === "startDate") {
-                input.value = educationInfo.startDate;
-            }
-
-            if (input.id === "endDate") {
-                input.value = educationInfo.endDate;
-            }
-
-            educationInfo.additionalInfo.forEach(infoObj => {
-                if (input.id === "additionalInfo" + infoObj.id) {
-                    input.value = educationInfo.additionalInfo[infoObj.id].text;
-                }
-            })
-
-        })
-        
-        setEducationInfo({...educationInfo, isEdit: true});
-    }
-
-
     return (
         <>
             <h1>Form Fields</h1>
@@ -145,7 +94,6 @@ function FormFields() {
             <EducationFields
                 handleSubmit={handleEducationSubmit}
                 additionalInfo={educationInfo.additionalInfo}
-                handleAddEducationInput={handleAddEducationInput}
                 editStatus={educationInfo.isEdit}
             />
             {/* <h2>Work Experience</h2>
@@ -163,13 +111,7 @@ function FormFields() {
                 handleEdit={handleGeneralEdit}
             />
             <EducationSection
-                schoolName={educationInfo.schoolName}
-                location={educationInfo.location}
-                titleOfStudy={educationInfo.titleOfStudy}
-                startDate={educationInfo.startDate}
-                endDate={educationInfo.endDate}
-                additionalInfo={educationInfo.additionalInfo}
-                handleEdit={handleEducationEdit}
+                educationInfo={educationInfo}
             />
         </>
     )
