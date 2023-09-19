@@ -16,6 +16,7 @@ function FormFields() {
     });
     const [educationInfo, setEducationInfo] = useState([
         {
+            id: 0,
             schoolName: "University of California, Los Angeles",
             location: "Los Angeles, CA",
             titleOfStudy: "Bachelor of Arts in Business",
@@ -50,6 +51,7 @@ function FormFields() {
                     ...prevState,
                     {
                         ...formValues,
+                        id: prevState.length,
                         additionalInfo: [...allAdditionalInfo]
                     }
                 ]
