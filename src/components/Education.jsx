@@ -113,10 +113,12 @@ function EducationSection({ educationInfo }) {
                         <p>{entry.titleOfStudy}</p>
                         {
                             /* Only add list if there is text to display */
-                            entry.additionalInfo.some(info => info.text) &&
+                            entry.additionalInfo.some(text => text) &&
                             <ul>
-                                {entry.additionalInfo.map(info => {
-                                    return (info.text && <li key={info.id}>{info.text}</li>)
+                                {entry.additionalInfo.map((text, index) => {
+                                    return (
+                                        text && <li key={index}>{text}</li>
+                                    )
                                 })}
                             </ul>
                         }

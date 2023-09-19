@@ -21,10 +21,7 @@ function FormFields() {
             titleOfStudy: "Bachelor of Arts in Business",
             startDate: "June 2019",
             endDate: "May 2023",
-            additionalInfo: [{
-                id: 0,
-                text: ""
-            }],
+            additionalInfo: [""],
             isEdit: false,
         }
     ]);
@@ -47,15 +44,17 @@ function FormFields() {
         const formValues = Object.fromEntries(formData);
         const allAdditionalInfo = formData.getAll("additionalInfo").filter(val => val);
 
-        // Add entry as new object to the state
-        setEducationInfo([
-            ...educationInfo,
-            {
-                ...formValues,
-                additionalInfo: allAdditionalInfo,
-                isEdit: false,
-            }
-        ]);
+        setEducationInfo((prevState) => {
+            return (
+                [
+                    ...prevState,
+                    {
+                        ...formValues,
+                        additionalInfo: [...allAdditionalInfo]
+                    }
+                ]
+            )
+        });
     }
 
     function handleGeneralEdit() {
