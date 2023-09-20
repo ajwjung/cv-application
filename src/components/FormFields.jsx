@@ -26,6 +26,7 @@ function FormFields() {
             isEdit: false,
         }
     ]);
+    const editedEducationEntry = educationInfo.find(entry => entry.isEdit);
 
     function handleGeneralSubmit() {
         const form = document.forms.generalForm;
@@ -45,18 +46,40 @@ function FormFields() {
         const formValues = Object.fromEntries(formData);
         const allAdditionalInfo = formData.getAll("additionalInfo").filter(val => val);
 
-        setEducationInfo((prevState) => {
-            return (
-                [
-                    ...prevState,
-                    {
-                        ...formValues,
-                        id: prevState.length,
-                        additionalInfo: [...allAdditionalInfo]
+        // Updating an edited entry
+        if (editedEducationEntry) {
+            // Update object values
+            setEducationInfo(educationInfo.map((entry, index) => {
+                    if (index === editedEducationEntry.id) {
+                        return {
+                            ...entry,
+                            schoolName: formValues.schoolName,
+                            location: formValues.location,
+                            titleOfStudy: formValues.titleOfStudy,
+                            startDate: formValues.startDate,
+                            endDate: formValues.endDate,
+                            additionalInfo: allAdditionalInfo,
+                            isEdit: false,
+                        }
                     }
-                ]
+                })
             )
-        });
+        } else {
+            // Submitting a new entry
+            setEducationInfo((prevState) => {
+                return (
+                    [
+                        ...prevState,
+                        {
+                            ...formValues,
+                            id: prevState.length,
+                            additionalInfo: [...allAdditionalInfo]
+                        }
+                    ]
+                )
+            });
+        }
+
     }
 
     function handleAddAdditionalInfo() {
@@ -92,6 +115,53 @@ function FormFields() {
         setGeneralInfo({...generalInfo, isEdit: true});
     }
 
+    function handleEducationEdit(entryDivId) {
+        const entryToEdit = educationInfo[entryDivId]
+        const allInputFields = document.querySelectorAll("#educationForm input");
+        const allAdditionalInputs = document.querySelectorAll(".additionalInfoFields input")
+
+        setEducationInfo(
+            educationInfo.map((entry) => {
+                if (entry.id === Number(entryDivId)) {
+                    return {
+                        ...entry,
+                        isEdit: true,
+                    }
+                } else {
+                    return entry;
+                }
+            })
+        )
+
+        allInputFields.forEach(input => {
+            switch (input.id) {
+                case "schoolName": 
+                    input.value = entryToEdit.schoolName;
+                    break;
+                case "location": 
+                    input.value = entryToEdit.location;
+                    break;
+                case "titleOfStudy": 
+                    input.value = entryToEdit.titleOfStudy;
+                    break;
+                case "startDate": 
+                    input.value = entryToEdit.startDate;
+                    break;
+                case "endDate": 
+                    input.value = entryToEdit.endDate;
+                    break;
+                default:
+                    input.value = "";
+                    break;
+            }
+        });
+
+        allAdditionalInputs.forEach((input, index) => {
+            const correspondingText = entryToEdit.additionalInfo[index];
+            input.value = correspondingText ? correspondingText : "";
+        })
+    }
+
     return (
         <>
             <h1>Form Fields</h1>
@@ -104,8 +174,7 @@ function FormFields() {
             <EducationFields
                 handleSubmit={handleEducationSubmit}
                 handleAddAdditionalInfo={handleAddAdditionalInfo}
-                additionalInfo={educationInfo.additionalInfo}
-                editStatus={educationInfo.isEdit}
+                // editStatus={educationInfo.isEdit}
             />
             {/* <h2>Work Experience</h2>
             <ExperienceFields />
@@ -123,6 +192,7 @@ function FormFields() {
             />
             <EducationSection
                 educationInfo={educationInfo}
+                handleEdit={handleEducationEdit}
             />
         </>
     )

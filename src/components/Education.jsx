@@ -1,7 +1,7 @@
 import "../styles/form.css"
 import { useState } from "react";
 
-function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) {
+function EducationFields({ handleSubmit, handleAddAdditionalInfo }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#educationForm input")
         inputFields.forEach(input => input.value = "");
@@ -74,15 +74,16 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
             </fieldset>
             <button onClick={() => handleAddAdditionalInfo()} type="button">Add Additional Info</button>
             <button type="submit">{
-                editStatus 
-                ? "Update Information" 
-                : "Add Information"
+                // editStatus 
+                // ? "Update Information" 
+                // : "Add Information"
+                "Add Information"
             }</button>
         </form>
     )
 }
 
-function EducationSection({ educationInfo }) {
+function EducationSection({ educationInfo, handleEdit }) {
     const [buttonHoverStyle, setButtonHoverStyle] = useState({display: "none"});
     const [entryHoverStyle, setEntryHoverStyle] = useState({});
     
@@ -127,7 +128,10 @@ function EducationSection({ educationInfo }) {
                         <button 
                             style={buttonHoverStyle} 
                             className="editInfo" 
-                            onClick={(e) => console.log(e.target.parentNode)}
+                            onClick={(e) => {
+                                const entryId = e.target.parentNode.id.slice(-1);
+                                handleEdit(entryId);
+                            }}
                             type="button"
                         >
                             Edit
