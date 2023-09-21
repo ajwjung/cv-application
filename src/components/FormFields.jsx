@@ -91,20 +91,19 @@ function FormFields() {
         // Updating an edited entry
         if (typeof(idOfEditedEducationEntry) === "number") {
             setEducationInfo(educationInfo.map((entry, index) => {
-                    if (index === idOfEditedEducationEntry) {
-                        return {
-                            schoolName: formValues.schoolName,
-                            location: formValues.location,
-                            titleOfStudy: formValues.titleOfStudy,
-                            startDate: formValues.startDate,
-                            endDate: formValues.endDate,
-                            additionalInfo: [...allAdditionalInfo],
-                        }
-                    } else {
-                        return entry;
+                if (index === idOfEditedEducationEntry) {
+                    return {
+                        schoolName: formValues.schoolName,
+                        location: formValues.location,
+                        titleOfStudy: formValues.titleOfStudy,
+                        startDate: formValues.startDate,
+                        endDate: formValues.endDate,
+                        additionalInfo: [...allAdditionalInfo],
                     }
-                })
-            )
+                } else {
+                    return entry;
+                }
+            }))
         } else {
             // Submitting a new entry
             setEducationInfo((prevState) => {
