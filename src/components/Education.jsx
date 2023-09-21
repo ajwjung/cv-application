@@ -77,7 +77,6 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
                 editStatus 
                 ? "Update Information" 
                 : "Add Information"
-                // "Add Information"
             }</button>
         </form>
     )

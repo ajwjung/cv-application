@@ -23,10 +23,9 @@ function FormFields() {
             startDate: "June 2019",
             endDate: "May 2023",
             additionalInfo: [""],
-            isEdit: false,
         }
     ]);
-    const editedEducationEntry = educationInfo.find(entry => entry.isEdit);
+    const [idOfEditedEducationEntry, setIdOfEditedEducationEntry] = useState();
 
     function handleGeneralSubmit() {
         const form = document.forms.generalForm;
@@ -36,7 +35,6 @@ function FormFields() {
         setGeneralInfo({
             ...generalInfo, 
             ...formValues, 
-            isEdit: false
         });
     }
 
@@ -47,20 +45,19 @@ function FormFields() {
         const allAdditionalInfo = formData.getAll("additionalInfo").filter(val => val);
 
         // Updating an edited entry
-        if (editedEducationEntry) {
-            // Update object values
+        if (typeof(idOfEditedEducationEntry) === "number") {
             setEducationInfo(educationInfo.map((entry, index) => {
-                    if (index === editedEducationEntry.id) {
+                    if (index === idOfEditedEducationEntry) {
                         return {
-                            ...entry,
                             schoolName: formValues.schoolName,
                             location: formValues.location,
                             titleOfStudy: formValues.titleOfStudy,
                             startDate: formValues.startDate,
                             endDate: formValues.endDate,
-                            additionalInfo: allAdditionalInfo,
-                            isEdit: false,
+                            additionalInfo: [...allAdditionalInfo],
                         }
+                    } else {
+                        return entry;
                     }
                 })
             )
@@ -74,13 +71,13 @@ function FormFields() {
                             ...formValues,
                             id: prevState.length,
                             additionalInfo: [...allAdditionalInfo],
-                            isEdit: false,
                         }
                     ]
                 )
             });
         }
 
+        setIdOfEditedEducationEntry("");
     }
 
     function handleAddAdditionalInfo() {
@@ -117,24 +114,11 @@ function FormFields() {
     }
 
     function handleEducationEdit(entryDivId) {
-        const entryToEdit = educationInfo[entryDivId]
+        const entryToEdit = educationInfo[entryDivId];
         const allInputFields = document.querySelectorAll("#educationForm input");
-        const allAdditionalInputs = document.querySelectorAll(".additionalInfoFields input")
+        const allAdditionalInputs = document.querySelectorAll(".additionalInfoFields input");
 
-        console.log(editedEducationEntry, educationInfo);
-
-        setEducationInfo(
-            educationInfo.map((entry) => {
-                if (entry.id === Number(entryDivId)) {
-                    return {
-                        ...entry,
-                        isEdit: true,
-                    }
-                } else {
-                    return entry;
-                }
-            })
-        )
+        setIdOfEditedEducationEntry(Number(entryDivId));
 
         allInputFields.forEach(input => {
             switch (input.id) {
@@ -177,7 +161,7 @@ function FormFields() {
             <EducationFields
                 handleSubmit={handleEducationSubmit}
                 handleAddAdditionalInfo={handleAddAdditionalInfo}
-                editStatus={editedEducationEntry}
+                editStatus={typeof(idOfEditedEducationEntry) === "number"}
             />
             {/* <h2>Work Experience</h2>
             <ExperienceFields />
