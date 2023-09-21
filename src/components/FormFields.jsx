@@ -26,6 +26,50 @@ function FormFields() {
         }
     ]);
     const [idOfEditedEducationEntry, setIdOfEditedEducationEntry] = useState();
+    const [buttonHoverStyle, setButtonHoverStyle] = useState([{ display: "none" }]);
+    const [entryHoverStyle, setEntryHoverStyle] = useState([{}]);
+
+    function handleMouseEnterEducation(entryId) {
+        setButtonHoverStyle(
+            buttonHoverStyle.map((buttonStyle, index) => {
+                if (index === entryId) {
+                    return ({ display: "block" });
+                } else {
+                    return buttonStyle;
+                }
+            })
+        );
+        setEntryHoverStyle(
+            entryHoverStyle.map((entryStyle, index) => {
+                if (index === entryId) {
+                    return ({ opacity: "50%" });
+                } else {
+                    return entryStyle;
+                }
+            })
+        )
+    }
+
+    function handleMouseLeaveEducation(entryId) {
+        setButtonHoverStyle(
+            buttonHoverStyle.map((buttonStyle, index) => {
+                if (index === entryId) {
+                    return ({ display: "none" });
+                } else {
+                    return buttonStyle;
+                }
+            })
+        );
+        setEntryHoverStyle(
+            entryHoverStyle.map((entryStyle, index) => {
+                if (index === entryId) {
+                    return ({});
+                } else {
+                    return entryStyle;
+                }
+            })
+        )
+    }
 
     function handleGeneralSubmit() {
         const form = document.forms.generalForm;
@@ -75,6 +119,17 @@ function FormFields() {
                     ]
                 )
             });
+
+            // Add another style element
+            setButtonHoverStyle([
+                ...buttonHoverStyle,
+                { display: "none" }
+            ])
+
+            setEntryHoverStyle([
+                ...entryHoverStyle,
+                {}
+            ])
         }
 
         setIdOfEditedEducationEntry("");
@@ -180,6 +235,10 @@ function FormFields() {
             <EducationSection
                 educationInfo={educationInfo}
                 handleEdit={handleEducationEdit}
+                handleMouseEnter={handleMouseEnterEducation}
+                handleMouseLeave={handleMouseLeaveEducation}
+                buttonHoverStyle={buttonHoverStyle}
+                entryHoverStyle={entryHoverStyle}
             />
         </>
     )

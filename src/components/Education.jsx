@@ -1,5 +1,5 @@
 import "../styles/form.css"
-import { useState } from "react";
+// import { useState } from "react";
 
 function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) {
     function clearFormFields() {
@@ -82,29 +82,22 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
     )
 }
 
-function EducationSection({ educationInfo, handleEdit }) {
-    const [buttonHoverStyle, setButtonHoverStyle] = useState({display: "none"});
-    const [entryHoverStyle, setEntryHoverStyle] = useState({});
-    
-    function handleMouseEnter() {
-        setButtonHoverStyle({display: "block"});
-        setEntryHoverStyle({opacity: "50%"})
-    }
-
-    function handleMouseLeave() {
-        setButtonHoverStyle({display: "none"});
-        setEntryHoverStyle({})
-    }
-
+function EducationSection({ educationInfo, handleEdit, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="educationWrapper">
             {educationInfo.map((entry, index) => {
                 return (
                     <div 
                         className="educationEntry"
-                        onMouseEnter={handleMouseEnter} 
-                        onMouseLeave={handleMouseLeave}
-                        style={entryHoverStyle} 
+                        onMouseEnter={(e) => {
+                            const hoveredEntryId = e.target.closest(".educationEntry").id.slice(-1);
+                            handleMouseEnter(Number(hoveredEntryId));
+                        }} 
+                        onMouseLeave={(e) => {
+                            const hoveredEntryId = e.target.closest(".educationEntry").id.slice(-1);
+                            handleMouseLeave(Number(hoveredEntryId));
+                        }}
+                        style={entryHoverStyle[index]} 
                         id={"entry" + index}
                         key={"entry" + index}
                     >
@@ -125,7 +118,7 @@ function EducationSection({ educationInfo, handleEdit }) {
                             </ul>
                         }
                         <button 
-                            style={buttonHoverStyle} 
+                            style={buttonHoverStyle[index]} 
                             className="editInfo" 
                             onClick={(e) => {
                                 const entryId = e.target.parentNode.id.slice(-1);
