@@ -73,7 +73,8 @@ function FormFields() {
                         {
                             ...formValues,
                             id: prevState.length,
-                            additionalInfo: [...allAdditionalInfo]
+                            additionalInfo: [...allAdditionalInfo],
+                            isEdit: false,
                         }
                     ]
                 )
@@ -119,6 +120,8 @@ function FormFields() {
         const entryToEdit = educationInfo[entryDivId]
         const allInputFields = document.querySelectorAll("#educationForm input");
         const allAdditionalInputs = document.querySelectorAll(".additionalInfoFields input")
+
+        console.log(editedEducationEntry, educationInfo);
 
         setEducationInfo(
             educationInfo.map((entry) => {
@@ -174,7 +177,7 @@ function FormFields() {
             <EducationFields
                 handleSubmit={handleEducationSubmit}
                 handleAddAdditionalInfo={handleAddAdditionalInfo}
-                // editStatus={educationInfo.isEdit}
+                editStatus={editedEducationEntry}
             />
             {/* <h2>Work Experience</h2>
             <ExperienceFields />
