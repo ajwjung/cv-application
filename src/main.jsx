@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { General, Education } from './components/FormFields.jsx'
+import General from './components/General.jsx'
+import Education from './components/Education.jsx'
 // import GeneratedCv from './components/GeneratedCv.jsx'
 import '../src/styles/index.css'
 

@@ -1,85 +1,6 @@
 import "../styles/form.css"
-
-function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) {
-    function clearFormFields() {
-        const inputFields = document.querySelectorAll("#educationForm input")
-        inputFields.forEach(input => input.value = "");
-    }
-
-    return (
-        <form 
-            id="educationForm" 
-            action=""
-            onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit();
-                clearFormFields();
-            }} 
-        >
-            <label htmlFor="schoolName">Name of Institution</label>
-            <input 
-                type="text" 
-                name="schoolName" 
-                id="schoolName" 
-                placeholder="Name of Institution" 
-                required
-            />
-            <label htmlFor="location">Location</label>
-            <input 
-                type="text" 
-                name="location" 
-                id="location"
-                placeholder="City, Country"
-                pattern="[- A-Za-z]+, [- A-Za-z]+"
-                required
-            />
-            <label htmlFor="titleOfStudy">Title of Study</label>
-            <input 
-                type="text" 
-                name="titleOfStudy" 
-                id="titleOfStudy" 
-                placeholder="Title of Study" 
-                required
-            />
-            <fieldset>
-                <div className="start">
-                    <label htmlFor="startDate">Start Date</label>
-                    <input
-                        type="text"
-                        name="startDate"
-                        id="startDate"
-                        placeholder="Start Date (Month Year)"
-                        required
-                    />
-                </div>
-                <div className="end">
-                    <label htmlFor="endDate">End Date</label>
-                    <input
-                        type="text"
-                        name="endDate"
-                        id="endDate"
-                        placeholder="End Date (Month Year)"
-                        required
-                    />
-                </div>
-            </fieldset>
-            <fieldset className="additionalInfoFields">
-                <legend>Additional Information (optional)</legend>
-                <input
-                    type="text"
-                    name="additionalInfo"
-                    placeholder="Additional info (e.g., relevant coursework)"
-                />
-            </fieldset>
-            <button onClick={() => handleAddAdditionalInfo()} type="button">Add Additional Info</button>
-            <button type="submit">{
-                editStatus 
-                ? "Update Information" 
-                : "Add Information"
-            }</button>
-        </form>
-    )
-}
+import { useState } from "react"
+import { EducationFields } from './FormFields.jsx'
 
 function EducationSection({ educationInfo, handleEdit, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
@@ -138,4 +59,179 @@ function EducationSection({ educationInfo, handleEdit, handleMouseEnter, handleM
     )
 }
 
-export { EducationFields, EducationSection };
+function Education() {
+    const [educationInfo, setEducationInfo] = useState([
+        {
+            id: 0,
+            schoolName: "University of California, Los Angeles",
+            location: "Los Angeles, CA",
+            titleOfStudy: "Bachelor of Arts in Business",
+            startDate: "June 2019",
+            endDate: "May 2023",
+            additionalInfo: [""],
+        }
+    ]);
+    const [idOfEditedEducationEntry, setIdOfEditedEducationEntry] = useState();
+    const [buttonHoverStyle, setButtonHoverStyle] = useState([{ display: "none" }]);
+    const [entryHoverStyle, setEntryHoverStyle] = useState([{}]);
+
+    function handleMouseEnterEducation(entryId) {
+        setButtonHoverStyle(
+            buttonHoverStyle.map((buttonStyle, index) => {
+                if (index === entryId) {
+                    return ({ display: "block" });
+                } else {
+                    return buttonStyle;
+                }
+            })
+        );
+        setEntryHoverStyle(
+            entryHoverStyle.map((entryStyle, index) => {
+                if (index === entryId) {
+                    return ({ opacity: "50%" });
+                } else {
+                    return entryStyle;
+                }
+            })
+        )
+    }
+
+    function handleMouseLeaveEducation(entryId) {
+        setButtonHoverStyle(
+            buttonHoverStyle.map((buttonStyle, index) => {
+                if (index === entryId) {
+                    return ({ display: "none" });
+                } else {
+                    return buttonStyle;
+                }
+            })
+        );
+        setEntryHoverStyle(
+            entryHoverStyle.map((entryStyle, index) => {
+                if (index === entryId) {
+                    return ({});
+                } else {
+                    return entryStyle;
+                }
+            })
+        )
+    }
+
+    function handleEducationSubmit() {
+        const form = document.forms.educationForm;
+        const formData = new FormData(form);
+        const formValues = Object.fromEntries(formData);
+        const allAdditionalInfo = formData.getAll("additionalInfo").filter(val => val);
+
+        // Updating an edited entry
+        if (typeof(idOfEditedEducationEntry) === "number") {
+            setEducationInfo(educationInfo.map((entry, index) => {
+                if (index === idOfEditedEducationEntry) {
+                    return {
+                        schoolName: formValues.schoolName,
+                        location: formValues.location,
+                        titleOfStudy: formValues.titleOfStudy,
+                        startDate: formValues.startDate,
+                        endDate: formValues.endDate,
+                        additionalInfo: [...allAdditionalInfo],
+                    }
+                } else {
+                    return entry;
+                }
+            }))
+        } else {
+            // Submitting a new entry
+            setEducationInfo((prevState) => {
+                return (
+                    [
+                        ...prevState,
+                        {
+                            ...formValues,
+                            id: prevState.length,
+                            additionalInfo: [...allAdditionalInfo],
+                        }
+                    ]
+                )
+            });
+
+            // Add another style element
+            setButtonHoverStyle([
+                ...buttonHoverStyle,
+                { display: "none" }
+            ])
+
+            setEntryHoverStyle([
+                ...entryHoverStyle,
+                {}
+            ])
+        }
+
+        setIdOfEditedEducationEntry("");
+    }
+
+    function handleAddAdditionalInfo() {
+        const additionalInfoFields = document.querySelector(".additionalInfoFields");
+        const newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.name = "additionalInfo";
+        newInput.placeholder = "Additional info (e.g., relevant coursework)"
+        additionalInfoFields.appendChild(newInput)
+    }
+
+    function handleEducationEdit(entryDivId) {
+        const entryToEdit = educationInfo[entryDivId];
+        const allInputFields = document.querySelectorAll("#educationForm input");
+        const allAdditionalInputs = document.querySelectorAll(".additionalInfoFields input");
+
+        setIdOfEditedEducationEntry(Number(entryDivId));
+
+        allInputFields.forEach(input => {
+            switch (input.id) {
+                case "schoolName": 
+                    input.value = entryToEdit.schoolName;
+                    break;
+                case "location": 
+                    input.value = entryToEdit.location;
+                    break;
+                case "titleOfStudy": 
+                    input.value = entryToEdit.titleOfStudy;
+                    break;
+                case "startDate": 
+                    input.value = entryToEdit.startDate;
+                    break;
+                case "endDate": 
+                    input.value = entryToEdit.endDate;
+                    break;
+                default:
+                    input.value = "";
+                    break;
+            }
+        });
+
+        allAdditionalInputs.forEach((input, index) => {
+            const correspondingText = entryToEdit.additionalInfo[index];
+            input.value = correspondingText ? correspondingText : "";
+        })
+    }
+
+    return (
+        <>
+            <h2>Education</h2>
+            <EducationFields
+                handleSubmit={handleEducationSubmit}
+                handleAddAdditionalInfo={handleAddAdditionalInfo}
+                editStatus={typeof(idOfEditedEducationEntry) === "number"}
+            />
+            <EducationSection
+                educationInfo={educationInfo}
+                handleEdit={handleEducationEdit}
+                handleMouseEnter={handleMouseEnterEducation}
+                handleMouseLeave={handleMouseLeaveEducation}
+                buttonHoverStyle={buttonHoverStyle}
+                entryHoverStyle={entryHoverStyle}
+            />
+        </>
+    )
+}
+
+export default Education;

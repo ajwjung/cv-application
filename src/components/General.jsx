@@ -1,68 +1,6 @@
 import "../styles/form.css"
 import { useState } from "react";
-
-function GeneralFields({ handleSubmit, editStatus }) {
-    function clearFormFields() {
-        const inputFields = document.querySelectorAll("#generalForm input")
-        inputFields.forEach(input => input.value = "");
-    }
-
-    return (
-        <form 
-            id="generalForm" 
-            action="" 
-            onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit();
-                clearFormFields();
-            }}
-        >
-            <fieldset className="fullName">
-                <div className="first">
-                    <label htmlFor="firstName">First Name</label>
-                    <input
-                        type="text"
-                        name="firstName"
-                        id="firstName"
-                        placeholder="First Name"
-                        required
-                    />
-                </div>
-                <div className="last">
-                    <label htmlFor="lastName">Last Name</label>
-                    <input
-                        type="text"
-                        name="lastName"
-                        id="lastName"
-                        placeholder="Last Name"
-                        required
-                    />
-                </div>
-            </fieldset>
-            <label htmlFor="email">Email Address</label>
-            <input 
-                type="email" 
-                name="email" 
-                id="email" 
-                placeholder="Email Address" 
-                required
-            />
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <input 
-                type="tel" 
-                name="phoneNumber" 
-                id="phoneNumber" 
-                placeholder="Phone Number" 
-                required
-            />
-            <button className="saveInfo" type="submit">{
-                editStatus 
-                ? "Update Information" 
-                : "Add Information"
-            }</button>
-        </form>
-    )
-}
+import { GeneralFields } from "./FormFields";
 
 function GeneralSection({ firstName, lastName, email, phoneNumber, handleEdit }) {
     const [buttonHoverStyle, setButtonHoverStyle] = useState({display: "none"});
@@ -101,4 +39,67 @@ function GeneralSection({ firstName, lastName, email, phoneNumber, handleEdit })
     )
 }
 
-export { GeneralFields, GeneralSection };
+function General() {
+    const [generalInfo, setGeneralInfo] = useState({
+        firstName: "John",
+        lastName: "Doe",
+        email: "johndoe@email.com",
+        phoneNumber: "111-111-1111",
+        isEdit: false,
+    });
+
+    function handleGeneralSubmit() {
+        const form = document.forms.generalForm;
+        const formData = new FormData(form);
+        const formValues = Object.fromEntries(formData);
+
+        setGeneralInfo({
+            ...generalInfo, 
+            ...formValues, 
+        });
+    }
+
+    function handleGeneralEdit() {
+        const allGeneralInputs = document.querySelectorAll("#generalForm input");
+
+        allGeneralInputs.forEach(input => {
+            if (input.id === "firstName") {
+                input.value = generalInfo.firstName;
+            }
+
+            if (input.id === "lastName") {
+                input.value = generalInfo.lastName;
+            }
+
+            if (input.id === "email") {
+                input.value = generalInfo.email;
+            }
+
+            if (input.id === "phoneNumber") {
+                input.value = generalInfo.phoneNumber;
+            }
+        })
+
+        setGeneralInfo({...generalInfo, isEdit: true});
+    }
+
+    return (
+        <>
+            <h1>Form Fields</h1>
+            <h2>General Information</h2>
+            <GeneralFields
+                handleSubmit={handleGeneralSubmit}  
+                editStatus={generalInfo.isEdit}
+            />
+            <GeneralSection
+                firstName={generalInfo.firstName}
+                lastName={generalInfo.lastName}
+                email={generalInfo.email}
+                phoneNumber={generalInfo.phoneNumber}
+                handleEdit={handleGeneralEdit}
+            />
+        </>
+    )
+}
+
+export default General;
