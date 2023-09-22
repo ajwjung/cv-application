@@ -247,7 +247,9 @@ function Education() {
     }
 
     function handleDeleteEntry(entryId) {
-        console.log("Deleting entry #", entryId);
+        setEducationInfo(
+            educationInfo.filter((_, index) => Number(entryId) !== index)
+        );
     }
 
     return (
