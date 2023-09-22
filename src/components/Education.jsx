@@ -117,16 +117,23 @@ function Education() {
         )
     }
 
-    function removeAdditionalFields(numOfFieldsNeeded) {
+    function removeAdditionalFields() {
         const additionalFieldset = document.querySelector(".additionalInfoFields");
-        const numOfChildren = additionalFieldset.childNodes.length;
 
-        /* Must keep at least 2 children regardless
+        /* Must always keep at least 2 children
         because one is the legend and one is the default input box */
-        while (numOfChildren > numOfFieldsNeeded
-            && numOfChildren > 2) {
+        while (additionalFieldset.childNodes.length > 2) {
             additionalFieldset.removeChild(additionalFieldset.lastChild);
         }
+    }
+
+    function handleAddAdditionalInfo() {
+        const additionalInfoFields = document.querySelector(".additionalInfoFields");
+        const newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.name = "additionalInfo";
+        newInput.placeholder = "Additional info (e.g., relevant coursework)"
+        additionalInfoFields.appendChild(newInput)
     }
 
     function handleEducationSubmit() {
@@ -178,39 +185,22 @@ function Education() {
             ])
         }
 
-        removeAdditionalFields(2);
+        removeAdditionalFields();
         setIdOfEditedEducationEntry("");
-    }
-
-    function handleAddAdditionalInfo() {
-        const additionalInfoFields = document.querySelector(".additionalInfoFields");
-        const newInput = document.createElement("input");
-        newInput.type = "text";
-        newInput.name = "additionalInfo";
-        newInput.placeholder = "Additional info (e.g., relevant coursework)"
-        additionalInfoFields.appendChild(newInput)
     }
 
     function handleEducationEdit(entryDivId) {
         const entryToEdit = educationInfo[entryDivId];
         const allInputFields = document.querySelectorAll("#educationForm input");
         const allAdditionalInputs = document.querySelectorAll(".additionalInfoFields input");
-        const numOfAdditionalFields = allAdditionalInputs.length;
         const numOfInfoValues = entryToEdit.additionalInfo.length;
-        const additionalInputsNeeded = numOfInfoValues - numOfAdditionalFields;
 
         setIdOfEditedEducationEntry(Number(entryDivId));
 
-        // Add or remove additional input fields so there are
-        // as many input fields as there are values to edit
-        if (numOfAdditionalFields > numOfInfoValues) {
-            removeAdditionalFields(numOfInfoValues);
-        } else if (numOfAdditionalFields < numOfInfoValues) {
-            [...Array(additionalInputsNeeded)].forEach(() => {
-                handleAddAdditionalInfo();
-            });
-        } else if (numOfAdditionalFields === 0) {
-            removeAdditionalFields(2);
+        // Add as many input fields back as number of additional inputs
+        if (allAdditionalInputs.length < numOfInfoValues) {
+            const numOfFieldsNeeded = numOfInfoValues - allAdditionalInputs.length;
+            [...Array(numOfFieldsNeeded)].forEach(() => handleAddAdditionalInfo());
         }
 
         allInputFields.forEach(input => {
