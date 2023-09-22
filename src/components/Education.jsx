@@ -1,5 +1,4 @@
 import "../styles/form.css"
-// import { useState } from "react";
 
 function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) {
     function clearFormFields() {
