@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import FormFields from './components/FormFields.jsx'
+import { General, Education } from './components/FormFields.jsx'
 // import GeneratedCv from './components/GeneratedCv.jsx'
 import '../src/styles/index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <FormFields />
+    <General />
+    <Education />
     {/* <GeneratedCv /> */}
   </React.StrictMode>,
 )

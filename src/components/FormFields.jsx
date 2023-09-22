@@ -6,7 +6,7 @@ import { EducationFields, EducationSection } from "./Education.jsx"
 // import ProjectFields from "./Projects.jsx"
 // import SkillsFields from "./Skills.jsx"
 
-function FormFields() {
+function General() {
     const [generalInfo, setGeneralInfo] = useState({
         firstName: "John",
         lastName: "Doe",
@@ -14,6 +14,62 @@ function FormFields() {
         phoneNumber: "111-111-1111",
         isEdit: false,
     });
+
+    function handleGeneralSubmit() {
+        const form = document.forms.generalForm;
+        const formData = new FormData(form);
+        const formValues = Object.fromEntries(formData);
+
+        setGeneralInfo({
+            ...generalInfo, 
+            ...formValues, 
+        });
+    }
+
+    function handleGeneralEdit() {
+        const allGeneralInputs = document.querySelectorAll("#generalForm input");
+
+        allGeneralInputs.forEach(input => {
+            if (input.id === "firstName") {
+                input.value = generalInfo.firstName;
+            }
+
+            if (input.id === "lastName") {
+                input.value = generalInfo.lastName;
+            }
+
+            if (input.id === "email") {
+                input.value = generalInfo.email;
+            }
+
+            if (input.id === "phoneNumber") {
+                input.value = generalInfo.phoneNumber;
+            }
+        })
+
+        setGeneralInfo({...generalInfo, isEdit: true});
+    }
+
+    return (
+        <>
+            <h1>Form Fields</h1>
+            <h2>General Information</h2>
+            <GeneralFields
+                handleSubmit={handleGeneralSubmit}  
+                editStatus={generalInfo.isEdit}
+            />
+            <GeneralSection
+                firstName={generalInfo.firstName}
+                lastName={generalInfo.lastName}
+                email={generalInfo.email}
+                phoneNumber={generalInfo.phoneNumber}
+                handleEdit={handleGeneralEdit}
+            />
+        </>
+    )
+}
+
+function Education() {
     const [educationInfo, setEducationInfo] = useState([
         {
             id: 0,
@@ -69,17 +125,6 @@ function FormFields() {
                 }
             })
         )
-    }
-
-    function handleGeneralSubmit() {
-        const form = document.forms.generalForm;
-        const formData = new FormData(form);
-        const formValues = Object.fromEntries(formData);
-
-        setGeneralInfo({
-            ...generalInfo, 
-            ...formValues, 
-        });
     }
 
     function handleEducationSubmit() {
@@ -143,30 +188,6 @@ function FormFields() {
         additionalInfoFields.appendChild(newInput)
     }
 
-    function handleGeneralEdit() {
-        const allGeneralInputs = document.querySelectorAll("#generalForm input");
-
-        allGeneralInputs.forEach(input => {
-            if (input.id === "firstName") {
-                input.value = generalInfo.firstName;
-            }
-
-            if (input.id === "lastName") {
-                input.value = generalInfo.lastName;
-            }
-
-            if (input.id === "email") {
-                input.value = generalInfo.email;
-            }
-
-            if (input.id === "phoneNumber") {
-                input.value = generalInfo.phoneNumber;
-            }
-        })
-
-        setGeneralInfo({...generalInfo, isEdit: true});
-    }
-
     function handleEducationEdit(entryDivId) {
         const entryToEdit = educationInfo[entryDivId];
         const allInputFields = document.querySelectorAll("#educationForm input");
@@ -205,31 +226,11 @@ function FormFields() {
 
     return (
         <>
-            <h1>Form Fields</h1>
-            <h2>General Information</h2>
-            <GeneralFields
-                handleSubmit={handleGeneralSubmit}  
-                editStatus={generalInfo.isEdit}
-            />
             <h2>Education</h2>
             <EducationFields
                 handleSubmit={handleEducationSubmit}
                 handleAddAdditionalInfo={handleAddAdditionalInfo}
                 editStatus={typeof(idOfEditedEducationEntry) === "number"}
-            />
-            {/* <h2>Work Experience</h2>
-            <ExperienceFields />
-            <h2>Projects (optional)</h2>
-            <ProjectFields />
-            <h2>Technical Skills</h2>
-            <SkillsFields /> */}
-
-            <GeneralSection
-                firstName={generalInfo.firstName}
-                lastName={generalInfo.lastName}
-                email={generalInfo.email}
-                phoneNumber={generalInfo.phoneNumber}
-                handleEdit={handleGeneralEdit}
             />
             <EducationSection
                 educationInfo={educationInfo}
@@ -243,4 +244,4 @@ function FormFields() {
     )
 }
 
-export default FormFields;
+export { General, Education };
