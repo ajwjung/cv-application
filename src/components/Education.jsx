@@ -97,19 +97,23 @@ function EducationSection({ educationInfo, handleEdit, handleMouseEnter, handleM
                             const hoveredEntryId = e.target.closest(".educationEntry").id.slice(-1);
                             handleMouseLeave(Number(hoveredEntryId));
                         }}
-                        style={entryHoverStyle[index]} 
                         id={"entry" + index}
                         key={"entry" + index}
                     >
-                        <div className="educationDetails">
+                        <div 
+                            className="educationDetails"
+                            style={entryHoverStyle[index]} 
+                        >
                             <p><b>{entry.schoolName}</b> | {entry.location}</p>
                             <p>{entry.startDate + " - " + entry.endDate}</p>
                         </div>
-                        <p>{entry.titleOfStudy}</p>
+                        <p
+                            style={entryHoverStyle[index]} 
+                        >{entry.titleOfStudy}</p>
                         {
                             /* Only add list if there is text to display */
                             entry.additionalInfo.some(text => text) &&
-                            <ul>
+                            <ul style={entryHoverStyle[index]}>
                                 {entry.additionalInfo.map((text, index) => {
                                     return (
                                         text && <li key={index}>{text}</li>
