@@ -2,7 +2,7 @@ import "../styles/form.css"
 import { useState } from "react"
 import { EducationFields } from './FormFields.jsx'
 
-function EducationSection({ educationInfo, handleEdit, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
+function EducationSection({ educationInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="educationWrapper">
             {educationInfo.map((entry, index) => {
@@ -41,17 +41,30 @@ function EducationSection({ educationInfo, handleEdit, handleMouseEnter, handleM
                                 })}
                             </ul>
                         }
-                        <button 
-                            style={buttonHoverStyle[index]} 
-                            className="editInfo" 
-                            onClick={(e) => {
-                                const entryId = e.target.parentNode.id.slice(-1);
-                                handleEdit(entryId);
-                            }}
-                            type="button"
-                        >
-                            Edit
-                        </button>
+                        <div className="btns" style={buttonHoverStyle[index]}>
+                            <button
+                                className="editInfo"
+                                onClick={(e) => {
+                                    const entryId = e.target.closest(".educationEntry").id.slice(-1);
+                                    handleEdit(entryId);
+                                }}
+                                style={{margin: "10px"}}
+                                type="button"
+                            >
+                                Edit
+                            </button>
+                            <button
+                                className="deleteInfo"
+                                onClick={(e) => {
+                                    const entryId = e.target.closest(".educationEntry").id.slice(-1);
+                                    handleDelete(entryId);
+                                }}
+                                style={{margin: "10px"}}
+                                type="button"
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 )
             })}
@@ -233,6 +246,10 @@ function Education() {
         })
     }
 
+    function handleDeleteEntry(entryId) {
+        console.log("Deleting entry #", entryId);
+    }
+
     return (
         <>
             <h2>Education</h2>
@@ -244,6 +261,7 @@ function Education() {
             <EducationSection
                 educationInfo={educationInfo}
                 handleEdit={handleEducationEdit}
+                handleDelete={handleDeleteEntry}
                 handleMouseEnter={handleMouseEnterEducation}
                 handleMouseLeave={handleMouseLeaveEducation}
                 buttonHoverStyle={buttonHoverStyle}
