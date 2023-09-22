@@ -79,16 +79,16 @@ function GeneralSection({ firstName, lastName, email, phoneNumber, handleEdit })
     }
 
     return (
-        <div 
+        <section 
             className="generalWrapper"
             onMouseEnter={handleMouseEnter} 
             onMouseLeave={handleMouseLeave}
         >
-            <section className="generalInfo" style={sectionHoverStyle} >
+            <div className="generalInfo" style={sectionHoverStyle} >
                 <h2>{firstName + " " + lastName}</h2>
                 <p>{email}</p>
                 <p>{phoneNumber}</p>
-            </section>
+            </div>
             <button 
                 style={buttonHoverStyle} 
                 className="editInfo" 
@@ -97,7 +97,7 @@ function GeneralSection({ firstName, lastName, email, phoneNumber, handleEdit })
             >
                 Edit
             </button>
-        </div>
+        </section>
     )
 }
 
