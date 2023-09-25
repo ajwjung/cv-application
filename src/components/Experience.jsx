@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ExperienceFields } from "./FormFields";
 
 // Component to create the generated CV
-function ExperienceSection({ experienceInfo, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
+function ExperienceSection({ experienceInfo, handleEdit, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="experienceWrapper">
             {experienceInfo.map((entry, index) => {
@@ -44,7 +44,8 @@ function ExperienceSection({ experienceInfo, handleMouseEnter, handleMouseLeave,
                             <button
                                 className="editInfo"
                                 onClick={(e) => {
-                                    e.preventDefault();
+                                    const entryId = e.target.closest(".jobEntry").id.slice(-1);
+                                    handleEdit(entryId);
                                 }}
                                 style={{margin: "10px"}}
                                 type="button"
@@ -82,9 +83,9 @@ function Experience() {
             responsibilities: ["Repsonsibility 1", "Responsibility 2", "Responsibility 3"],
         }
     ]);
+    const [idOfEditedJobEntry, setIdOfEditedJobEntry] = useState();
     const [buttonHoverStyle, setButtonHoverStyle] = useState([{ display: "none" }]);
     const [entryHoverStyle, setEntryHoverStyle] = useState([{}]);
-
 
     function handleMouseEnterExperience(entryId) {
         setButtonHoverStyle(
@@ -143,12 +144,12 @@ function Experience() {
         const formValues = Object.fromEntries(formData);
         const allJobDuties = formData.getAll("jobDuty").filter(val => val);
 
-        setExperienceInfo((prevState) => {
-            return (
-                [
-                    ...prevState,
-                    {
-                        id: prevState.length,
+        // Updating an edited entry
+        if (typeof(idOfEditedJobEntry) === "number") {
+            setExperienceInfo(experienceInfo.map((entry, index) => {
+                if (index === idOfEditedJobEntry) {
+                    return {
+                        ...entry,
                         position: formValues.position,
                         company: formValues.company,
                         location: formValues.companyLocation,
@@ -156,20 +157,79 @@ function Experience() {
                         endDate: formValues.jobEndDate,
                         responsibilities: [...allJobDuties],
                     }
-                ]
-            )
+                } else {
+                    return entry;
+                }
+            }))
+        } else {
+            // Submitting a new entry
+            setExperienceInfo((prevState) => {
+                return (
+                    [
+                        ...prevState,
+                        {
+                            id: prevState.length,
+                            position: formValues.position,
+                            company: formValues.company,
+                            location: formValues.companyLocation,
+                            startDate: formValues.jobStartDate,
+                            endDate: formValues.jobEndDate,
+                            responsibilities: [...allJobDuties],
+                        }
+                    ]
+                )
+            });
+            
+            // Add another style element
+            setButtonHoverStyle([
+                ...buttonHoverStyle,
+                { display: "none" }
+            ])
+    
+            setEntryHoverStyle([
+                ...entryHoverStyle,
+                {}
+            ])
+        }
+
+    }
+
+    function handleExperienceEdit(entryDivId) {
+        const entryToEdit = experienceInfo[entryDivId];
+        const allInputFields = document.querySelectorAll("#experienceForm input");
+        const allAdditionalInputs = document.querySelectorAll(".jobDuties input");
+        const numOfInfoValues = entryToEdit.responsibilities.length;
+
+        setIdOfEditedJobEntry(Number(entryDivId));
+
+        allInputFields.forEach(input => {
+            switch (input.id) {
+                case "company": 
+                    input.value = entryToEdit.company;
+                    break;
+                case "companyLocation": 
+                    input.value = entryToEdit.location;
+                    break;
+                case "position": 
+                    input.value = entryToEdit.position;
+                    break;
+                case "jobStartDate": 
+                    input.value = entryToEdit.startDate;
+                    break;
+                case "jobEndDate": 
+                    input.value = entryToEdit.endDate;
+                    break;
+                default:
+                    input.value = "";
+                    break;
+            }
         });
-
-        // Add another style element
-        setButtonHoverStyle([
-            ...buttonHoverStyle,
-            { display: "none" }
-        ])
-
-        setEntryHoverStyle([
-            ...entryHoverStyle,
-            {}
-        ])
+        
+        const updatedJobDutyInputs = document.querySelectorAll(".jobDuties input");
+        updatedJobDutyInputs.forEach((input, index) => {
+            const correspondingText = entryToEdit.responsibilities[index];
+            input.value = correspondingText ? correspondingText : "";
+        })
     }
 
     return (
@@ -181,6 +241,7 @@ function Experience() {
             />
             <ExperienceSection 
                 experienceInfo={experienceInfo} 
+                handleEdit={handleExperienceEdit}
                 handleMouseEnter={handleMouseEnterExperience}
                 handleMouseLeave={handleMouseLeaveExperience}
                 buttonHoverStyle={buttonHoverStyle}
