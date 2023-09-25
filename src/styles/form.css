@@ -45,7 +45,8 @@ fieldset {
 }
 
 /* Education */
-.educationEntry {
+.educationEntry,
+.jobEntry {
     position: relative;
 }
 
@@ -53,7 +54,8 @@ fieldset {
     flex-direction: column;
 }
 
-.educationEntry .btns {
+.educationEntry .btns,
+.jobEntry .btns {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -61,20 +63,22 @@ fieldset {
     z-index: 3;
 }
 
-.educationEntry .editInfo:hover {
+.educationEntry .editInfo:hover,
+.jobEntry .editInfo:hover {
     background:rgb(198, 219, 250);
     border: 1px solid rgb(19, 92, 201);
     text-transform: uppercase;
 }
 
-.educationEntry .deleteInfo:hover {
+.educationEntry .deleteInfo:hover,
+.jobEntry .deleteInfo:hover {
     background: rgb(248, 193, 193);
     border: 1px solid rgb(255, 71, 71);
     text-transform: uppercase;
 }
 
 /* Experience */
-.jobExperience {
+.jobDuties {
     flex-direction: column;
 }
 

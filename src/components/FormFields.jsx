@@ -192,7 +192,7 @@ function ExperienceFields() {
                     />
                 </div>
             </fieldset>
-            <fieldset className="jobExperience">
+            <fieldset className="jobDuties">
                 <legend>Core Responsibilities</legend>
                 <input
                     type="text"
