@@ -137,10 +137,46 @@ function Experience() {
         jobDuties.appendChild(newInput);
     }
 
+    function handleJobSubmit() {
+        const form = document.forms.experienceForm;
+        const formData = new FormData(form);
+        const formValues = Object.fromEntries(formData);
+        const allJobDuties = formData.getAll("jobDuty").filter(val => val);
+
+        setExperienceInfo((prevState) => {
+            return (
+                [
+                    ...prevState,
+                    {
+                        id: prevState.length,
+                        position: formValues.position,
+                        company: formValues.company,
+                        location: formValues.companyLocation,
+                        startDate: formValues.jobStartDate,
+                        endDate: formValues.jobEndDate,
+                        responsibilities: [...allJobDuties],
+                    }
+                ]
+            )
+        });
+
+        // Add another style element
+        setButtonHoverStyle([
+            ...buttonHoverStyle,
+            { display: "none" }
+        ])
+
+        setEntryHoverStyle([
+            ...entryHoverStyle,
+            {}
+        ])
+    }
+
     return (
         <>
             <h2>Experience</h2>
             <ExperienceFields 
+                handleSubmit={handleJobSubmit}
                 handleAddJobDuty={handleAddJobDuty}
             />
             <ExperienceSection 

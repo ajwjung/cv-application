@@ -144,12 +144,15 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
     )
 }
 
-function ExperienceFields({ handleAddJobDuty }) {
+function ExperienceFields({ handleSubmit, handleAddJobDuty }) {
     return (
         <form 
             id="experienceForm" 
             action=""
-            onSubmit={(e) => e.preventDefault()} 
+            onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+            }} 
         >
             <label htmlFor="company">Company Name</label>
             <input 
@@ -217,7 +220,7 @@ function ExperienceFields({ handleAddJobDuty }) {
                     required
                 />
             </fieldset>
-            <button onClick={() => { handleAddJobDuty()}} type="button">
+            <button onClick={() => handleAddJobDuty()} type="button">
                 Add Another Responsibility
             </button>
             <button type="submit">Add Experience</button>
