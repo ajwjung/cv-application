@@ -144,4 +144,79 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
     )
 }
 
-export { GeneralFields, EducationFields };
+function ExperienceFields() {
+    return (
+        <form className="experienceForm" onSubmit={(e) => e.preventDefault()} action="#">
+            <label htmlFor="company">Company Name</label>
+            <input 
+                type="text" 
+                name="company" 
+                id="company" 
+                placeholder="Company Name"
+            />
+            <label htmlFor="companyLocation">Location</label>
+            <input 
+                type="text" 
+                name="companyLocation" 
+                id="companyLocation"
+                placeholder="City, Country"
+                pattern="[- A-Za-z]+, [- A-Za-z]+"
+                required
+            />
+            <label htmlFor="position">Position</label>
+            <input 
+                type="text" 
+                name="position" 
+                id="position" 
+                placeholder="Position Title"
+            />
+            <fieldset className="dates">
+                <div className="start">
+                    <label htmlFor="jobStartDate">Start Date</label>
+                    <input
+                        type="text"
+                        name="jobStartDate"
+                        id="jobStartDate"
+                        placeholder="Start Date (Month Year)"
+                        required
+                    />
+                </div>
+                <div className="end">
+                    <label htmlFor="jobEndDate">End Date</label>
+                    <input
+                        type="text"
+                        name="jobEndDate"
+                        id="jobEndDate"
+                        placeholder="End Date (Month Year)"
+                        required
+                    />
+                </div>
+            </fieldset>
+            <fieldset className="jobExperience">
+                <legend>Core Responsibilities</legend>
+                <input
+                    type="text"
+                    name="jobDuty"
+                    placeholder="A short description of core responsibility 1"
+                    required
+                />
+                <input
+                    type="text"
+                    name="jobDuty"
+                    placeholder="A short description of core responsibility 2"
+                    required
+                />
+                <input
+                    type="text"
+                    name="jobDuty"
+                    placeholder="A short description of core responsibility 3"
+                    required
+                />
+            </fieldset>
+            <button type="button">Add Another Responsibility</button>
+            <button type="submit">Add Experience</button>
+        </form>
+    )
+}
+
+export { GeneralFields, EducationFields, ExperienceFields };

@@ -1,69 +1,58 @@
 import "../styles/form.css"
+import { useState } from "react";
+import { ExperienceFields } from "./FormFields";
 
-function ExperienceFields() {
+// Component to create the generated CV
+function ExperienceSection({ experienceInfo }) {
     return (
-        <form className="experienceForm" onSubmit={(e) => e.preventDefault()} action="#">
-            <label htmlFor="company">Company Name</label>
-            <input 
-                type="text" 
-                name="company" 
-                id="company" 
-                placeholder="Company Name"
-            />
-            <label htmlFor="position">Position</label>
-            <input 
-                type="text" 
-                name="position" 
-                id="position" 
-                placeholder="Position Title"
-            />
-            <fieldset className="dates">
-                <div className="start">
-                    <label htmlFor="startDate">Start Date (Month/Year)</label>
-                    <input
-                        type="text"
-                        name="startDate"
-                        id="startDate"
-                        placeholder="Start Date"
-                        required
-                    />
-                </div>
-                <div className="end">
-                    <label htmlFor="endDate">End Date (Month/Year)</label>
-                    <input
-                        type="text"
-                        name="endDate"
-                        id="endDate"
-                        placeholder="End Date"
-                        required
-                    />
-                </div>
-            </fieldset>
-            <fieldset className="jobExperience">
-                <label htmlFor="jobDuty">Core Responsibilities</label>
-                <input
-                    type="text"
-                    name="jobDuty"
-                    id="jobDuty"
-                    placeholder="A short description of one core responsibility"
-                />
-                <input
-                    type="text"
-                    name="jobDuty"
-                    id="jobDuty"
-                    placeholder="A short description of one core responsibility"
-                />
-                <input
-                    type="text"
-                    name="jobDuty"
-                    id="jobDuty"
-                    placeholder="A short description of one core responsibility"
-                />
-            </fieldset>
-            <button type="button">Add Another Responsibility</button>
-            <button type="submit">Add Experience</button>
-        </form>
+        <section className="experienceWrapper">
+            {experienceInfo.map((entry, index) => {
+                return (
+                    <div 
+                        className="jobEntry" 
+                        id={"job" + index} 
+                        key={"job" + index}
+                    >
+                        <div className="jobDetails">
+                            <p><b>{entry.position}</b></p>
+                            <p>{entry.startDate + " - " + entry.endDate}</p>
+                        </div>
+                        <p><b>{entry.company}</b> | {entry.location}</p>
+                        <ul>
+                            {entry.responsibilities.map((duty, index) => {
+                                return (
+                                    duty && <li key={index}>{duty}</li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                )
+            })}
+        </section>
     )
 }
 
-export default ExperienceFields;
+// Component to display the form and generated CV
+function Experience() {
+    const [experienceInfo, setExperienceInfo] = useState([
+        {
+            id: 0,
+            position: "Commander",
+            company: "Scout Regiment",
+            location: "Paradis",
+            startDate: "Year 850",
+            endDate: "Present",
+            responsibilities: ["Repsonsibility 1", "Responsibility 2", "Responsibility 3"],
+        }
+    ])
+
+    return (
+        <>
+            <h2>Experience</h2>
+            <ExperienceFields />
+            <ExperienceSection experienceInfo={experienceInfo} />
+        </>
+    )
+}
+
+export default Experience;
