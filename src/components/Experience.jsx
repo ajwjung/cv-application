@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ExperienceFields } from "./FormFields";
 
 // Component to create the generated CV
-function ExperienceSection({ experienceInfo, handleEdit, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
+function ExperienceSection({ experienceInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="experienceWrapper">
             {experienceInfo.map((entry, index) => {
@@ -55,7 +55,8 @@ function ExperienceSection({ experienceInfo, handleEdit, handleMouseEnter, handl
                             <button
                                 className="deleteInfo"
                                 onClick={(e) => {
-                                    e.preventDefault();
+                                    const entryId = e.target.closest(".jobEntry").id.slice(-1);
+                                    handleDelete(entryId);
                                 }}
                                 style={{margin: "10px"}}
                                 type="button"
@@ -251,6 +252,12 @@ function Experience() {
         })
     }
 
+    function handleDeleteEntry(entryId) {
+        setExperienceInfo(
+            experienceInfo.filter((_, index) => Number(entryId) !== index)
+        );
+    }
+
     return (
         <>
             <h2>Experience</h2>
@@ -261,6 +268,7 @@ function Experience() {
             <ExperienceSection 
                 experienceInfo={experienceInfo} 
                 handleEdit={handleExperienceEdit}
+                handleDelete={handleDeleteEntry}
                 handleMouseEnter={handleMouseEnterExperience}
                 handleMouseLeave={handleMouseLeaveExperience}
                 buttonHoverStyle={buttonHoverStyle}
