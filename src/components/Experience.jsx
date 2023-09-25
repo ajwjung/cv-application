@@ -128,10 +128,21 @@ function Experience() {
         )
     }
 
+    function handleAddJobDuty() {
+        const jobDuties = document.querySelector(".jobDuties");
+        const newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.name = "jobDuty";
+        newInput.placeholder = "A short description of one core responsibility"
+        jobDuties.appendChild(newInput);
+    }
+
     return (
         <>
             <h2>Experience</h2>
-            <ExperienceFields />
+            <ExperienceFields 
+                handleAddJobDuty={handleAddJobDuty}
+            />
             <ExperienceSection 
                 experienceInfo={experienceInfo} 
                 handleMouseEnter={handleMouseEnterExperience}

@@ -144,9 +144,13 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
     )
 }
 
-function ExperienceFields() {
+function ExperienceFields({ handleAddJobDuty }) {
     return (
-        <form className="experienceForm" onSubmit={(e) => e.preventDefault()} action="#">
+        <form 
+            id="experienceForm" 
+            action=""
+            onSubmit={(e) => e.preventDefault()} 
+        >
             <label htmlFor="company">Company Name</label>
             <input 
                 type="text" 
@@ -197,23 +201,25 @@ function ExperienceFields() {
                 <input
                     type="text"
                     name="jobDuty"
-                    placeholder="A short description of core responsibility 1"
+                    placeholder="A short description of one core responsibility"
                     required
                 />
                 <input
                     type="text"
                     name="jobDuty"
-                    placeholder="A short description of core responsibility 2"
+                    placeholder="A short description of one core responsibility"
                     required
                 />
                 <input
                     type="text"
                     name="jobDuty"
-                    placeholder="A short description of core responsibility 3"
+                    placeholder="A short description of one core responsibility"
                     required
                 />
             </fieldset>
-            <button type="button">Add Another Responsibility</button>
+            <button onClick={() => { handleAddJobDuty()}} type="button">
+                Add Another Responsibility
+            </button>
             <button type="submit">Add Experience</button>
         </form>
     )
