@@ -145,6 +145,11 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
 }
 
 function ExperienceFields({ handleSubmit, handleAddJobDuty }) {
+    function clearFormFields() {
+        const inputFields = document.querySelectorAll("#experienceForm input")
+        inputFields.forEach(input => input.value = "");
+    }
+
     return (
         <form 
             id="experienceForm" 
@@ -152,6 +157,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty }) {
             onSubmit={(e) => {
                 e.preventDefault();
                 handleSubmit();
+                clearFormFields();
             }} 
         >
             <label htmlFor="company">Company Name</label>

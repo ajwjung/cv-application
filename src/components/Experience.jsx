@@ -129,6 +129,16 @@ function Experience() {
         )
     }
 
+    function removeAdditionalFields() {
+        const additionalJobDuties = document.querySelector(".jobDuties");
+
+        /* Must always keep at least 4 children
+        because one is the legend and one is the default input box */
+        while (additionalJobDuties.childNodes.length > 4) {
+            additionalJobDuties.removeChild(additionalJobDuties.lastChild);
+        }
+    }
+
     function handleAddJobDuty() {
         const jobDuties = document.querySelector(".jobDuties");
         const newInput = document.createElement("input");
@@ -192,15 +202,24 @@ function Experience() {
             ])
         }
 
+        removeAdditionalFields();
+        setIdOfEditedJobEntry("");
+
     }
 
     function handleExperienceEdit(entryDivId) {
         const entryToEdit = experienceInfo[entryDivId];
         const allInputFields = document.querySelectorAll("#experienceForm input");
-        const allAdditionalInputs = document.querySelectorAll(".jobDuties input");
+        const allJobDutyInputs = document.querySelectorAll(".jobDuties input");
         const numOfInfoValues = entryToEdit.responsibilities.length;
 
         setIdOfEditedJobEntry(Number(entryDivId));
+
+        // Add as many input fields back as number of additional job duty inputs
+        if (allJobDutyInputs.length < numOfInfoValues) {
+            const numOfFieldsNeeded = numOfInfoValues - allJobDutyInputs.length;
+            [...Array(numOfFieldsNeeded)].forEach(() => handleAddJobDuty());
+        }
 
         allInputFields.forEach(input => {
             switch (input.id) {
