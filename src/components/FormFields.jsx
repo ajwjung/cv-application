@@ -238,7 +238,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
     )
 }
 
-function ProjectsFields() {
+function ProjectsFields({ handleAddDescription }) {
     return (
         <form 
             id="projectsForm" 
@@ -283,7 +283,7 @@ function ProjectsFields() {
                     required
                 />
             </fieldset>
-            <button onClick={(e) => e.preventDefault()} type="button">Add Another Description</button>
+            <button onClick={() => handleAddDescription()} type="button">Add Another Description</button>
             <button onClick={(e) => e.preventDefault()} type="submit">Add Project</button>
         </form>
     )

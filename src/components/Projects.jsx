@@ -120,10 +120,21 @@ function Projects() {
         )
     }
 
+    function handleAddDescription() {
+        const descriptions = document.querySelector(".projectDescriptions");
+        const newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.name = "projectDescription";
+        newInput.placeholder = "A short description about one feature of your project"
+        descriptions.appendChild(newInput);
+    }
+
     return (
         <>
             <h2>Projects</h2>
-            <ProjectsFields />
+            <ProjectsFields 
+                handleAddDescription={handleAddDescription}
+            />
             <ProjectsSection 
                 projectsInfo={projectsInfo}
                 handleMouseEnter={handleMouseEnterProject}
