@@ -160,6 +160,7 @@ function Education() {
             setEducationInfo(educationInfo.map((entry, index) => {
                 if (index === idOfEditedEducationEntry) {
                     return {
+                        ...entry,
                         schoolName: formValues.schoolName,
                         location: formValues.location,
                         titleOfStudy: formValues.titleOfStudy,
