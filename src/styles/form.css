@@ -12,7 +12,7 @@ fieldset {
     display: flex;
     padding: 0;
     border: none;
-    gap: 5px;
+    gap: 10px;
 }
 
 #projectDescription {
@@ -50,7 +50,21 @@ fieldset {
     position: relative;
 }
 
-.additionalInfoFields {
+.educationDetails,
+.jobDetails {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Form fields (dates) */
+.start,
+.end {
+    display: flex;
+    flex-direction: column;
+}
+
+.additionalInfoFields,
+.jobDuties {
     flex-direction: column;
 }
 
@@ -75,22 +89,6 @@ fieldset {
     background: rgb(248, 193, 193);
     border: 1px solid rgb(255, 71, 71);
     text-transform: uppercase;
-}
-
-/* Experience */
-.jobDuties {
-    flex-direction: column;
-}
-
-.dates {
-    display: flex;
-    gap: 30px;
-}
-
-.start,
-.end {
-    display: flex;
-    flex-direction: column;
 }
 
 /* Skills */
