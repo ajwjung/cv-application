@@ -15,10 +15,6 @@ fieldset {
     gap: 10px;
 }
 
-#projectDescription {
-    width: 100%;
-}
-
 /* General Info */
 .generalWrapper {
     position: relative;
@@ -64,7 +60,8 @@ fieldset {
 }
 
 .additionalInfoFields,
-.jobDuties {
+.jobDuties,
+.projectDescriptions {
     flex-direction: column;
 }
 

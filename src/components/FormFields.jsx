@@ -238,4 +238,55 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
     )
 }
 
-export { GeneralFields, EducationFields, ExperienceFields };
+function ProjectsFields() {
+    return (
+        <form 
+            id="projectsForm" 
+            action=""
+            onSubmit={(e) => e.preventDefault()} 
+        >
+            <label htmlFor="projectName">Project Name</label>
+            <input 
+                type="text" 
+                name="projectName" 
+                id="projectName"
+                placeholder="Project Name" 
+            />
+            <fieldset>
+                <div className="start">
+                    <label htmlFor="projectStartDate">Start Date</label>
+                    <input
+                        type="text"
+                        name="projectStartDate"
+                        id="projectStartDate"
+                        placeholder="Start Date (Month Year)"
+                        required
+                    />
+                </div>
+                <div className="end">
+                    <label htmlFor="projectEndDate">End Date</label>
+                    <input
+                        type="text"
+                        name="projectEndDate"
+                        id="projectEndDate"
+                        placeholder="End Date (Month Year)"
+                        required
+                    />
+                </div>
+            </fieldset>
+            <fieldset className="projectDescriptions">
+                <legend>Project Description (at least 1 required)</legend>
+                <input
+                    type="text"
+                    name="projectDescription"
+                    placeholder="A short description about one feature of your project"
+                    required
+                />
+            </fieldset>
+            <button onClick={(e) => e.preventDefault()} type="button">Add Another Description</button>
+            <button onClick={(e) => e.preventDefault()} type="submit">Add Project</button>
+        </form>
+    )
+}
+
+export { GeneralFields, EducationFields, ExperienceFields, ProjectsFields };

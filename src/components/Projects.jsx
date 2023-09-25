@@ -1,37 +1,55 @@
 import "../styles/form.css"
+import { useState } from "react";
+import { ProjectsFields } from "./FormFields";
 
-function ProjectFields() {
+function ProjectsSection({ projectsInfo }) {
     return (
-        <form className="projectsForm" onSubmit={(e) => e.preventDefault()} action="#">
-            <label htmlFor="projectName">Project Name</label>
-            <input 
-                type="text" 
-                name="projectName" 
-                id="projectName" placeholder="Project Name" 
-            />
-            <label htmlFor="projectDescription">Project Description</label>
-            <ul>
-                <li>
-                    <input
-                        type="text"
-                        name="projectDescription"
-                        id="projectDescription"
-                        placeholder="A short description about one feature of your project"
-                    />
-                </li>
-                <li>
-                    <input
-                        type="text"
-                        name="projectDescription"
-                        id="projectDescription"
-                        placeholder="A short description about one feature of your project"
-                    />
-                </li>
-            </ul>
-            <button type="button">Add Another Description</button>
-            <button type="submit">Add Project</button>
-        </form>
+        <section className="projectsWrapper">
+            {projectsInfo.map((entry, index) => {
+                return (
+                    <div 
+                        className="projectEntry" 
+                        id={"project" + index} 
+                        key={"project" + index}
+                    >
+                        <div className="projectDetails">
+                            <p><b>{entry.projectName}</b></p>
+                            <p>{entry.startDate + " - " + entry.endDate}</p>
+                        </div>
+                        {
+                            <ul>
+                                {entry.descriptions.map((text, index) => {
+                                    return (
+                                        text && <li key={index}>{text}</li>
+                                    )
+                                })}
+                            </ul>
+                        }
+                    </div>
+                )
+            })}
+        </section>
     )
 }
 
-export default ProjectFields;
+function Projects() {
+    const [projectsInfo, setProjectsInfo] = useState([
+        {
+            id: 0,
+            projectName: "Retaking Wall Maria",
+            startDate: "846",
+            endDate: "846",
+            descriptions: ["Led 5+ survey corps regiments to regain Wall Maria from 200+ titans"],
+        }
+    ]);
+
+    return (
+        <>
+            <h2>Projects</h2>
+            <ProjectsFields />
+            <ProjectsSection projectsInfo={projectsInfo}/>
+        </>
+    )
+}
+
+export default Projects;
