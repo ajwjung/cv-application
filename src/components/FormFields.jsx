@@ -173,7 +173,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty }) {
                 name="companyLocation" 
                 id="companyLocation"
                 placeholder="City, Country"
-                pattern="[- A-Za-z]+, [- A-Za-z]+"
+                pattern="[ \-A-Za-z]+, [ \-A-Za-z]+"
                 required
             />
             <label htmlFor="position">Position</label>
