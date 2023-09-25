@@ -264,6 +264,7 @@ function Experience() {
             <ExperienceFields 
                 handleSubmit={handleJobSubmit}
                 handleAddJobDuty={handleAddJobDuty}
+                editStatus={typeof(idOfEditedJobEntry) === "number"}
             />
             <ExperienceSection 
                 experienceInfo={experienceInfo} 

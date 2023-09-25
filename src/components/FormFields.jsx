@@ -144,7 +144,7 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
     )
 }
 
-function ExperienceFields({ handleSubmit, handleAddJobDuty }) {
+function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#experienceForm input")
         inputFields.forEach(input => input.value = "");
@@ -229,7 +229,11 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty }) {
             <button onClick={() => handleAddJobDuty()} type="button">
                 Add Another Responsibility
             </button>
-            <button type="submit">Add Experience</button>
+            <button type="submit">{
+                editStatus 
+                ? "Update Information" 
+                : "Add Information"
+            }</button>
         </form>
     )
 }
