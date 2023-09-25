@@ -200,7 +200,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty }) {
                 </div>
             </fieldset>
             <fieldset className="jobDuties">
-                <legend>Core Responsibilities</legend>
+                <legend>Core Responsibilities (3 required)</legend>
                 <input
                     type="text"
                     name="jobDuty"
