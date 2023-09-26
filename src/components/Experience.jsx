@@ -2,7 +2,6 @@ import "../styles/form.css"
 import { useState } from "react";
 import { ExperienceFields } from "./FormFields";
 
-// Component to create the generated CV
 function ExperienceSection({ experienceInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="experienceWrapper">
@@ -71,7 +70,6 @@ function ExperienceSection({ experienceInfo, handleEdit, handleDelete, handleMou
     )
 }
 
-// Component to display the form and generated CV
 function Experience() {
     const [experienceInfo, setExperienceInfo] = useState([
         {
@@ -134,7 +132,7 @@ function Experience() {
         const additionalJobDuties = document.querySelector(".jobDuties");
 
         /* Must always keep at least 4 children
-        because one is the legend and one is the default input box */
+        because one is the legend and three are the required input boxes */
         while (additionalJobDuties.childNodes.length > 4) {
             additionalJobDuties.removeChild(additionalJobDuties.lastChild);
         }
@@ -205,7 +203,6 @@ function Experience() {
 
         removeAdditionalFields();
         setIdOfEditedJobEntry("");
-
     }
 
     function handleExperienceEdit(entryDivId) {
@@ -245,6 +242,7 @@ function Experience() {
             }
         });
         
+        // Update input fields with values after adding back additional field boxes
         const updatedJobDutyInputs = document.querySelectorAll(".jobDuties input");
         updatedJobDutyInputs.forEach((input, index) => {
             const correspondingText = entryToEdit.responsibilities[index];

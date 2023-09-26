@@ -240,6 +240,7 @@ function Education() {
             }
         });
 
+        // Update input fields with values after adding back additional field boxes
         const updatedAdditionalInputs = document.querySelectorAll(".additionalInfoFields input");
         updatedAdditionalInputs.forEach((input, index) => {
             const correspondingText = entryToEdit.additionalInfo[index];

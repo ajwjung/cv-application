@@ -227,6 +227,7 @@ function Projects() {
             }
         });
 
+        // Update input fields with values after adding back additional field boxes
         const updatedDescriptions = document.querySelectorAll(".projectDescriptions input");
         updatedDescriptions.forEach((input, index) => {
             const correspondingText = entryToEdit.descriptions[index];
