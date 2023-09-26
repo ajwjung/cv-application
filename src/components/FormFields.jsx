@@ -303,6 +303,11 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
 }
 
 function SkillsFields({ handleSubmit, editStatus }) {
+    function clearFormFields() {
+        const inputFields = document.querySelectorAll("#skillsForm input")
+        inputFields.forEach(input => input.value = "");
+    }
+
     return (
         <form 
             id="skillsForm" 
@@ -310,6 +315,7 @@ function SkillsFields({ handleSubmit, editStatus }) {
             onSubmit={(e) => {
                 e.preventDefault();
                 handleSubmit();
+                clearFormFields();
             }} 
         >
             <fieldset className="skillsList">
