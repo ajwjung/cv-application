@@ -15,39 +15,29 @@ fieldset {
     gap: 10px;
 }
 
-/* General Info */
-.generalWrapper {
-    position: relative;
-}
-
 .first,
-.last {
+.last,
+.start,
+.end {
     display: flex;
     flex-direction: column;
 }
 
-.generalWrapper .editInfo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform:translate(-50%, -50%);
-    z-index: 3;
+.skillCategory,
+.skillInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
-.generalWrapper .editInfo:hover {
-    background:rgb(198, 219, 250);
-    border: 1px solid rgb(19, 92, 201);
-    text-transform: uppercase;
+/* Styles the added additional fields */
+.additionalInfoFields,
+.jobDuties,
+.projectDescriptions {
+    flex-direction: column;
 }
 
-/* Education */
-.educationEntry,
-.jobEntry,
-.projectEntry,
-.skillsEntry {
-    position: relative;
-}
-
+/* Displayed entries for generated CV */
 .educationDetails,
 .jobDetails,
 .projectDetails {
@@ -60,23 +50,17 @@ fieldset {
     gap: 1rem;
 }
 
-/* Form fields (dates) */
-.start,
-.end {
-    display: flex;
-    flex-direction: column;
+/* Allow buttons to overlay in each entry */
+.generalWrapper,
+.educationEntry,
+.jobEntry,
+.projectEntry,
+.skillsEntry {
+    position: relative;
 }
 
-.additionalInfoFields,
-.jobDuties,
-.projectDescriptions {
-    flex-direction: column;
-}
-
-.educationEntry .btns,
-.jobEntry .btns,
-.projectEntry .btns,
-.skillsEntry .btns {
+.generalWrapper .editInfo,
+.btns {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -84,27 +68,14 @@ fieldset {
     z-index: 3;
 }
 
-.educationEntry .editInfo:hover,
-.jobEntry .editInfo:hover,
-.projectEntry .editInfo:hover,
-.skillsEntry .editInfo:hover {
+.editInfo:hover {
     background:rgb(198, 219, 250);
     border: 1px solid rgb(19, 92, 201);
     text-transform: uppercase;
 }
 
-.educationEntry .deleteInfo:hover,
-.jobEntry .deleteInfo:hover,
-.projectEntry .deleteInfo:hover,
-.skillsEntry .deleteInfo:hover {
+.deleteInfo:hover {
     background: rgb(248, 193, 193);
     border: 1px solid rgb(255, 71, 71);
     text-transform: uppercase;
-}
-
-.skillCategory,
-.skillInfo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
 }
