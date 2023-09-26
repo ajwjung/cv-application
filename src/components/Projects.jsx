@@ -2,7 +2,7 @@ import "../styles/form.css"
 import { useState } from "react";
 import { ProjectsFields } from "./FormFields";
 
-function ProjectsSection({ projectsInfo, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
+function ProjectsSection({ projectsInfo, handleEdit, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="projectsWrapper">
             {projectsInfo.map((entry, index) => {
@@ -40,7 +40,8 @@ function ProjectsSection({ projectsInfo, handleMouseEnter, handleMouseLeave, but
                             <button
                                 className="editInfo"
                                 onClick={(e) => {
-                                    e.preventDefault();
+                                    const entryId = e.target.closest(".projectEntry").id.slice(-1);
+                                    handleEdit(entryId);
                                 }}
                                 style={{margin: "10px"}}
                                 type="button"
@@ -75,6 +76,7 @@ function Projects() {
             descriptions: ["Led 5+ survey corps regiments to regain Wall Maria from 200+ titans"],
         }
     ]);
+    const [idOfEditedProjectEntry, setIdOfEditedProjectEntry] = useState();
     const [buttonHoverStyle, setButtonHoverStyle] = useState([{ display: "none" }]);
     const [entryHoverStyle, setEntryHoverStyle] = useState([{}]);
 
@@ -135,31 +137,87 @@ function Projects() {
         const formValues = Object.fromEntries(formData);
         const allDescriptions = formData.getAll("projectDescription").filter(val => val);
 
-        setProjectsInfo((prevState) => {
-            return (
-                [
-                    ...prevState,
-                    {
-                        id: prevState.length,
+        // Updating an edited entry
+        if (typeof(idOfEditedProjectEntry) === "number") {
+            setProjectsInfo(projectsInfo.map((entry, index) => {
+                if (index === idOfEditedProjectEntry) {
+                    return {
+                        ...entry,
                         projectName: formValues.projectName,
                         startDate: formValues.projectStartDate,
                         endDate: formValues.projectEndDate,
                         descriptions: [...allDescriptions],
                     }
-                ]
-            )
+                } else {
+                    return entry;
+                }
+            }))
+        } else {
+            // Submitting a new entry
+            setProjectsInfo((prevState) => {
+                return (
+                    [
+                        ...prevState,
+                        {
+                            id: prevState.length,
+                            projectName: formValues.projectName,
+                            startDate: formValues.projectStartDate,
+                            endDate: formValues.projectEndDate,
+                            descriptions: [...allDescriptions],
+                        }
+                    ]
+                )
+            });
+    
+            // Add another style element
+            setButtonHoverStyle([
+                ...buttonHoverStyle,
+                { display: "none" }
+            ])
+    
+            setEntryHoverStyle([
+                ...entryHoverStyle,
+                {}
+            ])
+        }
+    }
+
+    function handleProjectEdit(entryDivId) {
+        const entryToEdit = projectsInfo[entryDivId];
+        const allInputFields = document.querySelectorAll("#projectsForm input");
+        const allDescriptions = document.querySelectorAll(".projectDescriptions input");
+        const numOfInfoValues = entryToEdit.descriptions.length;
+
+        setIdOfEditedProjectEntry(Number(entryDivId));
+
+        // Add as many input fields back as number of additional inputs
+        if (allDescriptions.length < numOfInfoValues) {
+            const numOfFieldsNeeded = numOfInfoValues - allDescriptions.length;
+            [...Array(numOfFieldsNeeded)].forEach(() => handleAddDescription());
+        }
+
+        allInputFields.forEach(input => {
+            switch (input.id) {
+                case "projectName": 
+                    input.value = entryToEdit.projectName;
+                    break;
+                case "projectStartDate": 
+                    input.value = entryToEdit.startDate;
+                    break;
+                case "projectEndDate": 
+                    input.value = entryToEdit.endDate;
+                    break;
+                default:
+                    input.value = "";
+                    break;
+            }
         });
 
-        // Add another style element
-        setButtonHoverStyle([
-            ...buttonHoverStyle,
-            { display: "none" }
-        ])
-
-        setEntryHoverStyle([
-            ...entryHoverStyle,
-            {}
-        ])
+        const updatedDescriptions = document.querySelectorAll(".projectDescriptions input");
+        updatedDescriptions.forEach((input, index) => {
+            const correspondingText = entryToEdit.descriptions[index];
+            input.value = correspondingText ? correspondingText : "";
+        })
     }
 
     return (
@@ -171,6 +229,7 @@ function Projects() {
             />
             <ProjectsSection 
                 projectsInfo={projectsInfo}
+                handleEdit={handleProjectEdit}
                 handleMouseEnter={handleMouseEnterProject}
                 handleMouseLeave={handleMouseLeaveProject}
                 buttonHoverStyle={buttonHoverStyle}
