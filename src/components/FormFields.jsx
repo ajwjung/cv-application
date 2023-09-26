@@ -183,7 +183,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
                 id="position" 
                 placeholder="Position Title"
             />
-            <fieldset className="dates">
+            <fieldset>
                 <div className="start">
                     <label htmlFor="jobStartDate">Start Date</label>
                     <input
