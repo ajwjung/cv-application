@@ -2,7 +2,7 @@ import "../styles/form.css"
 import { useState } from "react";
 import { ProjectsFields } from "./FormFields";
 
-function ProjectsSection({ projectsInfo, handleEdit, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
+function ProjectsSection({ projectsInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="projectsWrapper">
             {projectsInfo.map((entry, index) => {
@@ -51,7 +51,8 @@ function ProjectsSection({ projectsInfo, handleEdit, handleMouseEnter, handleMou
                             <button
                                 className="deleteInfo"
                                 onClick={(e) => {
-                                    e.preventDefault();
+                                    const entryId = e.target.closest(".projectEntry").id.slice(-1);
+                                    handleDelete(entryId);
                                 }}
                                 style={{margin: "10px"}}
                                 type="button"
@@ -233,6 +234,12 @@ function Projects() {
         })
     }
 
+    function handleDeleteEntry(entryId) {
+        setProjectsInfo(
+            projectsInfo.filter((_, index) => Number(entryId) !== index)
+        );
+    }
+
     return (
         <>
             <h2>Projects</h2>
@@ -243,6 +250,7 @@ function Projects() {
             <ProjectsSection 
                 projectsInfo={projectsInfo}
                 handleEdit={handleProjectEdit}
+                handleDelete={handleDeleteEntry}
                 handleMouseEnter={handleMouseEnterProject}
                 handleMouseLeave={handleMouseLeaveProject}
                 buttonHoverStyle={buttonHoverStyle}
