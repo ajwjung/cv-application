@@ -302,4 +302,32 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
     )
 }
 
-export { GeneralFields, EducationFields, ExperienceFields, ProjectsFields };
+function SkillsFields() {
+    return (
+        <form 
+            id="skillsForm" 
+            action=""
+            onSubmit={(e) => e.preventDefault()} 
+        >
+            <fieldset className="skillsList">
+                <label htmlFor="skillCategory">Category</label>
+                <input
+                    type="text"
+                    name="skillCategory"
+                    id="skillCategory"
+                    placeholder="Skills category (e.g., technical)"
+                />
+                <label htmlFor="listOfSkills">Skill</label>
+                <input
+                    type="text"
+                    name="listOfSkills"
+                    id="listOfSkills"
+                    placeholder="List of skills (comma-separated)"
+                />
+            </fieldset>
+            <button type="button">Add Another Skill</button>
+            <button type="submit">Add Skills</button>
+        </form>
+    )
+}
+export { GeneralFields, EducationFields, ExperienceFields, ProjectsFields, SkillsFields };

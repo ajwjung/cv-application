@@ -1,46 +1,43 @@
 import "../styles/form.css"
+import { useState } from "react";
+import { SkillsFields } from "./FormFields";
 
-function SkillsFields() {
+function SkillsSection({ skillsInfo }) {
     return (
-        <form className="skillsForm" onSubmit={(e) => e.preventDefault()} action="#">
-            <ul className="skillsList">
-                <li>
-                    <label htmlFor="skillCategory">Category</label>
-                    <input
-                        type="text"
-                        name="skillCategory"
-                        id="skillCategory"
-                        placeholder="Skills category"
-                    />
-                    <label htmlFor="listOfSkills">Skill</label>
-                    <input
-                        type="text"
-                        name="listOfSkills"
-                        id="listOfSkills"
-                        placeholder="List of skills (comma-separated)"
-                    />
-                </li>
-                <li>
-                    <label htmlFor="skillCategory">Category</label>
-                    <input
-                        type="text"
-                        name="skillCategory"
-                        id="skillCategory"
-                        placeholder="Skills category"
-                    />
-                    <label htmlFor="listOfSkills">Skill</label>
-                    <input
-                        type="text"
-                        name="listOfSkills"
-                        id="listOfSkills"
-                        placeholder="List of skills (comma-separated)"
-                    />
-                </li>
+        <section className="skillsWrapper">
+            <ul>
+                {skillsInfo.map((entry, index) => {
+                    return (
+                        <li 
+                            className="skillsEntry"
+                            id={"skill" + index}
+                            key={"skill" + index}
+                        >
+                            <b>{entry.category}</b> {entry.listedSkills}
+                        </li>
+                    )
+                })}
             </ul>
-            <button type="button">Add Another Skill</button>
-            <button type="submit">Add Skills</button>
-        </form>
+        </section>
     )
 }
 
-export default SkillsFields;
+function Skills() {
+    const [skillsInfo, setSkillsInfo] = useState([
+        {
+            id: 0,
+            category: "Special",
+            listedSkills: "High agility, decision-making, problem-solving"
+        }
+    ]);
+
+    return (
+        <>
+            <h2>Skills</h2>
+            <SkillsFields />
+            <SkillsSection skillsInfo={skillsInfo} />
+        </>
+    )
+}
+
+export default Skills;
