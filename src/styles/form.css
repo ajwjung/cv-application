@@ -43,13 +43,15 @@ fieldset {
 /* Education */
 .educationEntry,
 .jobEntry,
-.projectEntry {
+.projectEntry,
+.skillsEntry {
     position: relative;
 }
 
 .educationDetails,
 .jobDetails,
-.projectDetails {
+.projectDetails,
+.skillsDetails {
     display: flex;
     justify-content: space-between;
 }
@@ -69,7 +71,8 @@ fieldset {
 
 .educationEntry .btns,
 .jobEntry .btns,
-.projectEntry .btns {
+.projectEntry .btns,
+.skillsEntry .btns {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -79,7 +82,8 @@ fieldset {
 
 .educationEntry .editInfo:hover,
 .jobEntry .editInfo:hover,
-.projectEntry .editInfo:hover {
+.projectEntry .editInfo:hover,
+.skillsEntry .editInfo:hover {
     background:rgb(198, 219, 250);
     border: 1px solid rgb(19, 92, 201);
     text-transform: uppercase;
@@ -87,7 +91,8 @@ fieldset {
 
 .educationEntry .deleteInfo:hover,
 .jobEntry .deleteInfo:hover,
-.projectEntry .deleteInfo:hover {
+.projectEntry .deleteInfo:hover,
+.skillsEntry .deleteInfo:hover {
     background: rgb(248, 193, 193);
     border: 1px solid rgb(255, 71, 71);
     text-transform: uppercase;
