@@ -63,29 +63,31 @@ function General() {
         const allGeneralInputs = document.querySelectorAll("#generalForm input");
 
         allGeneralInputs.forEach(input => {
-            if (input.id === "firstName") {
-                input.value = generalInfo.firstName;
-            }
-
-            if (input.id === "lastName") {
-                input.value = generalInfo.lastName;
-            }
-
-            if (input.id === "email") {
-                input.value = generalInfo.email;
-            }
-
-            if (input.id === "phoneNumber") {
-                input.value = generalInfo.phoneNumber;
+            switch (input.id) {
+                case "firstName":
+                    input.value = generalInfo.firstName;
+                    break;
+                case "lastName":
+                    input.value = generalInfo.lastName;
+                    break;
+                case "email":
+                    input.value = generalInfo.email;
+                    break;
+                case "phoneNumber":
+                    input.value = generalInfo.phoneNumber;
+                    break;
+                
             }
         })
 
-        setGeneralInfo({...generalInfo, isEdit: true});
+        setGeneralInfo({
+            ...generalInfo,
+            isEdit: true
+        });
     }
 
     return (
         <>
-            <h1>Form Fields</h1>
             <h2>General Information</h2>
             <GeneralFields
                 handleSubmit={handleGeneralSubmit}  
