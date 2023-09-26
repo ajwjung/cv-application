@@ -238,7 +238,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
     )
 }
 
-function ProjectsFields({ handleSubmit, handleAddDescription }) {
+function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#projectsForm input")
         inputFields.forEach(input => input.value = "");
@@ -293,7 +293,11 @@ function ProjectsFields({ handleSubmit, handleAddDescription }) {
                 />
             </fieldset>
             <button onClick={() => handleAddDescription()} type="button">Add Another Description</button>
-            <button type="submit">Add Project</button>
+            <button type="submit">{
+                editStatus 
+                ? "Update Information" 
+                : "Add Information"
+            }</button>
         </form>
     )
 }

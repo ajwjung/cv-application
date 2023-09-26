@@ -246,6 +246,7 @@ function Projects() {
             <ProjectsFields 
                 handleSubmit={handleProjectSubmit}
                 handleAddDescription={handleAddDescription}
+                editStatus={typeof(idOfEditedProjectEntry) === "number"}
             />
             <ProjectsSection 
                 projectsInfo={projectsInfo}
