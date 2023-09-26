@@ -156,6 +156,8 @@ function Skills() {
                 {}
             ]);
         }
+        
+        setIdOfEditedSkillEntry("");
     }
 
     function handleSkillsEdit(entryDivId) {
