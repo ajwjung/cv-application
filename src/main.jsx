@@ -4,11 +4,12 @@ import General from './components/General.jsx'
 import Education from './components/Education.jsx'
 import Experience from './components/Experience.jsx'
 import Projects from './components/Projects.jsx'
-import '../src/styles/index.css'
 import Skills from './components/Skills.jsx'
+import '../src/styles/index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <h1>Form Fields</h1>
     <General />
     <Education />
     <Experience />
