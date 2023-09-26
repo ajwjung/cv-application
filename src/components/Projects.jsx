@@ -122,6 +122,16 @@ function Projects() {
         )
     }
 
+    function removeAdditionalFields() {
+        const descriptionsFieldset = document.querySelector(".projectDescriptions");
+
+        /* Must always keep at least 2 children
+        because one is the legend and one is the default input box */
+        while (descriptionsFieldset.childNodes.length > 2) {
+            descriptionsFieldset.removeChild(descriptionsFieldset.lastChild);
+        }
+    }
+
     function handleAddDescription() {
         const descriptions = document.querySelector(".projectDescriptions");
         const newInput = document.createElement("input");
@@ -181,6 +191,7 @@ function Projects() {
             ])
         }
 
+        removeAdditionalFields();
         setIdOfEditedProjectEntry("");
     }
 

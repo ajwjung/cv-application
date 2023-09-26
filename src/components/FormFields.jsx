@@ -239,6 +239,11 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
 }
 
 function ProjectsFields({ handleSubmit, handleAddDescription }) {
+    function clearFormFields() {
+        const inputFields = document.querySelectorAll("#projectsForm input")
+        inputFields.forEach(input => input.value = "");
+    }
+
     return (
         <form 
             id="projectsForm" 
@@ -246,6 +251,7 @@ function ProjectsFields({ handleSubmit, handleAddDescription }) {
             onSubmit={(e) => {
                 e.preventDefault();
                 handleSubmit();
+                clearFormFields();
             }} 
         >
             <label htmlFor="projectName">Project Name</label>
