@@ -2,7 +2,7 @@ import "../styles/form.css"
 import { useState } from "react";
 import { SkillsFields } from "./FormFields";
 
-function SkillsSection({ skillsInfo, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
+function SkillsSection({ skillsInfo, handleEdit, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="skillsWrapper">
             <ul>
@@ -31,7 +31,8 @@ function SkillsSection({ skillsInfo, handleMouseEnter, handleMouseLeave, buttonH
                                 <button
                                     className="editInfo"
                                     onClick={(e) => {
-                                        e.preventDefault()
+                                        const entryId = e.target.closest(".skillsEntry").id.slice(-1);
+                                        handleEdit(entryId);
                                     }}
                                     style={{margin: "10px"}}
                                     type="button"
@@ -65,6 +66,7 @@ function Skills() {
             listedSkills: "High agility, decision-making, problem-solving"
         }
     ]);
+    const [idOfEditedSkillEntry, setIdOfEditedSkillEntry] = useState();
     const [buttonHoverStyle, setButtonHoverStyle] = useState([{ display: "none" }]);
     const [entryHoverStyle, setEntryHoverStyle] = useState([{}]);
 
@@ -115,30 +117,66 @@ function Skills() {
         const formData = new FormData(form);
         const formValues = Object.fromEntries(formData);
         
-        // Submitting a new entry
-        setSkillsInfo((prevState) => {
-            return (
-                [
-                    ...prevState,
-                    {
-                        id: prevState.length,
+        // Updating an edited entry
+        if (typeof(idOfEditedSkillEntry) === "number") {
+            setSkillsInfo(skillsInfo.map((entry, index) => {
+                if (index === idOfEditedSkillEntry) {
+                    return {
+                        ...entry,
                         category: formValues.skillCategory,
-                        listedSkills: formValues.listOfSkills
+                        listedSkills: formValues.listOfSkills,
                     }
-                ]
-            )
+                } else {
+                    return entry;
+                }
+            }));
+        } else {
+            // Submitting a new entry
+            setSkillsInfo((prevState) => {
+                return (
+                    [
+                        ...prevState,
+                        {
+                            id: prevState.length,
+                            category: formValues.skillCategory,
+                            listedSkills: formValues.listOfSkills,
+                        }
+                    ]
+                )
+            });
+    
+            // Add another style element
+            setButtonHoverStyle([
+                ...buttonHoverStyle,
+                { display: "none" }
+            ]);
+    
+            setEntryHoverStyle([
+                ...entryHoverStyle,
+                {}
+            ]);
+        }
+    }
+
+    function handleSkillsEdit(entryDivId) {
+        const entryToEdit = skillsInfo[entryDivId];
+        const allInputFields = document.querySelectorAll("#skillsForm input");
+        
+        setIdOfEditedSkillEntry(Number(entryDivId));
+
+        allInputFields.forEach(input => {
+            switch (input.id) {
+                case "skillCategory": 
+                    input.value = entryToEdit.category;
+                    break;
+                case "listOfSkills": 
+                    input.value = entryToEdit.listedSkills;
+                    break;
+                default:
+                    input.value = "";
+                    break;
+            }
         });
-
-        // Add another style element
-        setButtonHoverStyle([
-            ...buttonHoverStyle,
-            { display: "none" }
-        ])
-
-        setEntryHoverStyle([
-            ...entryHoverStyle,
-            {}
-        ])
     }
 
     return (
@@ -149,6 +187,7 @@ function Skills() {
             />
             <SkillsSection 
                 skillsInfo={skillsInfo} 
+                handleEdit={handleSkillsEdit}
                 handleMouseEnter={handleMouseEnterSkill}
                 handleMouseLeave={handleMouseLeaveSkill}
                 buttonHoverStyle={buttonHoverStyle}
