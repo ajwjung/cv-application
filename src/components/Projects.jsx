@@ -180,6 +180,8 @@ function Projects() {
                 {}
             ])
         }
+
+        setIdOfEditedProjectEntry("");
     }
 
     function handleProjectEdit(entryDivId) {
