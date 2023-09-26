@@ -1,4 +1,4 @@
-import "../styles/App.css"
+import "../styles/FormFields.css"
 
 function GeneralFields({ handleSubmit, editStatus }) {
     function clearFormFields() {
