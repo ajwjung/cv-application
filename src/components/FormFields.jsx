@@ -302,7 +302,7 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
     )
 }
 
-function SkillsFields({ handleSubmit }) {
+function SkillsFields({ handleSubmit, editStatus }) {
     return (
         <form 
             id="skillsForm" 
@@ -332,7 +332,11 @@ function SkillsFields({ handleSubmit }) {
                     />
                 </div>
             </fieldset>
-            <button type="submit">Add Skills</button>
+            <button type="submit">{
+                editStatus 
+                ? "Update Information" 
+                : "Add Information"
+            }</button>
         </form>
     )
 }

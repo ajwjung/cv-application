@@ -186,6 +186,7 @@ function Skills() {
             <h2>Skills</h2>
             <SkillsFields 
                 handleSubmit={handleSkillsSubmit}
+                editStatus={typeof(idOfEditedSkillEntry) === "number"}
             />
             <SkillsSection 
                 skillsInfo={skillsInfo} 
