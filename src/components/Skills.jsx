@@ -110,19 +110,43 @@ function Skills() {
         )
     }
 
-    function handleAddAnotherSkill() {
-        const additionalInfoFields = document.querySelector(".additionalInfoFields");
-        const newInput = document.createElement("input");
-        newInput.type = "text";
-        newInput.name = "additionalInfo";
-        newInput.placeholder = "Additional info (e.g., relevant coursework)"
-        additionalInfoFields.appendChild(newInput)
+    function handleSkillsSubmit() {
+        const form = document.forms.skillsForm;
+        const formData = new FormData(form);
+        const formValues = Object.fromEntries(formData);
+        
+        // Submitting a new entry
+        setSkillsInfo((prevState) => {
+            return (
+                [
+                    ...prevState,
+                    {
+                        id: prevState.length,
+                        category: formValues.skillCategory,
+                        listedSkills: formValues.listOfSkills
+                    }
+                ]
+            )
+        });
+
+        // Add another style element
+        setButtonHoverStyle([
+            ...buttonHoverStyle,
+            { display: "none" }
+        ])
+
+        setEntryHoverStyle([
+            ...entryHoverStyle,
+            {}
+        ])
     }
 
     return (
         <>
             <h2>Skills</h2>
-            <SkillsFields />
+            <SkillsFields 
+                handleSubmit={handleSkillsSubmit}
+            />
             <SkillsSection 
                 skillsInfo={skillsInfo} 
                 handleMouseEnter={handleMouseEnterSkill}

@@ -302,12 +302,15 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
     )
 }
 
-function SkillsFields() {
+function SkillsFields({ handleSubmit }) {
     return (
         <form 
             id="skillsForm" 
             action=""
-            onSubmit={(e) => e.preventDefault()} 
+            onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+            }} 
         >
             <fieldset className="skillsList">
                 <div className="skillCategory">
@@ -329,7 +332,6 @@ function SkillsFields() {
                     />
                 </div>
             </fieldset>
-            <button type="button">Add Another Skill</button>
             <button type="submit">Add Skills</button>
         </form>
     )
