@@ -129,10 +129,44 @@ function Projects() {
         descriptions.appendChild(newInput);
     }
 
+    function handleProjectSubmit() {
+        const form = document.forms.projectsForm;
+        const formData = new FormData(form);
+        const formValues = Object.fromEntries(formData);
+        const allDescriptions = formData.getAll("projectDescription").filter(val => val);
+
+        setProjectsInfo((prevState) => {
+            return (
+                [
+                    ...prevState,
+                    {
+                        id: prevState.length,
+                        projectName: formValues.projectName,
+                        startDate: formValues.projectStartDate,
+                        endDate: formValues.projectEndDate,
+                        descriptions: [...allDescriptions],
+                    }
+                ]
+            )
+        });
+
+        // Add another style element
+        setButtonHoverStyle([
+            ...buttonHoverStyle,
+            { display: "none" }
+        ])
+
+        setEntryHoverStyle([
+            ...entryHoverStyle,
+            {}
+        ])
+    }
+
     return (
         <>
             <h2>Projects</h2>
             <ProjectsFields 
+                handleSubmit={handleProjectSubmit}
                 handleAddDescription={handleAddDescription}
             />
             <ProjectsSection 
