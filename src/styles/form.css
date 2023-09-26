@@ -50,10 +50,14 @@ fieldset {
 
 .educationDetails,
 .jobDetails,
-.projectDetails,
-.skillsDetails {
+.projectDetails {
     display: flex;
     justify-content: space-between;
+}
+
+.skillsDetails {
+    display: flex;
+    gap: 1rem;
 }
 
 /* Form fields (dates) */
@@ -98,7 +102,9 @@ fieldset {
     text-transform: uppercase;
 }
 
-/* Skills */
-.skillsList > li > * {
-    padding: 0 5px;
+.skillCategory,
+.skillInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }

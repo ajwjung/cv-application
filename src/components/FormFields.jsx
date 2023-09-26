@@ -310,20 +310,24 @@ function SkillsFields() {
             onSubmit={(e) => e.preventDefault()} 
         >
             <fieldset className="skillsList">
-                <label htmlFor="skillCategory">Category</label>
-                <input
-                    type="text"
-                    name="skillCategory"
-                    id="skillCategory"
-                    placeholder="Skills category (e.g., technical)"
-                />
-                <label htmlFor="listOfSkills">Skill</label>
-                <input
-                    type="text"
-                    name="listOfSkills"
-                    id="listOfSkills"
-                    placeholder="List of skills (comma-separated)"
-                />
+                <div className="skillCategory">
+                    <label htmlFor="skillCategory">Category</label>
+                    <input
+                        type="text"
+                        name="skillCategory"
+                        id="skillCategory"
+                        placeholder="Skills category (e.g., technical)"
+                        />
+                </div>
+                <div className="skillInfo">
+                    <label htmlFor="listOfSkills">Skill</label>
+                    <input
+                        type="text"
+                        name="listOfSkills"
+                        id="listOfSkills"
+                        placeholder="List of skills (comma-separated)"
+                    />
+                </div>
             </fieldset>
             <button type="button">Add Another Skill</button>
             <button type="submit">Add Skills</button>

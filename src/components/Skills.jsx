@@ -110,6 +110,15 @@ function Skills() {
         )
     }
 
+    function handleAddAnotherSkill() {
+        const additionalInfoFields = document.querySelector(".additionalInfoFields");
+        const newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.name = "additionalInfo";
+        newInput.placeholder = "Additional info (e.g., relevant coursework)"
+        additionalInfoFields.appendChild(newInput)
+    }
+
     return (
         <>
             <h2>Skills</h2>
