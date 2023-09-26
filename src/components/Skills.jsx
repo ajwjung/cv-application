@@ -2,7 +2,7 @@ import "../styles/form.css"
 import { useState } from "react";
 import { SkillsFields } from "./FormFields";
 
-function SkillsSection({ skillsInfo, handleEdit, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
+function SkillsSection({ skillsInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="skillsWrapper">
             <ul>
@@ -42,7 +42,8 @@ function SkillsSection({ skillsInfo, handleEdit, handleMouseEnter, handleMouseLe
                                 <button
                                     className="deleteInfo"
                                     onClick={(e) => {
-                                        e.preventDefault()
+                                        const entryId = e.target.closest(".skillsEntry").id.slice(-1);
+                                        handleDelete(entryId);
                                     }}
                                     style={{margin: "10px"}}
                                     type="button"
@@ -181,6 +182,12 @@ function Skills() {
         });
     }
 
+    function handleDeleteEntry(entryId) {
+        setSkillsInfo(
+            skillsInfo.filter((_, index) => Number(entryId) !== index)
+        );
+    }
+
     return (
         <>
             <h2>Skills</h2>
@@ -191,6 +198,7 @@ function Skills() {
             <SkillsSection 
                 skillsInfo={skillsInfo} 
                 handleEdit={handleSkillsEdit}
+                handleDelete={handleDeleteEntry}
                 handleMouseEnter={handleMouseEnterSkill}
                 handleMouseLeave={handleMouseLeaveSkill}
                 buttonHoverStyle={buttonHoverStyle}
