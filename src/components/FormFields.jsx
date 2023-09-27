@@ -137,8 +137,14 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
                     placeholder="Additional info (e.g., relevant coursework)"
                 />
             </fieldset>
-            <button onClick={() => handleAddAdditionalInfo()} type="button">Add Additional Info</button>
-            <button type="submit">{
+            <button 
+                onClick={() => handleAddAdditionalInfo()}
+                className="addField"
+                type="button"
+            >
+                Add Additional Info
+            </button>
+            <button className="saveInfo" type="submit">{
                 editStatus 
                 ? "Update Information" 
                 : "Add Information"
@@ -170,6 +176,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
                 name="company" 
                 id="company" 
                 placeholder="Company Name"
+                required
             />
             <label htmlFor="companyLocation">Location</label>
             <input 
@@ -186,6 +193,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
                 name="position" 
                 id="position" 
                 placeholder="Position Title"
+                required
             />
             <fieldset>
                 <div className="start">
@@ -230,10 +238,14 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
                     required
                 />
             </fieldset>
-            <button onClick={() => handleAddJobDuty()} type="button">
+            <button 
+                onClick={() => handleAddJobDuty()}
+                className="addField" 
+                type="button"
+            >
                 Add Another Responsibility
             </button>
-            <button type="submit">{
+            <button className="saveInfo" type="submit">{
                 editStatus 
                 ? "Update Information" 
                 : "Add Information"
@@ -265,6 +277,7 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
                 name="projectName" 
                 id="projectName"
                 placeholder="Project Name" 
+                required
             />
             <fieldset>
                 <div className="start">
@@ -297,8 +310,13 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
                     required
                 />
             </fieldset>
-            <button onClick={() => handleAddDescription()} type="button">Add Another Description</button>
-            <button type="submit">{
+            <button 
+                onClick={() => handleAddDescription()} 
+                className="addField"
+                type="button">
+                    Add Another Description
+                </button>
+            <button className="saveInfo" type="submit">{
                 editStatus 
                 ? "Update Information" 
                 : "Add Information"
@@ -344,7 +362,7 @@ function SkillsFields({ handleSubmit, editStatus }) {
                     />
                 </div>
             </fieldset>
-            <button type="submit">{
+            <button className="saveInfo" type="submit">{
                 editStatus 
                 ? "Update Information" 
                 : "Add Information"
