@@ -1,75 +1,90 @@
 #root {
-  margin: 0 auto;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Reorder forms */
 #generalForm {
-  order: 1;
+    order: 1;
 }
 
 #educationForm {
-  order: 2;
+    order: 2;
 }
 
 #experienceForm {
-  order: 3;
+    order: 3;
 }
 
 #projectsForm {
-  order: 4;
+    order: 4;
 }
 
 #skillsForm {
-  order: 5;
+    order: 5;
 }
 
 /* Styles the form fields */
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  background: rgb(240, 240, 240);
-  border-radius: 10px;
-  padding: 1rem;
-  margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgb(239, 243, 247);
+    border: 1px solid rgb(142, 161, 180);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 10px 0;
 }
 
 label {
-  text-align: start;
+    text-align: start;
+}
+
+legend,
+.first > label,
+.last > label,
+.start > label,
+.end > label {
+    margin: 5px 0;
 }
 
 fieldset {
-  display: flex;
-  padding: 0;
-  border: none;
-  gap: 10px;
+    display: flex;
+    padding: 0;
+    border: none;
+    gap: 10px;
 }
 
 button {
-  margin-top: 10px;
+    margin-top: 10px;
+}
+
+.addField,
+.saveInfo {
+    background-color: rgb(201, 215, 233);
 }
 
 .first,
 .last,
 .start,
 .end {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .skillCategory,
 .skillInfo {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 /* Styles the added additional fields */
 .additionalInfoFields,
 .jobDuties,
 .projectDescriptions {
-  flex-direction: column;
+    flex-direction: column;
 }
