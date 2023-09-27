@@ -43,8 +43,8 @@ function General() {
         lastName: "Doe",
         email: "johndoe@email.com",
         phoneNumber: "111-111-1111",
-        isEdit: false,
     });
+    const [editStatus, setEditStatus] = useState(false);
 
     function handleGeneralSubmit() {
         const form = document.forms.generalForm;
@@ -55,11 +55,15 @@ function General() {
             ...generalInfo, 
             ...formValues, 
         });
+
+        setEditStatus(false);
     }
 
     function handleGeneralEdit() {
         const allGeneralInputs = document.querySelectorAll("#generalForm input");
         const generalForm = document.getElementById("generalForm");
+
+        setEditStatus(true);
 
         allGeneralInputs.forEach(input => {
             switch (input.id) {
@@ -79,11 +83,6 @@ function General() {
             }
         })
 
-        setGeneralInfo({
-            ...generalInfo,
-            isEdit: true
-        });
-
         generalForm.scrollIntoView({
             behavior: "smooth",
             block: "start",
@@ -95,7 +94,7 @@ function General() {
         <>
             <GeneralFields
                 handleSubmit={handleGeneralSubmit}  
-                editStatus={generalInfo.isEdit}
+                editStatus={editStatus}
             />
             <GeneralSection
                 firstName={generalInfo.firstName}
