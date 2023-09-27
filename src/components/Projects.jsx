@@ -3,7 +3,7 @@ import { ProjectsFields } from "./FormFields";
 
 function ProjectsSection({ projectsInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
-        <section className="projectsWrapper">
+        projectsInfo.length > 0 && <section className="projectsWrapper">
             <h2 className="projectsDivider">PROJECTS</h2>
             <hr/>
             {projectsInfo.map((entry, index) => {

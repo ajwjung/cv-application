@@ -350,7 +350,8 @@ function SkillsFields({ handleSubmit, editStatus }) {
                         name="skillCategory"
                         id="skillCategory"
                         placeholder="Skills category (e.g., technical)"
-                        />
+                        required
+                    />
                 </div>
                 <div className="skillInfo">
                     <label htmlFor="listOfSkills">Skill</label>
@@ -359,6 +360,7 @@ function SkillsFields({ handleSubmit, editStatus }) {
                         name="listOfSkills"
                         id="listOfSkills"
                         placeholder="List of skills (comma-separated)"
+                        required
                     />
                 </div>
             </fieldset>

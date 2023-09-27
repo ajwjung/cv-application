@@ -3,7 +3,7 @@ import { SkillsFields } from "./FormFields";
 
 function SkillsSection({ skillsInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
-        <section className="skillsWrapper">
+        skillsInfo.length > 0 && <section className="skillsWrapper">
             <h2 className="skillsDivider">SKILLS</h2>
             <hr/>
             <ul>
