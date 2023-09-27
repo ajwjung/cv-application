@@ -1,40 +1,48 @@
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+/* Reorders the sections */
+.generalWrapper {
+    order: 6;
 }
 
-label {
-    text-align: start;
+.projectsWrapper {
+    order: 7;
 }
 
-fieldset {
-    display: flex;
-    padding: 0;
-    border: none;
-    gap: 10px;
+.experienceWrapper {
+    order: 8;
 }
 
-.first,
-.last,
-.start,
-.end {
-    display: flex;
-    flex-direction: column;
+.educationWrapper {
+    order: 9;
 }
 
-.skillCategory,
-.skillInfo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.skillsWrapper {
+    order: 10;
 }
 
-/* Styles the added additional fields */
-.additionalInfoFields,
-.jobDuties,
-.projectDescriptions {
-    flex-direction: column;
+/* Styles the generated CV */
+.educationDivider,
+.experienceDivider,
+.projectsDivider,
+.skillsDivider {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+section {
+    margin: 10px 0;
+}
+
+p,
+ul {
+    margin: 5px 0;
+}
+
+.generalInfo > * {
+    text-align: center;
+}
+
+.generalInfo > h2 {
+    margin-bottom: 0;
 }
 
 /* Displayed entries for generated CV */

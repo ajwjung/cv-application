@@ -1,10 +1,11 @@
-import "../styles/form.css"
 import { useState } from "react";
 import { SkillsFields } from "./FormFields";
 
 function SkillsSection({ skillsInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="skillsWrapper">
+            <h2 className="skillsDivider">SKILLS</h2>
+            <hr/>
             <ul>
                 {skillsInfo.map((entry, index) => {
                     return (
@@ -164,6 +165,7 @@ function Skills() {
     function handleSkillsEdit(entryDivId) {
         const entryToEdit = skillsInfo[entryDivId];
         const allInputFields = document.querySelectorAll("#skillsForm input");
+        const skillsForm = document.getElementById("skillsForm");
         
         setIdOfEditedSkillEntry(Number(entryDivId));
 
@@ -180,6 +182,12 @@ function Skills() {
                     break;
             }
         });
+
+        skillsForm.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "start"
+        });
     }
 
     function handleDeleteEntry(entryId) {
@@ -190,7 +198,6 @@ function Skills() {
 
     return (
         <>
-            <h2>Skills</h2>
             <SkillsFields 
                 handleSubmit={handleSkillsSubmit}
                 editStatus={typeof(idOfEditedSkillEntry) === "number"}

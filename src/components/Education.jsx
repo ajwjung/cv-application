@@ -1,10 +1,11 @@
-import "../styles/form.css"
 import { useState } from "react"
 import { EducationFields } from './FormFields.jsx'
 
 function EducationSection({ educationInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="educationWrapper">
+            <h2 className="educationDivider">EDUCATION</h2>
+            <hr/>
             {educationInfo.map((entry, index) => {
                 return (
                     <div 
@@ -25,7 +26,7 @@ function EducationSection({ educationInfo, handleEdit, handleDelete, handleMouse
                             style={entryHoverStyle[index]} 
                         >
                             <p><b>{entry.schoolName}</b> | {entry.location}</p>
-                            <p>{entry.startDate + " - " + entry.endDate}</p>
+                            <p><i>{entry.startDate + " - " + entry.endDate}</i></p>
                         </div>
                         <p
                             style={entryHoverStyle[index]} 
@@ -208,6 +209,7 @@ function Education() {
         const allInputFields = document.querySelectorAll("#educationForm input");
         const allAdditionalInputs = document.querySelectorAll(".additionalInfoFields input");
         const numOfInfoValues = entryToEdit.additionalInfo.length;
+        const educationForm = document.getElementById("educationForm");
 
         setIdOfEditedEducationEntry(Number(entryDivId));
 
@@ -246,6 +248,12 @@ function Education() {
             const correspondingText = entryToEdit.additionalInfo[index];
             input.value = correspondingText ? correspondingText : "";
         })
+
+        educationForm.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "start"
+        });
     }
 
     function handleDeleteEntry(entryId) {
@@ -256,7 +264,6 @@ function Education() {
 
     return (
         <>
-            <h2>Education</h2>
             <EducationFields
                 handleSubmit={handleEducationSubmit}
                 handleAddAdditionalInfo={handleAddAdditionalInfo}

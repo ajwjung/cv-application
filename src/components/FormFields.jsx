@@ -1,4 +1,5 @@
-import "../styles/FormFields.css"
+import "../styles/formFields.css"
+import "../styles/generatedCv.css"
 
 function GeneralFields({ handleSubmit, editStatus }) {
     function clearFormFields() {
@@ -16,6 +17,7 @@ function GeneralFields({ handleSubmit, editStatus }) {
                 clearFormFields();
             }}
         >
+            <h2 className="generalHeading">General Information</h2>
             <fieldset className="fullName">
                 <div className="first">
                     <label htmlFor="firstName">First Name</label>
@@ -79,6 +81,7 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
                 clearFormFields();
             }} 
         >
+            <h2 className="educationHeading">Education</h2>
             <label htmlFor="schoolName">Name of Institution</label>
             <input 
                 type="text" 
@@ -160,6 +163,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
                 clearFormFields();
             }} 
         >
+            <h2 className="experienceHeading">Experience</h2>
             <label htmlFor="company">Company Name</label>
             <input 
                 type="text" 
@@ -254,6 +258,7 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
                 clearFormFields();
             }} 
         >
+            <h2 className="projectsHeading">Projects</h2>
             <label htmlFor="projectName">Project Name</label>
             <input 
                 type="text" 
@@ -318,6 +323,7 @@ function SkillsFields({ handleSubmit, editStatus }) {
                 clearFormFields();
             }} 
         >
+            <h2 className="skillsHeading">Skills</h2>
             <fieldset className="skillsList">
                 <div className="skillCategory">
                     <label htmlFor="skillCategory">Category</label>

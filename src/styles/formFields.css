@@ -1,0 +1,75 @@
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Reorder forms */
+#generalForm {
+  order: 1;
+}
+
+#educationForm {
+  order: 2;
+}
+
+#experienceForm {
+  order: 3;
+}
+
+#projectsForm {
+  order: 4;
+}
+
+#skillsForm {
+  order: 5;
+}
+
+/* Styles the form fields */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: rgb(240, 240, 240);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 10px 0;
+}
+
+label {
+  text-align: start;
+}
+
+fieldset {
+  display: flex;
+  padding: 0;
+  border: none;
+  gap: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.first,
+.last,
+.start,
+.end {
+  display: flex;
+  flex-direction: column;
+}
+
+.skillCategory,
+.skillInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Styles the added additional fields */
+.additionalInfoFields,
+.jobDuties,
+.projectDescriptions {
+  flex-direction: column;
+}

@@ -1,10 +1,11 @@
-import "../styles/form.css"
 import { useState } from "react";
 import { ExperienceFields } from "./FormFields";
 
 function ExperienceSection({ experienceInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="experienceWrapper">
+            <h2 className="experienceDivider">EXPERIENCE</h2>
+            <hr/>
             {experienceInfo.map((entry, index) => {
                 return (
                     <div 
@@ -25,12 +26,12 @@ function ExperienceSection({ experienceInfo, handleEdit, handleDelete, handleMou
                             style={entryHoverStyle[index]}
                         >
                             <p><b>{entry.position}</b></p>
-                            <p>{entry.startDate + " - " + entry.endDate}</p>
+                            <p><i>{entry.startDate + " - " + entry.endDate}</i></p>
                         </div>
                         <p
                             style={entryHoverStyle[index]} 
                         >
-                            <b>{entry.company}</b> | {entry.location}
+                            {entry.company} | {entry.location}
                         </p>
                         <ul style={entryHoverStyle[index]}>
                             {entry.responsibilities.map((duty, index) => {
@@ -210,6 +211,7 @@ function Experience() {
         const allInputFields = document.querySelectorAll("#experienceForm input");
         const allJobDutyInputs = document.querySelectorAll(".jobDuties input");
         const numOfInfoValues = entryToEdit.responsibilities.length;
+        const experienceForm = document.getElementById("experienceForm");
 
         setIdOfEditedJobEntry(Number(entryDivId));
 
@@ -248,6 +250,12 @@ function Experience() {
             const correspondingText = entryToEdit.responsibilities[index];
             input.value = correspondingText ? correspondingText : "";
         })
+
+        experienceForm.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "start"
+        });
     }
 
     function handleDeleteEntry(entryId) {
@@ -258,7 +266,6 @@ function Experience() {
 
     return (
         <>
-            <h2>Experience</h2>
             <ExperienceFields 
                 handleSubmit={handleJobSubmit}
                 handleAddJobDuty={handleAddJobDuty}

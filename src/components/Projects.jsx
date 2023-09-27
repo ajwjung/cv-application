@@ -1,10 +1,11 @@
-import "../styles/form.css"
 import { useState } from "react";
 import { ProjectsFields } from "./FormFields";
 
 function ProjectsSection({ projectsInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
     return (
         <section className="projectsWrapper">
+            <h2 className="projectsDivider">PROJECTS</h2>
+            <hr/>
             {projectsInfo.map((entry, index) => {
                 return (
                     <div 
@@ -25,7 +26,7 @@ function ProjectsSection({ projectsInfo, handleEdit, handleDelete, handleMouseEn
                             style={entryHoverStyle[index]}
                         >
                             <p><b>{entry.projectName}</b></p>
-                            <p>{entry.startDate + " - " + entry.endDate}</p>
+                            <p><i>{entry.startDate + " - " + entry.endDate}</i></p>
                         </div>
                         {
                             <ul style={entryHoverStyle[index]}>
@@ -201,6 +202,7 @@ function Projects() {
         const allInputFields = document.querySelectorAll("#projectsForm input");
         const allDescriptions = document.querySelectorAll(".projectDescriptions input");
         const numOfInfoValues = entryToEdit.descriptions.length;
+        const projectsForm = document.getElementById("projectsForm");
 
         setIdOfEditedProjectEntry(Number(entryDivId));
 
@@ -233,6 +235,12 @@ function Projects() {
             const correspondingText = entryToEdit.descriptions[index];
             input.value = correspondingText ? correspondingText : "";
         })
+
+        projectsForm.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "start"
+        });
     }
 
     function handleDeleteEntry(entryId) {
@@ -243,7 +251,6 @@ function Projects() {
 
     return (
         <>
-            <h2>Projects</h2>
             <ProjectsFields 
                 handleSubmit={handleProjectSubmit}
                 handleAddDescription={handleAddDescription}

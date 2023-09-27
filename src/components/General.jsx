@@ -1,4 +1,3 @@
-import "../styles/form.css"
 import { useState } from "react";
 import { GeneralFields } from "./FormFields";
 
@@ -24,8 +23,7 @@ function GeneralSection({ firstName, lastName, email, phoneNumber, handleEdit })
         >
             <div className="generalInfo" style={sectionHoverStyle} >
                 <h2>{firstName + " " + lastName}</h2>
-                <p>{email}</p>
-                <p>{phoneNumber}</p>
+                <p>{email} • {phoneNumber}</p>
             </div>
             <button 
                 style={buttonHoverStyle} 
@@ -61,6 +59,7 @@ function General() {
 
     function handleGeneralEdit() {
         const allGeneralInputs = document.querySelectorAll("#generalForm input");
+        const generalForm = document.getElementById("generalForm");
 
         allGeneralInputs.forEach(input => {
             switch (input.id) {
@@ -84,11 +83,16 @@ function General() {
             ...generalInfo,
             isEdit: true
         });
+
+        generalForm.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "start"
+        });
     }
 
     return (
         <>
-            <h2>General Information</h2>
             <GeneralFields
                 handleSubmit={handleGeneralSubmit}  
                 editStatus={generalInfo.isEdit}
