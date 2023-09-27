@@ -87,3 +87,8 @@ ul {
     border: 1px solid rgb(255, 71, 71);
     text-transform: uppercase;
 }
+
+.skillsEntry .editInfo,
+.skillsEntry .deleteInfo {
+    padding: 0.3rem 1.2rem;
+}
