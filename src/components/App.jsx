@@ -757,7 +757,6 @@ function App() {
 
     return (
         <>
-            <h1>Form Fields</h1>
             <AllForms 
                 // General
                 handleSubmitGeneral={handleGeneralSubmit}  
@@ -778,7 +777,6 @@ function App() {
                 handleSubmitSkill={handleSubmitSkill}
                 editSkillStatus={typeof(idOfEditedSkillEntry) === "number"}
             />
-            <h1>Generated CV</h1>
             <AllSections 
                 // General
                 generalInfo={generalInfo}

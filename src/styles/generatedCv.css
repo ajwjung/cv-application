@@ -1,24 +1,3 @@
-/* Reorders the sections */
-.generalWrapper {
-    order: 6;
-}
-
-.projectsWrapper {
-    order: 7;
-}
-
-.experienceWrapper {
-    order: 8;
-}
-
-.educationWrapper {
-    order: 9;
-}
-
-.skillsWrapper {
-    order: 10;
-}
-
 /* Styles the generated CV */
 .educationDivider,
 .experienceDivider,

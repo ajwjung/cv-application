@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import GeneralSection from "./General";
 import EducationSection from "./Education"
 import ExperienceSection from "./Experience"
@@ -15,47 +14,50 @@ function AllSections({
     entryHoverEducation, entryHoverExperience, entryHoverProject, entryHoverSkill
  }) {
     return (
-        <div className="sectionsWrapper">
-            <GeneralSection
-                generalInfo={generalInfo}
-                handleEditGeneral={handleEditGeneral}
-            />
-            <EducationSection
-                educationInfo={educationInfo}
-                handleEditEducation={handleEditEducation}
-                handleDeleteEducation={handleDeleteEducation}
-                handleMouseEnterEducation={handleMouseEnterEducation}
-                handleMouseLeaveEducation={handleMouseLeaveEducation}
-                buttonHoverEducation={buttonHoverEducation}
-                entryHoverEducation={entryHoverEducation}
-            />
-            <ExperienceSection 
-                experienceInfo={experienceInfo} 
-                handleEditExperience={handleEditExperience}
-                handleDeleteExperience={handleDeleteExperience}
-                handleMouseEnterExperience={handleMouseEnterExperience}
-                handleMouseLeaveExperience={handleMouseLeaveExperience}
-                buttonHoverExperience={buttonHoverExperience}
-                entryHoverExperience={entryHoverExperience}
-            />
-            <ProjectsSection 
-                projectsInfo={projectsInfo}
-                handleEditProject={handleEditProject}
-                handleDeleteProject={handleDeleteProject}
-                handleMouseEnterProject={handleMouseEnterProject}
-                handleMouseLeaveProject={handleMouseLeaveProject}
-                buttonHoverProject={buttonHoverProject}
-                entryHoverProject={entryHoverProject}
-            />
-            <SkillsSection 
-                skillsInfo={skillsInfo} 
-                handleEditSkill={handleEditSkill}
-                handleDeleteSkill={handleDeleteSkill}
-                handleMouseEnterSkill={handleMouseEnterSkill}
-                handleMouseLeaveSkill={handleMouseLeaveSkill}
-                buttonHoverSkill={buttonHoverSkill}
-                entryHoverSkill={entryHoverSkill}
-            />
+        <div className="sectionsContainer">
+            <h1 className="sectionsHeading">Generated CV</h1>
+            <div className="sectionsWrapper">
+                <GeneralSection
+                    generalInfo={generalInfo}
+                    handleEditGeneral={handleEditGeneral}
+                />
+                <EducationSection
+                    educationInfo={educationInfo}
+                    handleEditEducation={handleEditEducation}
+                    handleDeleteEducation={handleDeleteEducation}
+                    handleMouseEnterEducation={handleMouseEnterEducation}
+                    handleMouseLeaveEducation={handleMouseLeaveEducation}
+                    buttonHoverEducation={buttonHoverEducation}
+                    entryHoverEducation={entryHoverEducation}
+                />
+                <ExperienceSection
+                    experienceInfo={experienceInfo}
+                    handleEditExperience={handleEditExperience}
+                    handleDeleteExperience={handleDeleteExperience}
+                    handleMouseEnterExperience={handleMouseEnterExperience}
+                    handleMouseLeaveExperience={handleMouseLeaveExperience}
+                    buttonHoverExperience={buttonHoverExperience}
+                    entryHoverExperience={entryHoverExperience}
+                />
+                <ProjectsSection
+                    projectsInfo={projectsInfo}
+                    handleEditProject={handleEditProject}
+                    handleDeleteProject={handleDeleteProject}
+                    handleMouseEnterProject={handleMouseEnterProject}
+                    handleMouseLeaveProject={handleMouseLeaveProject}
+                    buttonHoverProject={buttonHoverProject}
+                    entryHoverProject={entryHoverProject}
+                />
+                <SkillsSection
+                    skillsInfo={skillsInfo}
+                    handleEditSkill={handleEditSkill}
+                    handleDeleteSkill={handleDeleteSkill}
+                    handleMouseEnterSkill={handleMouseEnterSkill}
+                    handleMouseLeaveSkill={handleMouseLeaveSkill}
+                    buttonHoverSkill={buttonHoverSkill}
+                    entryHoverSkill={entryHoverSkill}
+                />
+            </div>
         </div>
     )
 }
