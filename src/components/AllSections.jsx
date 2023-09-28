@@ -15,7 +15,7 @@ function AllSections({
     entryHoverEducation, entryHoverExperience, entryHoverProject, entryHoverSkill
  }) {
     return (
-        <>
+        <div className="sectionsWrapper">
             <GeneralSection
                 generalInfo={generalInfo}
                 handleEditGeneral={handleEditGeneral}
@@ -56,7 +56,7 @@ function AllSections({
                 buttonHoverSkill={buttonHoverSkill}
                 entryHoverSkill={entryHoverSkill}
             />
-        </>
+        </div>
     )
 }
 
