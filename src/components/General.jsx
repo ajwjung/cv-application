@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { GeneralFields } from "./FormFields";
 
-function GeneralSection({ firstName, lastName, email, phoneNumber, handleEdit }) {
+function GeneralSection({ generalInfo, handleEditGeneral }) {
     const [buttonHoverStyle, setButtonHoverStyle] = useState({display: "none"});
     const [sectionHoverStyle, setSectionHoverStyle] = useState({});
     
@@ -22,13 +21,13 @@ function GeneralSection({ firstName, lastName, email, phoneNumber, handleEdit })
             onMouseLeave={handleMouseLeave}
         >
             <div className="generalInfo" style={sectionHoverStyle} >
-                <h2>{firstName + " " + lastName}</h2>
-                <p>{email} • {phoneNumber}</p>
+                <h2>{generalInfo.firstName + " " + generalInfo.lastName}</h2>
+                <p>{generalInfo.email} • {generalInfo.phoneNumber}</p>
             </div>
             <button 
                 style={buttonHoverStyle} 
                 className="editInfo" 
-                onClick={() => handleEdit()}
+                onClick={() => handleEditGeneral()}
                 type="button"
             >
                 Edit
@@ -37,74 +36,71 @@ function GeneralSection({ firstName, lastName, email, phoneNumber, handleEdit })
     )
 }
 
-function General() {
-    const [generalInfo, setGeneralInfo] = useState({
-        firstName: "John",
-        lastName: "Doe",
-        email: "johndoe@email.com",
-        phoneNumber: "111-111-1111",
-    });
-    const [editStatus, setEditStatus] = useState(false);
+// function General() {
+//     const [generalInfo, setGeneralInfo] = useState({
+//         firstName: "John",
+//         lastName: "Doe",
+//         email: "johndoe@email.com",
+//         phoneNumber: "111-111-1111",
+//     });
+//     const [editStatus, setEditStatus] = useState(false);
 
-    function handleGeneralSubmit() {
-        const form = document.forms.generalForm;
-        const formData = new FormData(form);
-        const formValues = Object.fromEntries(formData);
+//     function handleGeneralSubmit() {
+//         const form = document.forms.generalForm;
+//         const formData = new FormData(form);
+//         const formValues = Object.fromEntries(formData);
 
-        setGeneralInfo({
-            ...generalInfo, 
-            ...formValues, 
-        });
+//         setGeneralInfo({
+//             ...generalInfo, 
+//             ...formValues, 
+//         });
 
-        setEditStatus(false);
-    }
+//         setEditStatus(false);
+//     }
 
-    function handleGeneralEdit() {
-        const allGeneralInputs = document.querySelectorAll("#generalForm input");
-        const generalForm = document.getElementById("generalForm");
+//     function handleGeneralEdit() {
+//         const allGeneralInputs = document.querySelectorAll("#generalForm input");
+//         const generalForm = document.getElementById("generalForm");
 
-        setEditStatus(true);
+//         setEditStatus(true);
 
-        allGeneralInputs.forEach(input => {
-            switch (input.id) {
-                case "firstName":
-                    input.value = generalInfo.firstName;
-                    break;
-                case "lastName":
-                    input.value = generalInfo.lastName;
-                    break;
-                case "email":
-                    input.value = generalInfo.email;
-                    break;
-                case "phoneNumber":
-                    input.value = generalInfo.phoneNumber;
-                    break;
+//         allGeneralInputs.forEach(input => {
+//             switch (input.id) {
+//                 case "firstName":
+//                     input.value = generalInfo.firstName;
+//                     break;
+//                 case "lastName":
+//                     input.value = generalInfo.lastName;
+//                     break;
+//                 case "email":
+//                     input.value = generalInfo.email;
+//                     break;
+//                 case "phoneNumber":
+//                     input.value = generalInfo.phoneNumber;
+//                     break;
                 
-            }
-        })
+//             }
+//         })
 
-        generalForm.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-            inline: "start"
-        });
-    }
+//         generalForm.scrollIntoView({
+//             behavior: "smooth",
+//             block: "start",
+//             inline: "start"
+//         });
+//     }
 
-    return (
-        <>
-            <GeneralFields
-                handleSubmit={handleGeneralSubmit}  
-                editStatus={editStatus}
-            />
-            <GeneralSection
-                firstName={generalInfo.firstName}
-                lastName={generalInfo.lastName}
-                email={generalInfo.email}
-                phoneNumber={generalInfo.phoneNumber}
-                handleEdit={handleGeneralEdit}
-            />
-        </>
-    )
-}
+//     return (
+//         <>
+//             <GeneralFields
+//                 handleSubmit={handleGeneralSubmit}  
+//                 editStatus={editStatus}
+//             />
+//             <GeneralSection
+//                 generalInfo={generalInfo.firstName}
+//                 handleEdit={handleGeneralEdit}
+//             />
+//         </>
+//     )
+// }
 
-export default General;
+export default GeneralSection;

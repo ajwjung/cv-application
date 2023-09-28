@@ -1,7 +1,4 @@
-import { useState } from "react";
-import { SkillsFields } from "./FormFields";
-
-function SkillsSection({ skillsInfo, handleEdit, handleDelete, handleMouseEnter, handleMouseLeave, buttonHoverStyle, entryHoverStyle }) {
+function SkillsSection({ skillsInfo, handleEditSkill, handleDeleteSkill, handleMouseEnterSkill, handleMouseLeaveSkill, buttonHoverSkill, entryHoverSkill }) {
     return (
         skillsInfo.length > 0 && <section className="skillsWrapper">
             <h2 className="skillsDivider">SKILLS</h2>
@@ -13,27 +10,27 @@ function SkillsSection({ skillsInfo, handleEdit, handleDelete, handleMouseEnter,
                             className="skillsEntry"
                             onMouseEnter={(e) => {
                                 const hoveredEntryId = e.target.closest(".skillsEntry").id.slice(-1);
-                                handleMouseEnter(Number(hoveredEntryId));
+                                handleMouseEnterSkill(Number(hoveredEntryId));
                             }} 
                             onMouseLeave={(e) => {
                                 const hoveredEntryId = e.target.closest(".skillsEntry").id.slice(-1);
-                                handleMouseLeave(Number(hoveredEntryId));
+                                handleMouseLeaveSkill(Number(hoveredEntryId));
                             }}
                             id={"skill" + index}
                             key={"skill" + index}
                         >
                             <p 
                                 className="skillsDetails" 
-                                style={entryHoverStyle[index]}
+                                style={entryHoverSkill[index]}
                             >
                                 <b>{entry.category}</b> {entry.listedSkills}
                             </p>
-                            <div className="btns" style={buttonHoverStyle[index]}>
+                            <div className="btns" style={buttonHoverSkill[index]}>
                                 <button
                                     className="editInfo"
                                     onClick={(e) => {
                                         const entryId = e.target.closest(".skillsEntry").id.slice(-1);
-                                        handleEdit(entryId);
+                                        handleEditSkill(entryId);
                                     }}
                                     style={{margin: "10px"}}
                                     type="button"
@@ -44,7 +41,7 @@ function SkillsSection({ skillsInfo, handleEdit, handleDelete, handleMouseEnter,
                                     className="deleteInfo"
                                     onClick={(e) => {
                                         const entryId = e.target.closest(".skillsEntry").id.slice(-1);
-                                        handleDelete(entryId);
+                                        handleDeleteSkill(entryId);
                                     }}
                                     style={{margin: "10px"}}
                                     type="button"
@@ -60,159 +57,4 @@ function SkillsSection({ skillsInfo, handleEdit, handleDelete, handleMouseEnter,
     )
 }
 
-function Skills() {
-    const [skillsInfo, setSkillsInfo] = useState([
-        {
-            id: 0,
-            category: "Special",
-            listedSkills: "High agility, decision-making, problem-solving"
-        }
-    ]);
-    const [idOfEditedSkillEntry, setIdOfEditedSkillEntry] = useState();
-    const [buttonHoverStyle, setButtonHoverStyle] = useState([{ display: "none" }]);
-    const [entryHoverStyle, setEntryHoverStyle] = useState([{}]);
-
-    function handleMouseEnterSkill(entryId) {
-        setButtonHoverStyle(
-            buttonHoverStyle.map((buttonStyle, index) => {
-                if (index === entryId) {
-                    return ({ display: "block" });
-                } else {
-                    return buttonStyle;
-                }
-            })
-        );
-        setEntryHoverStyle(
-            entryHoverStyle.map((entryStyle, index) => {
-                if (index === entryId) {
-                    return ({ opacity: "50%" });
-                } else {
-                    return entryStyle;
-                }
-            })
-        )
-    }
-
-    function handleMouseLeaveSkill(entryId) {
-        setButtonHoverStyle(
-            buttonHoverStyle.map((buttonStyle, index) => {
-                if (index === entryId) {
-                    return ({ display: "none" });
-                } else {
-                    return buttonStyle;
-                }
-            })
-        );
-        setEntryHoverStyle(
-            entryHoverStyle.map((entryStyle, index) => {
-                if (index === entryId) {
-                    return ({});
-                } else {
-                    return entryStyle;
-                }
-            })
-        )
-    }
-
-    function handleSkillsSubmit() {
-        const form = document.forms.skillsForm;
-        const formData = new FormData(form);
-        const formValues = Object.fromEntries(formData);
-        
-        // Updating an edited entry
-        if (typeof(idOfEditedSkillEntry) === "number") {
-            setSkillsInfo(skillsInfo.map((entry, index) => {
-                if (index === idOfEditedSkillEntry) {
-                    return {
-                        ...entry,
-                        category: formValues.skillCategory,
-                        listedSkills: formValues.listOfSkills,
-                    }
-                } else {
-                    return entry;
-                }
-            }));
-        } else {
-            // Submitting a new entry
-            setSkillsInfo((prevState) => {
-                return (
-                    [
-                        ...prevState,
-                        {
-                            id: prevState.length,
-                            category: formValues.skillCategory,
-                            listedSkills: formValues.listOfSkills,
-                        }
-                    ]
-                )
-            });
-    
-            // Add another style element
-            setButtonHoverStyle([
-                ...buttonHoverStyle,
-                { display: "none" }
-            ]);
-    
-            setEntryHoverStyle([
-                ...entryHoverStyle,
-                {}
-            ]);
-        }
-        
-        setIdOfEditedSkillEntry("");
-    }
-
-    function handleSkillsEdit(entryDivId) {
-        const entryToEdit = skillsInfo[entryDivId];
-        const allInputFields = document.querySelectorAll("#skillsForm input");
-        const skillsForm = document.getElementById("skillsForm");
-        
-        setIdOfEditedSkillEntry(Number(entryDivId));
-
-        allInputFields.forEach(input => {
-            switch (input.id) {
-                case "skillCategory": 
-                    input.value = entryToEdit.category;
-                    break;
-                case "listOfSkills": 
-                    input.value = entryToEdit.listedSkills;
-                    break;
-                default:
-                    input.value = "";
-                    break;
-            }
-        });
-
-        skillsForm.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-            inline: "start"
-        });
-    }
-
-    function handleDeleteEntry(entryId) {
-        setSkillsInfo(
-            skillsInfo.filter((_, index) => Number(entryId) !== index)
-        );
-    }
-
-    return (
-        <>
-            <SkillsFields 
-                handleSubmit={handleSkillsSubmit}
-                editStatus={typeof(idOfEditedSkillEntry) === "number"}
-            />
-            <SkillsSection 
-                skillsInfo={skillsInfo} 
-                handleEdit={handleSkillsEdit}
-                handleDelete={handleDeleteEntry}
-                handleMouseEnter={handleMouseEnterSkill}
-                handleMouseLeave={handleMouseLeaveSkill}
-                buttonHoverStyle={buttonHoverStyle}
-                entryHoverStyle={entryHoverStyle}
-            />
-        </>
-    )
-}
-
-export default Skills;
+export default SkillsSection;

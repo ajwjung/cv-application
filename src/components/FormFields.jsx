@@ -1,7 +1,7 @@
 import "../styles/formFields.css"
 import "../styles/generatedCv.css"
 
-function GeneralFields({ handleSubmit, editStatus }) {
+function GeneralFields({ handleSubmitGeneral, editGeneralStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#generalForm input")
         inputFields.forEach(input => input.value = "");
@@ -13,7 +13,7 @@ function GeneralFields({ handleSubmit, editStatus }) {
             action="" 
             onSubmit={(e) => {
                 e.preventDefault();
-                handleSubmit();
+                handleSubmitGeneral();
                 clearFormFields();
             }}
         >
@@ -57,7 +57,7 @@ function GeneralFields({ handleSubmit, editStatus }) {
                 required
             />
             <button className="saveInfo" type="submit">{
-                editStatus 
+                editGeneralStatus 
                 ? "Update Information" 
                 : "Add Information"
             }</button>
@@ -65,7 +65,7 @@ function GeneralFields({ handleSubmit, editStatus }) {
     )
 }
 
-function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) {
+function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editEducationStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#educationForm input")
         inputFields.forEach(input => input.value = "");
@@ -77,7 +77,7 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
             action=""
             onSubmit={(e) => {
                 e.preventDefault();
-                handleSubmit();
+                handleSubmitEducation();
                 clearFormFields();
             }} 
         >
@@ -145,7 +145,7 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
                 Add Additional Info
             </button>
             <button className="saveInfo" type="submit">{
-                editStatus 
+                editEducationStatus 
                 ? "Update Information" 
                 : "Add Information"
             }</button>
@@ -153,7 +153,7 @@ function EducationFields({ handleSubmit, handleAddAdditionalInfo, editStatus }) 
     )
 }
 
-function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
+function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#experienceForm input")
         inputFields.forEach(input => input.value = "");
@@ -165,7 +165,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
             action=""
             onSubmit={(e) => {
                 e.preventDefault();
-                handleSubmit();
+                handleSubmitExperience();
                 clearFormFields();
             }} 
         >
@@ -246,7 +246,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
                 Add Another Responsibility
             </button>
             <button className="saveInfo" type="submit">{
-                editStatus 
+                editJobStatus 
                 ? "Update Information" 
                 : "Add Information"
             }</button>
@@ -254,7 +254,7 @@ function ExperienceFields({ handleSubmit, handleAddJobDuty, editStatus }) {
     )
 }
 
-function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
+function ProjectsFields({ handleSubmitProject, handleAddDescription, editProjectStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#projectsForm input")
         inputFields.forEach(input => input.value = "");
@@ -266,7 +266,7 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
             action=""
             onSubmit={(e) => {
                 e.preventDefault();
-                handleSubmit();
+                handleSubmitProject();
                 clearFormFields();
             }} 
         >
@@ -317,7 +317,7 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
                     Add Another Description
                 </button>
             <button className="saveInfo" type="submit">{
-                editStatus 
+                editProjectStatus 
                 ? "Update Information" 
                 : "Add Information"
             }</button>
@@ -325,7 +325,7 @@ function ProjectsFields({ handleSubmit, handleAddDescription, editStatus }) {
     )
 }
 
-function SkillsFields({ handleSubmit, editStatus }) {
+function SkillsFields({ handleSubmitSkill, editSkillStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#skillsForm input")
         inputFields.forEach(input => input.value = "");
@@ -337,7 +337,7 @@ function SkillsFields({ handleSubmit, editStatus }) {
             action=""
             onSubmit={(e) => {
                 e.preventDefault();
-                handleSubmit();
+                handleSubmitSkill();
                 clearFormFields();
             }} 
         >
@@ -365,11 +365,12 @@ function SkillsFields({ handleSubmit, editStatus }) {
                 </div>
             </fieldset>
             <button className="saveInfo" type="submit">{
-                editStatus 
+                editSkillStatus 
                 ? "Update Information" 
                 : "Add Information"
             }</button>
         </form>
     )
 }
+
 export { GeneralFields, EducationFields, ExperienceFields, ProjectsFields, SkillsFields };
