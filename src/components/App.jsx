@@ -3,6 +3,25 @@ import AllForms from "./AllForms";
 import AllSections from "./AllSections";
 
 function App() {
+    const [editedEntries, setEditedEntries] = useState([...Array(5).fill("")]);
+
+    function updateEditedEntryId(entryId, newValue) {
+        /* entryIds/indexes map to:
+            0 = general
+            1 = education
+            2 = experience
+            3 = projects
+            4 = skills
+        */
+        setEditedEntries(editedEntries.map((entry, index) => {
+            if (index === entryId) {
+                return newValue;
+            } else {
+                return entry;
+            }
+        }));
+    }
+
     /* ========== GENERAL ========== */
     const [generalInfo, setGeneralInfo] = useState({
         firstName: "John",
@@ -10,7 +29,7 @@ function App() {
         email: "johndoe@email.com",
         phoneNumber: "111-111-1111",
     });
-    const [editGeneralStatus, setEditGeneralStatus] = useState(false);
+    // const [editGeneralStatus, setEditGeneralStatus] = useState(false);
 
     function handleGeneralSubmit() {
         const form = document.forms.generalForm;
@@ -22,14 +41,16 @@ function App() {
             ...formValues, 
         });
 
-        setEditGeneralStatus(false);
+        // setEditGeneralStatus(false);
+        updateEditedEntryId(0, false);
     }
 
     function handleEditGeneral() {
         const allGeneralInputs = document.querySelectorAll("#generalForm input");
         const generalForm = document.getElementById("generalForm");
 
-        setEditGeneralStatus(true);
+        // setEditGeneralStatus(true);
+        updateEditedEntryId(0, true);
 
         allGeneralInputs.forEach(input => {
             switch (input.id) {
@@ -68,7 +89,6 @@ function App() {
             additionalInfo: [""],
         }
     ]);
-    const [idOfEditedEducationEntry, setIdOfEditedEducationEntry] = useState();
     const [buttonHoverEducation, setButtonHoverEducation] = useState([{ display: "none" }]);
     const [entryHoverEducation, setEntryHoverEducation] = useState([{}]);
 
@@ -140,9 +160,9 @@ function App() {
         const allAdditionalInfo = formData.getAll("additionalInfo").filter(val => val);
 
         // Updating an edited entry
-        if (typeof(idOfEditedEducationEntry) === "number") {
+        if (typeof(editedEntries[1]) === "number") {
             setEducationInfo(educationInfo.map((entry, index) => {
-                if (index === idOfEditedEducationEntry) {
+                if (index === editedEntries[1]) {
                     return {
                         ...entry,
                         schoolName: formValues.schoolName,
@@ -184,7 +204,7 @@ function App() {
         }
 
         removeAdditionalEducation();
-        setIdOfEditedEducationEntry("");
+        updateEditedEntryId(1, "");
     }
 
     function handleEditEducation(entryDivId) {
@@ -194,7 +214,7 @@ function App() {
         const numOfInfoValues = entryToEdit.additionalInfo.length;
         const educationForm = document.getElementById("educationForm");
 
-        setIdOfEditedEducationEntry(Number(entryDivId));
+        updateEditedEntryId(1, Number(entryDivId));
 
         // Add as many input fields back as number of additional inputs
         if (allAdditionalInputs.length < numOfInfoValues) {
@@ -257,7 +277,6 @@ function App() {
             responsibilities: ["Repsonsibility 1", "Responsibility 2", "Responsibility 3"],
         }
     ]);
-    const [idOfEditedJobEntry, setIdOfEditedJobEntry] = useState();
     const [buttonHoverExperience, setButtonHoverExperience] = useState([{ display: "none" }]);
     const [entryHoverExperience, setEntryHoverExperience] = useState([{}]);
 
@@ -329,9 +348,9 @@ function App() {
         const allJobDuties = formData.getAll("jobDuty").filter(val => val);
 
         // Updating an edited entry
-        if (typeof(idOfEditedJobEntry) === "number") {
+        if (typeof(editedEntries[2]) === "number") {
             setExperienceInfo(experienceInfo.map((entry, index) => {
-                if (index === idOfEditedJobEntry) {
+                if (index === editedEntries[1]) {
                     return {
                         ...entry,
                         position: formValues.position,
@@ -377,7 +396,7 @@ function App() {
         }
 
         removeAdditionalJobs();
-        setIdOfEditedJobEntry("");
+        updateEditedEntryId(2, "");
     }
 
     function handleEditExperience(entryDivId) {
@@ -386,8 +405,8 @@ function App() {
         const allJobDutyInputs = document.querySelectorAll(".jobDuties input");
         const numOfInfoValues = entryToEdit.responsibilities.length;
         const experienceForm = document.getElementById("experienceForm");
-
-        setIdOfEditedJobEntry(Number(entryDivId));
+        
+        updateEditedEntryId(2, Number(entryDivId));
 
         // Add as many input fields back as number of additional job duty inputs
         if (allJobDutyInputs.length < numOfInfoValues) {
@@ -448,7 +467,6 @@ function App() {
             descriptions: ["Led 5+ survey corps regiments to regain Wall Maria from 200+ titans"],
         }
     ]);
-    const [idOfEditedProjectEntry, setIdOfEditedProjectEntry] = useState();
     const [buttonHoverProject, setButtonHoverProject] = useState([{ display: "none" }]);
     const [entryHoverProject, setEntryHoverProject] = useState([{}]);
 
@@ -520,9 +538,9 @@ function App() {
         const allDescriptions = formData.getAll("projectDescription").filter(val => val);
 
         // Updating an edited entry
-        if (typeof(idOfEditedProjectEntry) === "number") {
+        if (typeof(editedEntries[3]) === "number") {
             setProjectsInfo(projectsInfo.map((entry, index) => {
-                if (index === idOfEditedProjectEntry) {
+                if (index === editedEntries[3]) {
                     return {
                         ...entry,
                         projectName: formValues.projectName,
@@ -564,7 +582,7 @@ function App() {
         }
 
         removeAdditionalDescriptions();
-        setIdOfEditedProjectEntry("");
+        updateEditedEntryId(3, "");
     }
 
     function handleEditProject(entryDivId) {
@@ -574,7 +592,7 @@ function App() {
         const numOfInfoValues = entryToEdit.descriptions.length;
         const projectsForm = document.getElementById("projectsForm");
 
-        setIdOfEditedProjectEntry(Number(entryDivId));
+        updateEditedEntryId(3, Number(entryDivId));
 
         // Add as many input fields back as number of additional inputs
         if (allDescriptions.length < numOfInfoValues) {
@@ -627,7 +645,6 @@ function App() {
             listedSkills: "High agility, decision-making, problem-solving"
         }
     ]);
-    const [idOfEditedSkillEntry, setIdOfEditedSkillEntry] = useState();
     const [buttonHoverSkill, setButtonHoverSkill] = useState([{ display: "none" }]);
     const [entryHoverSkill, setEntryHoverSkill] = useState([{}]);
 
@@ -679,9 +696,9 @@ function App() {
         const formValues = Object.fromEntries(formData);
         
         // Updating an edited entry
-        if (typeof(idOfEditedSkillEntry) === "number") {
+        if (typeof(editedEntries[4]) === "number") {
             setSkillsInfo(skillsInfo.map((entry, index) => {
-                if (index === idOfEditedSkillEntry) {
+                if (index === editedEntries[4]) {
                     return {
                         ...entry,
                         category: formValues.skillCategory,
@@ -718,7 +735,7 @@ function App() {
             ]);
         }
         
-        setIdOfEditedSkillEntry("");
+        updateEditedEntryId(4, "");
     }
 
     function handleEditSkill(entryDivId) {
@@ -726,7 +743,7 @@ function App() {
         const allInputFields = document.querySelectorAll("#skillsForm input");
         const skillsForm = document.getElementById("skillsForm");
         
-        setIdOfEditedSkillEntry(Number(entryDivId));
+        updateEditedEntryId(4, Number(entryDivId));
 
         allInputFields.forEach(input => {
             switch (input.id) {
@@ -760,22 +777,22 @@ function App() {
             <AllForms 
                 // General
                 handleSubmitGeneral={handleGeneralSubmit}  
-                editGeneralStatus={editGeneralStatus}
+                editGeneralStatus={editedEntries[0]}
                 // Education
                 handleSubmitEducation={handleEducationSubmit}
                 handleAddAdditionalInfo={handleAddAdditionalInfo}
-                editEducationStatus={typeof(idOfEditedEducationEntry) === "number"}
+                editEducationStatus={typeof(editedEntries[1]) === "number"}
                 // Experience
                 handleSubmitExperience={handleJobSubmit}
                 handleAddJobDuty={handleAddJobDuty}
-                editJobStatus={typeof(idOfEditedJobEntry) === "number"}
+                editJobStatus={typeof(editedEntries[2]) === "number"}
                 // Projects
                 handleSubmitProject={handleSubmitProject}
                 handleAddDescription={handleAddDescription}
-                editProjectStatus={typeof(idOfEditedProjectEntry) === "number"}
+                editProjectStatus={typeof(editedEntries[3]) === "number"}
                 // Skills
                 handleSubmitSkill={handleSubmitSkill}
-                editSkillStatus={typeof(idOfEditedSkillEntry) === "number"}
+                editSkillStatus={typeof(editedEntries[4]) === "number"}
             />
             <AllSections 
                 // General
