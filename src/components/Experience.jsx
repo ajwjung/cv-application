@@ -6,7 +6,7 @@ function ExperienceSection({ experienceInfo, handleEditExperience, handleDeleteE
         <section className="experienceWrapper">
             <h2 className="experienceDivider">EXPERIENCE</h2>
             <hr/>
-            {experienceInfo.toReversed().map((entry, index) => {
+            {experienceInfo.map((entry, index) => {
                 return (
                     <div 
                         className="jobEntry" 

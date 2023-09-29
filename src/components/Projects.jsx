@@ -3,7 +3,7 @@ function ProjectsSection({ projectsInfo, handleEditProject, handleDeleteProject,
         projectsInfo.length > 0 && <section className="projectsWrapper">
             <h2 className="projectsDivider">PROJECTS</h2>
             <hr/>
-            {projectsInfo.toReversed().map((entry, index) => {
+            {projectsInfo.map((entry, index) => {
                 return (
                     <div 
                         className="projectEntry" 

@@ -3,7 +3,7 @@ function EducationSection({ educationInfo, handleEditEducation, handleDeleteEduc
         <section className="educationWrapper">
             <h2 className="educationDivider">EDUCATION</h2>
             <hr/>
-            {educationInfo.toReversed().map((entry, index) => {
+            {educationInfo.map((entry, index) => {
                 return (
                     <div 
                         className="educationEntry"

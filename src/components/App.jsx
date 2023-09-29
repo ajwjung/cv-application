@@ -56,7 +56,6 @@ function App() {
         email: "johndoe@email.com",
         phoneNumber: "111-111-1111",
     });
-    // const [editGeneralStatus, setEditGeneralStatus] = useState(false);
 
     function handleGeneralSubmit() {
         const form = document.forms.generalForm;
@@ -198,12 +197,12 @@ function App() {
             setEducationInfo((prevState) => {
                 return (
                     [
-                        ...prevState,
                         {
                             ...formValues,
                             id: prevState.length,
                             additionalInfo: [...allAdditionalInfo],
-                        }
+                        },
+                        ...prevState
                     ]
                 )
             });
@@ -376,7 +375,6 @@ function App() {
             setExperienceInfo((prevState) => {
                 return (
                     [
-                        ...prevState,
                         {
                             id: prevState.length,
                             position: formValues.position,
@@ -385,7 +383,8 @@ function App() {
                             startDate: formValues.jobStartDate,
                             endDate: formValues.jobEndDate,
                             responsibilities: [...allJobDuties],
-                        }
+                        },
+                        ...prevState
                     ]
                 )
             });
@@ -554,14 +553,14 @@ function App() {
             setProjectsInfo((prevState) => {
                 return (
                     [
-                        ...prevState,
                         {
                             id: prevState.length,
                             projectName: formValues.projectName,
                             startDate: formValues.projectStartDate,
                             endDate: formValues.projectEndDate,
                             descriptions: [...allDescriptions],
-                        }
+                        },
+                        ...prevState
                     ]
                 )
             });
