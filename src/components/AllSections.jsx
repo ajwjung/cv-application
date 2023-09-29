@@ -20,14 +20,14 @@ function AllSections({
                     buttonHoverGeneral={buttonHoverStyle}
                     entryHoverGeneral={entryHoverStyle}
                 />
-                <EducationSection
-                    educationInfo={educationInfo}
-                    handleEditEducation={handleEditEducation}
-                    handleDeleteEducation={handleDeleteEntry}
-                    handleMouseEnterEducation={handleMouseEnterEntry}
-                    handleMouseLeaveEducation={handleMouseLeaveEntry}
-                    buttonHoverEducation={buttonHoverStyle}
-                    entryHoverEducation={entryHoverStyle}
+                <ProjectsSection
+                    projectsInfo={projectsInfo}
+                    handleEditProject={handleEditProject}
+                    handleDeleteProject={handleDeleteEntry}
+                    handleMouseEnterProject={handleMouseEnterEntry}
+                    handleMouseLeaveProject={handleMouseLeaveEntry}
+                    buttonHoverProject={buttonHoverStyle}
+                    entryHoverProject={entryHoverStyle}
                 />
                 <ExperienceSection
                     experienceInfo={experienceInfo}
@@ -38,14 +38,14 @@ function AllSections({
                     buttonHoverExperience={buttonHoverStyle}
                     entryHoverExperience={entryHoverStyle}
                 />
-                <ProjectsSection
-                    projectsInfo={projectsInfo}
-                    handleEditProject={handleEditProject}
-                    handleDeleteProject={handleDeleteEntry}
-                    handleMouseEnterProject={handleMouseEnterEntry}
-                    handleMouseLeaveProject={handleMouseLeaveEntry}
-                    buttonHoverProject={buttonHoverStyle}
-                    entryHoverProject={entryHoverStyle}
+                <EducationSection
+                    educationInfo={educationInfo}
+                    handleEditEducation={handleEditEducation}
+                    handleDeleteEducation={handleDeleteEntry}
+                    handleMouseEnterEducation={handleMouseEnterEntry}
+                    handleMouseLeaveEducation={handleMouseLeaveEntry}
+                    buttonHoverEducation={buttonHoverStyle}
+                    entryHoverEducation={entryHoverStyle}
                 />
                 <SkillsSection
                     skillsInfo={skillsInfo}
