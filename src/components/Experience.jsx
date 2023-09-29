@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { ExperienceFields } from "./FormFields";
-
 function ExperienceSection({ experienceInfo, handleEditExperience, handleDeleteExperience, handleMouseEnterExperience, handleMouseLeaveExperience, buttonHoverExperience, entryHoverExperience }) {
     return (
         <section className="experienceWrapper">
