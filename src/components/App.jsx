@@ -22,6 +22,33 @@ function App() {
         }));
     }
 
+    function removeAdditionalFields(sectionName) {
+        const additionalEducationFields = document.querySelector(".additionalInfoFields");
+        const additionalJobDuties = document.querySelector(".jobDuties");
+        const additionalDescriptions = document.querySelector(".projectDescriptions");
+        let field;
+        let minChildren;
+
+        switch (sectionName) {
+            case "education":
+                field = additionalEducationFields;
+                minChildren = 2;
+                break;
+            case "experience":
+                field = additionalJobDuties;
+                minChildren = 4;
+                break;
+            case "projects":
+                field = additionalDescriptions;
+                minChildren = 2;
+                break;
+        }
+
+        while (field.childNodes.length > minChildren) {
+            field.removeChild(field.lastChild);
+        }
+    }
+
     /* ========== GENERAL ========== */
     const [generalInfo, setGeneralInfo] = useState({
         firstName: "John",
@@ -134,16 +161,6 @@ function App() {
         )
     }
 
-    function removeAdditionalEducation() {
-        const additionalFieldset = document.querySelector(".additionalInfoFields");
-
-        /* Must always keep at least 2 children
-        because one is the legend and one is the default input box */
-        while (additionalFieldset.childNodes.length > 2) {
-            additionalFieldset.removeChild(additionalFieldset.lastChild);
-        }
-    }
-
     function handleAddAdditionalInfo() {
         const additionalInfoFields = document.querySelector(".additionalInfoFields");
         const newInput = document.createElement("input");
@@ -203,7 +220,7 @@ function App() {
             ])
         }
 
-        removeAdditionalEducation();
+        removeAdditionalFields("education");
         updateEditedEntryId(1, "");
     }
 
@@ -322,16 +339,6 @@ function App() {
         )
     }
 
-    function removeAdditionalJobs() {
-        const additionalJobDuties = document.querySelector(".jobDuties");
-
-        /* Must always keep at least 4 children
-        because one is the legend and three are the required input boxes */
-        while (additionalJobDuties.childNodes.length > 4) {
-            additionalJobDuties.removeChild(additionalJobDuties.lastChild);
-        }
-    }
-
     function handleAddJobDuty() {
         const jobDuties = document.querySelector(".jobDuties");
         const newInput = document.createElement("input");
@@ -395,7 +402,7 @@ function App() {
             ])
         }
 
-        removeAdditionalJobs();
+        removeAdditionalFields("experience");
         updateEditedEntryId(2, "");
     }
 
@@ -512,16 +519,6 @@ function App() {
         )
     }
 
-    function removeAdditionalDescriptions() {
-        const descriptionsFieldset = document.querySelector(".projectDescriptions");
-
-        /* Must always keep at least 2 children
-        because one is the legend and one is the default input box */
-        while (descriptionsFieldset.childNodes.length > 2) {
-            descriptionsFieldset.removeChild(descriptionsFieldset.lastChild);
-        }
-    }
-
     function handleAddDescription() {
         const descriptions = document.querySelector(".projectDescriptions");
         const newInput = document.createElement("input");
@@ -581,7 +578,7 @@ function App() {
             ])
         }
 
-        removeAdditionalDescriptions();
+        removeAdditionalFields("projects");
         updateEditedEntryId(3, "");
     }
 
