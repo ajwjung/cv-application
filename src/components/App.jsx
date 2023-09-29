@@ -47,7 +47,132 @@ function App() {
             listedSkills: "High agility, decision-making, problem-solving"
         }
     ]);
-    const [editedEntries, setEditedEntries] = useState([...Array(5).fill("")]);
+    const [editedEntries, setEditedEntries] = useState(
+        [...Array(5).fill("")]
+    );
+    const [buttonHoverStyle, setButtonHoverStyle] = useState([
+        ...Array(5).fill([{ display: "none" }])
+    ]);
+    const [entryHoverStyle, setEntryHoverStyle] = useState([
+        ...Array(5).fill([{}])
+    ]);
+
+    function handleMouseEnterEntry(sectionId, entryId) {
+        /* Updates hover styles for the target entry in the target section
+            sectionIds are:
+                0 - general
+                1 - education
+                2 - experience
+                3 - projects
+                4 - skills
+        */
+
+        setButtonHoverStyle(
+            buttonHoverStyle.map((sectionStyles, sectionIndex) => {
+                if (sectionIndex === sectionId) {
+                    return sectionStyles.map((buttonStyle, styleIndex) => {
+                        if (styleIndex === entryId) {
+                            return ({ display: "block" })
+                        } else {
+                            return buttonStyle;
+                        }
+                    })
+                } else {
+                    return sectionStyles;
+                }
+                    
+            })
+        )
+
+        setEntryHoverStyle(
+            entryHoverStyle.map((sectionStyles, sectionIndex) => {
+                if (sectionIndex === sectionId) {
+                    return sectionStyles.map((entryStyle, styleIndex) => {
+                        if (styleIndex === entryId) {
+                            return ({ opacity: "50%" })
+                        } else {
+                            return entryStyle;
+                        }
+                    })
+                } else {
+                    return sectionStyles;
+                }
+                    
+            })
+        )
+    }
+
+    function handleMouseLeaveEntry(sectionId, entryId) {
+        /* Updates hover styles for the target entry in the target section
+            sectionIds are:
+                0 - general
+                1 - education
+                2 - experience
+                3 - projects
+                4 - skills
+        */
+        setButtonHoverStyle(
+            buttonHoverStyle.map((sectionStyles, sectionIndex) => {
+                if (sectionIndex === sectionId) {
+                    return sectionStyles.map((buttonStyle, styleIndex) => {
+                        if (styleIndex === entryId) {
+                            return ({ display: "none" })
+                        } else {
+                            return buttonStyle;
+                        }
+                    })
+                } else {
+                    return sectionStyles;
+                }
+                    
+            })
+        )
+
+        setEntryHoverStyle(
+            entryHoverStyle.map((sectionStyles, sectionIndex) => {
+                if (sectionIndex === sectionId) {
+                    return sectionStyles.map((entryStyle, styleIndex) => {
+                        if (styleIndex === entryId) {
+                            return ({})
+                        } else {
+                            return entryStyle;
+                        }
+                    })
+                } else {
+                    return sectionStyles;
+                }
+                    
+            })
+        )
+    }
+
+    function addAnotherStyleElement(sectionId) {
+        setButtonHoverStyle(
+            buttonHoverStyle.map((sectionStyles, index) => {
+                if (index === sectionId) {
+                    return [
+                        ...sectionStyles,
+                        { display: "none" }
+                    ]
+                } else {
+                    return sectionStyles;
+                }
+            })
+        )
+
+        setEntryHoverStyle(
+            entryHoverStyle.map((sectionStyles, index) => {
+                if (index === sectionId) {
+                    return [
+                        ...sectionStyles,
+                        { opacity: "50%" }
+                    ]
+                } else {
+                    return sectionStyles;
+                }
+            })
+        )
+    }
 
     function updateEditedEntryId(entryId, newValue) {
         /* entryIds/indexes map to:
@@ -166,51 +291,6 @@ function App() {
     }
 
     /* ========== EDUCATION ========== */
-    const [buttonHoverEducation, setButtonHoverEducation] = useState([{ display: "none" }]);
-    const [entryHoverEducation, setEntryHoverEducation] = useState([{}]);
-
-    function handleMouseEnterEducation(entryId) {
-        setButtonHoverEducation(
-            buttonHoverEducation.map((buttonEducation, index) => {
-                if (index === entryId) {
-                    return ({ display: "block" });
-                } else {
-                    return buttonEducation;
-                }
-            })
-        );
-        setEntryHoverEducation(
-            entryHoverEducation.map((entryEducation, index) => {
-                if (index === entryId) {
-                    return ({ opacity: "50%" });
-                } else {
-                    return entryEducation;
-                }
-            })
-        )
-    }
-
-    function handleMouseLeaveEducation(entryId) {
-        setButtonHoverEducation(
-            buttonHoverEducation.map((buttonEducation, index) => {
-                if (index === entryId) {
-                    return ({ display: "none" });
-                } else {
-                    return buttonEducation;
-                }
-            })
-        );
-        setEntryHoverEducation(
-            entryHoverEducation.map((entryEducation, index) => {
-                if (index === entryId) {
-                    return ({});
-                } else {
-                    return entryEducation;
-                }
-            })
-        )
-    }
-
     function handleAddAdditionalInfo() {
         const additionalInfoFields = document.querySelector(".additionalInfoFields");
         const newInput = document.createElement("input");
@@ -258,16 +338,7 @@ function App() {
                 )
             });
 
-            // Add another Education element
-            setButtonHoverEducation([
-                ...buttonHoverEducation,
-                { display: "none" }
-            ])
-
-            setEntryHoverEducation([
-                ...entryHoverEducation,
-                {}
-            ])
+            addAnotherStyleElement(1);
         }
 
         removeAdditionalFields("education");
@@ -327,51 +398,6 @@ function App() {
     }
 
     /* ========== EXPERIENCE ========== */
-    const [buttonHoverExperience, setButtonHoverExperience] = useState([{ display: "none" }]);
-    const [entryHoverExperience, setEntryHoverExperience] = useState([{}]);
-
-    function handleMouseEnterExperience(entryId) {
-        setButtonHoverExperience(
-            buttonHoverExperience.map((buttonExperience, index) => {
-                if (index === entryId) {
-                    return ({ display: "block" });
-                } else {
-                    return buttonExperience;
-                }
-            })
-        );
-        setEntryHoverExperience(
-            entryHoverExperience.map((entryExperience, index) => {
-                if (index === entryId) {
-                    return ({ opacity: "50%" });
-                } else {
-                    return entryExperience;
-                }
-            })
-        )
-    }
-
-    function handleMouseLeaveExperience(entryId) {
-        setButtonHoverExperience(
-            buttonHoverExperience.map((buttonExperience, index) => {
-                if (index === entryId) {
-                    return ({ display: "none" });
-                } else {
-                    return buttonExperience;
-                }
-            })
-        );
-        setEntryHoverExperience(
-            entryHoverExperience.map((entryExperience, index) => {
-                if (index === entryId) {
-                    return ({});
-                } else {
-                    return entryExperience;
-                }
-            })
-        )
-    }
-
     function handleAddJobDuty() {
         const jobDuties = document.querySelector(".jobDuties");
         const newInput = document.createElement("input");
@@ -423,16 +449,7 @@ function App() {
                 )
             });
             
-            // Add another Experience element
-            setButtonHoverExperience([
-                ...buttonHoverExperience,
-                { display: "none" }
-            ])
-    
-            setEntryHoverExperience([
-                ...entryHoverExperience,
-                {}
-            ])
+            addAnotherStyleElement(2);
         }
 
         removeAdditionalFields("experience");
@@ -492,51 +509,6 @@ function App() {
     }
 
     /* ========== PROJECTS ========== */
-    const [buttonHoverProject, setButtonHoverProject] = useState([{ display: "none" }]);
-    const [entryHoverProject, setEntryHoverProject] = useState([{}]);
-
-    function handleMouseEnterProject(entryId) {
-        setButtonHoverProject(
-            buttonHoverProject.map((buttonStyle, index) => {
-                if (index === entryId) {
-                    return ({ display: "block" });
-                } else {
-                    return buttonStyle;
-                }
-            })
-        );
-        setEntryHoverProject(
-            entryHoverProject.map((entryStyle, index) => {
-                if (index === entryId) {
-                    return ({ opacity: "50%" });
-                } else {
-                    return entryStyle;
-                }
-            })
-        )
-    }
-
-    function handleMouseLeaveProject(entryId) {
-        setButtonHoverProject(
-            buttonHoverProject.map((buttonStyle, index) => {
-                if (index === entryId) {
-                    return ({ display: "none" });
-                } else {
-                    return buttonStyle;
-                }
-            })
-        );
-        setEntryHoverProject(
-            entryHoverProject.map((entryStyle, index) => {
-                if (index === entryId) {
-                    return ({});
-                } else {
-                    return entryStyle;
-                }
-            })
-        )
-    }
-
     function handleAddDescription() {
         const descriptions = document.querySelector(".projectDescriptions");
         const newInput = document.createElement("input");
@@ -584,16 +556,7 @@ function App() {
                 )
             });
     
-            // Add another style element
-            setButtonHoverProject([
-                ...buttonHoverProject,
-                { display: "none" }
-            ])
-    
-            setEntryHoverProject([
-                ...entryHoverProject,
-                {}
-            ])
+            addAnotherStyleElement(3);
         }
 
         removeAdditionalFields("projects");
@@ -647,51 +610,6 @@ function App() {
     }
 
     /* ========== SKILLS ========== */
-    const [buttonHoverSkill, setButtonHoverSkill] = useState([{ display: "none" }]);
-    const [entryHoverSkill, setEntryHoverSkill] = useState([{}]);
-
-    function handleMouseEnterSkill(entryId) {
-        setButtonHoverSkill(
-            buttonHoverSkill.map((buttonStyle, index) => {
-                if (index === entryId) {
-                    return ({ display: "block" });
-                } else {
-                    return buttonStyle;
-                }
-            })
-        );
-        setEntryHoverSkill(
-            entryHoverSkill.map((entryStyle, index) => {
-                if (index === entryId) {
-                    return ({ opacity: "50%" });
-                } else {
-                    return entryStyle;
-                }
-            })
-        )
-    }
-
-    function handleMouseLeaveSkill(entryId) {
-        setButtonHoverSkill(
-            buttonHoverSkill.map((buttonStyle, index) => {
-                if (index === entryId) {
-                    return ({ display: "none" });
-                } else {
-                    return buttonStyle;
-                }
-            })
-        );
-        setEntryHoverSkill(
-            entryHoverSkill.map((entryStyle, index) => {
-                if (index === entryId) {
-                    return ({});
-                } else {
-                    return entryStyle;
-                }
-            })
-        )
-    }
-
     function handleSubmitSkill() {
         const form = document.forms.skillsForm;
         const formData = new FormData(form);
@@ -725,16 +643,7 @@ function App() {
                 )
             });
     
-            // Add another style element
-            setButtonHoverSkill([
-                ...buttonHoverSkill,
-                { display: "none" }
-            ]);
-    
-            setEntryHoverSkill([
-                ...entryHoverSkill,
-                {}
-            ]);
+            addAnotherStyleElement(4);
         }
         
         updateEditedEntryId(4, "");
@@ -771,56 +680,32 @@ function App() {
     return (
         <>
             <AllForms 
-                // Shared Props
                 editedEntries={editedEntries}
-                // General
                 handleSubmitGeneral={handleGeneralSubmit}
-                // Education
                 handleSubmitEducation={handleEducationSubmit}
                 handleAddAdditionalInfo={handleAddAdditionalInfo}
-                // Experience
                 handleSubmitExperience={handleJobSubmit}
                 handleAddJobDuty={handleAddJobDuty}
-                // Projects
                 handleSubmitProject={handleSubmitProject}
                 handleAddDescription={handleAddDescription}
-                // Skills
                 handleSubmitSkill={handleSubmitSkill}
             />
             <AllSections 
-                // Shared Props                
                 handleDeleteEntry={handleDeleteEntry} 
-                // General
+                handleMouseEnterEntry={handleMouseEnterEntry}
+                handleMouseLeaveEntry={handleMouseLeaveEntry}
+                buttonHoverStyle={buttonHoverStyle}
+                entryHoverStyle={entryHoverStyle}
                 generalInfo={generalInfo}
                 handleEditGeneral={handleEditGeneral}
-                // Education
                 educationInfo={educationInfo}
                 handleEditEducation={handleEditEducation}
-                handleMouseEnterEducation={handleMouseEnterEducation}
-                handleMouseLeaveEducation={handleMouseLeaveEducation}
-                buttonHoverEducation={buttonHoverEducation}
-                entryHoverEducation={entryHoverEducation}
-                // Experience
                 experienceInfo={experienceInfo} 
                 handleEditExperience={handleEditExperience}
-                handleMouseEnterExperience={handleMouseEnterExperience}
-                handleMouseLeaveExperience={handleMouseLeaveExperience}
-                buttonHoverExperience={buttonHoverExperience}
-                entryHoverExperience={entryHoverExperience}
-                // Projects
                 projectsInfo={projectsInfo}
                 handleEditProject={handleEditProject}
-                handleMouseEnterProject={handleMouseEnterProject}
-                handleMouseLeaveProject={handleMouseLeaveProject}
-                buttonHoverProject={buttonHoverProject}
-                entryHoverProject={entryHoverProject}
-                // Skills
                 skillsInfo={skillsInfo} 
                 handleEditSkill={handleEditSkill}
-                handleMouseEnterSkill={handleMouseEnterSkill}
-                handleMouseLeaveSkill={handleMouseLeaveSkill}
-                buttonHoverSkill={buttonHoverSkill}
-                entryHoverSkill={entryHoverSkill}
             />
         </>
     )

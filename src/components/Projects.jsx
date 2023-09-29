@@ -9,24 +9,24 @@ function ProjectsSection({ projectsInfo, handleEditProject, handleDeleteProject,
                         className="projectEntry" 
                         onMouseEnter={(e) => {
                             const hoveredEntryId = e.target.closest(".projectEntry").id.slice(-1);
-                            handleMouseEnterProject(Number(hoveredEntryId));
+                            handleMouseEnterProject(3, Number(hoveredEntryId));
                         }} 
                         onMouseLeave={(e) => {
                             const hoveredEntryId = e.target.closest(".projectEntry").id.slice(-1);
-                            handleMouseLeaveProject(Number(hoveredEntryId));
+                            handleMouseLeaveProject(3, Number(hoveredEntryId));
                         }}
                         id={"project" + index} 
                         key={"project" + index}
                     >
                         <div 
                             className="projectDetails"
-                            style={entryHoverProject[index]}
+                            style={entryHoverProject[3][index]}
                         >
                             <p><b>{entry.projectName}</b></p>
                             <p><i>{entry.startDate + " - " + entry.endDate}</i></p>
                         </div>
                         {
-                            <ul style={entryHoverProject[index]}>
+                            <ul style={entryHoverProject[3][index]}>
                                 {entry.descriptions.map((text, index) => {
                                     return (
                                         text && <li key={index}>{text}</li>
@@ -34,7 +34,7 @@ function ProjectsSection({ projectsInfo, handleEditProject, handleDeleteProject,
                                 })}
                             </ul>
                         }
-                        <div className="btns" style={buttonHoverProject[index]}>
+                        <div className="btns" style={buttonHoverProject[3][index]}>
                             <button
                                 className="editInfo"
                                 onClick={(e) => {

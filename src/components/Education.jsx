@@ -9,29 +9,29 @@ function EducationSection({ educationInfo, handleEditEducation, handleDeleteEduc
                         className="educationEntry"
                         onMouseEnter={(e) => {
                             const hoveredEntryId = e.target.closest(".educationEntry").id.slice(-1);
-                            handleMouseEnterEducation(Number(hoveredEntryId));
+                            handleMouseEnterEducation(1, Number(hoveredEntryId));
                         }} 
                         onMouseLeave={(e) => {
                             const hoveredEntryId = e.target.closest(".educationEntry").id.slice(-1);
-                            handleMouseLeaveEducation(Number(hoveredEntryId));
+                            handleMouseLeaveEducation(1, Number(hoveredEntryId));
                         }}
                         id={"entry" + index}
                         key={"entry" + index}
                     >
                         <div 
                             className="educationDetails"
-                            style={entryHoverEducation[index]} 
+                            style={entryHoverEducation[1][index]} 
                         >
                             <p><b>{entry.schoolName}</b> | {entry.location}</p>
                             <p><i>{entry.startDate + " - " + entry.endDate}</i></p>
                         </div>
                         <p
-                            style={entryHoverEducation[index]} 
+                            style={entryHoverEducation[1][index]} 
                         >{entry.titleOfStudy}</p>
                         {
                             /* Only add list if there is text to display */
                             entry.additionalInfo.some(text => text) &&
-                            <ul style={entryHoverEducation[index]}>
+                            <ul style={entryHoverEducation[1][index]}>
                                 {entry.additionalInfo.map((text, index) => {
                                     return (
                                         text && <li key={index}>{text}</li>
@@ -39,7 +39,7 @@ function EducationSection({ educationInfo, handleEditEducation, handleDeleteEduc
                                 })}
                             </ul>
                         }
-                        <div className="btns" style={buttonHoverEducation[index]}>
+                        <div className="btns" style={buttonHoverEducation[1][index]}>
                             <button
                                 className="editInfo"
                                 onClick={(e) => {

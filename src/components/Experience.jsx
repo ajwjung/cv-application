@@ -12,35 +12,35 @@ function ExperienceSection({ experienceInfo, handleEditExperience, handleDeleteE
                         className="jobEntry" 
                         onMouseEnter={(e) => {
                             const hoveredEntryId = e.target.closest(".jobEntry").id.slice(-1);
-                            handleMouseEnterExperience(Number(hoveredEntryId));
+                            handleMouseEnterExperience(2, Number(hoveredEntryId));
                         }}
                         onMouseLeave={(e) => {
                             const hoveredEntryId = e.target.closest(".jobEntry").id.slice(-1);
-                            handleMouseLeaveExperience(Number(hoveredEntryId));
+                            handleMouseLeaveExperience(2, Number(hoveredEntryId));
                         }}
                         id={"job" + index} 
                         key={"job" + index}
                     >
                         <div 
                             className="jobDetails"
-                            style={entryHoverExperience[index]}
+                            style={entryHoverExperience[2][index]}
                         >
                             <p><b>{entry.position}</b></p>
                             <p><i>{entry.startDate + " - " + entry.endDate}</i></p>
                         </div>
                         <p
-                            style={entryHoverExperience[index]} 
+                            style={entryHoverExperience[2][index]} 
                         >
                             {entry.company} | {entry.location}
                         </p>
-                        <ul style={entryHoverExperience[index]}>
+                        <ul style={entryHoverExperience[2][index]}>
                             {entry.responsibilities.map((duty, index) => {
                                 return (
                                     duty && <li key={index}>{duty}</li>
                                 )
                             })}
                         </ul>
-                        <div className="btns" style={buttonHoverExperience[index]}>
+                        <div className="btns" style={buttonHoverExperience[2][index]}>
                             <button
                                 className="editInfo"
                                 onClick={(e) => {

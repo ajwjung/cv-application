@@ -10,22 +10,22 @@ function SkillsSection({ skillsInfo, handleEditSkill, handleDeleteSkill, handleM
                             className="skillsEntry"
                             onMouseEnter={(e) => {
                                 const hoveredEntryId = e.target.closest(".skillsEntry").id.slice(-1);
-                                handleMouseEnterSkill(Number(hoveredEntryId));
+                                handleMouseEnterSkill(4, Number(hoveredEntryId));
                             }} 
                             onMouseLeave={(e) => {
                                 const hoveredEntryId = e.target.closest(".skillsEntry").id.slice(-1);
-                                handleMouseLeaveSkill(Number(hoveredEntryId));
+                                handleMouseLeaveSkill(4, Number(hoveredEntryId));
                             }}
                             id={"skill" + index}
                             key={"skill" + index}
                         >
                             <p 
                                 className="skillsDetails" 
-                                style={entryHoverSkill[index]}
+                                style={entryHoverSkill[4][index]}
                             >
                                 <b>{entry.category}</b> {entry.listedSkills}
                             </p>
-                            <div className="btns" style={buttonHoverSkill[index]}>
+                            <div className="btns" style={buttonHoverSkill[4][index]}>
                                 <button
                                     className="editInfo"
                                     onClick={(e) => {

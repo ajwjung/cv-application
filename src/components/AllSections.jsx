@@ -6,12 +6,7 @@ import SkillsSection from "./Skills"
 
 function AllSections({ 
     generalInfo, educationInfo, experienceInfo, projectsInfo, skillsInfo,
-    handleEditGeneral, handleEditEducation, handleEditExperience, handleEditProject, handleEditSkill, 
-    handleDeleteEntry,
-    handleMouseEnterEducation, handleMouseEnterExperience, handleMouseEnterProject, handleMouseEnterSkill, 
-    handleMouseLeaveEducation, handleMouseLeaveExperience, handleMouseLeaveProject, handleMouseLeaveSkill,
-    buttonHoverEducation, buttonHoverExperience, buttonHoverProject, buttonHoverSkill, 
-    entryHoverEducation, entryHoverExperience, entryHoverProject, entryHoverSkill
+    handleEditGeneral, handleEditEducation, handleEditExperience, handleEditProject, handleEditSkill, handleDeleteEntry, handleMouseEnterEntry, handleMouseLeaveEntry, buttonHoverStyle, entryHoverStyle
  }) {
     return (
         <div className="sectionsContainer">
@@ -20,42 +15,46 @@ function AllSections({
                 <GeneralSection
                     generalInfo={generalInfo}
                     handleEditGeneral={handleEditGeneral}
+                    handleMouseEnterGeneral={handleMouseEnterEntry}
+                    handleMouseLeaveGeneral={handleMouseLeaveEntry}
+                    buttonHoverGeneral={buttonHoverStyle}
+                    entryHoverGeneral={entryHoverStyle}
                 />
                 <EducationSection
                     educationInfo={educationInfo}
                     handleEditEducation={handleEditEducation}
                     handleDeleteEducation={handleDeleteEntry}
-                    handleMouseEnterEducation={handleMouseEnterEducation}
-                    handleMouseLeaveEducation={handleMouseLeaveEducation}
-                    buttonHoverEducation={buttonHoverEducation}
-                    entryHoverEducation={entryHoverEducation}
+                    handleMouseEnterEducation={handleMouseEnterEntry}
+                    handleMouseLeaveEducation={handleMouseLeaveEntry}
+                    buttonHoverEducation={buttonHoverStyle}
+                    entryHoverEducation={entryHoverStyle}
                 />
                 <ExperienceSection
                     experienceInfo={experienceInfo}
                     handleEditExperience={handleEditExperience}
                     handleDeleteExperience={handleDeleteEntry}
-                    handleMouseEnterExperience={handleMouseEnterExperience}
-                    handleMouseLeaveExperience={handleMouseLeaveExperience}
-                    buttonHoverExperience={buttonHoverExperience}
-                    entryHoverExperience={entryHoverExperience}
+                    handleMouseEnterExperience={handleMouseEnterEntry}
+                    handleMouseLeaveExperience={handleMouseLeaveEntry}
+                    buttonHoverExperience={buttonHoverStyle}
+                    entryHoverExperience={entryHoverStyle}
                 />
                 <ProjectsSection
                     projectsInfo={projectsInfo}
                     handleEditProject={handleEditProject}
                     handleDeleteProject={handleDeleteEntry}
-                    handleMouseEnterProject={handleMouseEnterProject}
-                    handleMouseLeaveProject={handleMouseLeaveProject}
-                    buttonHoverProject={buttonHoverProject}
-                    entryHoverProject={entryHoverProject}
+                    handleMouseEnterProject={handleMouseEnterEntry}
+                    handleMouseLeaveProject={handleMouseLeaveEntry}
+                    buttonHoverProject={buttonHoverStyle}
+                    entryHoverProject={entryHoverStyle}
                 />
                 <SkillsSection
                     skillsInfo={skillsInfo}
                     handleEditSkill={handleEditSkill}
                     handleDeleteSkill={handleDeleteEntry}
-                    handleMouseEnterSkill={handleMouseEnterSkill}
-                    handleMouseLeaveSkill={handleMouseLeaveSkill}
-                    buttonHoverSkill={buttonHoverSkill}
-                    entryHoverSkill={entryHoverSkill}
+                    handleMouseEnterSkill={handleMouseEnterEntry}
+                    handleMouseLeaveSkill={handleMouseLeaveEntry}
+                    buttonHoverSkill={buttonHoverStyle}
+                    entryHoverSkill={entryHoverStyle}
                 />
             </div>
         </div>
