@@ -356,7 +356,7 @@ function App() {
         // Updating an edited entry
         if (typeof(editedEntries[2]) === "number") {
             setExperienceInfo(experienceInfo.map((entry, index) => {
-                if (index === editedEntries[1]) {
+                if (index === editedEntries[2]) {
                     return {
                         ...entry,
                         position: formValues.position,
