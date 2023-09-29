@@ -4,57 +4,80 @@ import AllSections from "./AllSections";
 
 function App() {
     const [generalInfo, setGeneralInfo] = useState({
-        firstName: "John",
-        lastName: "Doe",
-        email: "johndoe@email.com",
+        firstName: "Spongebob",
+        lastName: "Squarepants",
+        email: "squarepants@bikinibottom.com",
         phoneNumber: "111-111-1111",
     });
     const [educationInfo, setEducationInfo] = useState([
         {
             id: 0,
-            schoolName: "University of California, Los Angeles",
-            location: "Los Angeles, CA",
-            titleOfStudy: "Bachelor of Arts in Business",
-            startDate: "June 2019",
-            endDate: "May 2023",
+            schoolName: "Bikini Bottom University",
+            location: "Bikini Bottom, Ocean",
+            titleOfStudy: "Bachelor of Science in Chemistry",
+            startDate: "Sept 2000",
+            endDate: "May 2004",
             additionalInfo: [""],
         }
     ]);
     const [experienceInfo, setExperienceInfo] = useState([
         {
             id: 0,
-            position: "Commander",
-            company: "Scout Regiment",
-            location: "Paradis",
-            startDate: "Year 850",
+            position: "Fry Cook",
+            company: "Krusty Krab",
+            location: "Bikini Bottom, Pacific Ocean",
+            startDate: "July 2009",
             endDate: "Present",
-            responsibilities: ["Repsonsibility 1", "Responsibility 2", "Responsibility 3"],
+            responsibilities: [
+                "Efficiently prepared customer meals with few mistakes, increasing sales by 200%", 
+                "Accomodated customer dietary restrictions by swapping out ingredients, resulting in frequent positive feedback", 
+                "Successfully created and advertised new recipes for the menu to increase variety offered"
+            ],
+        },
+        {
+            id: 0,
+            position: "Waiter",
+            company: "Krusty Krab",
+            location: "Bikini Bottom, Pacific Ocean",
+            startDate: "Aug 2005",
+            endDate: "July 2009",
+            responsibilities: [
+                "Resolved customer complaints swiftly to ensure customer satisfaction", 
+                "Trained new staff members on professionalism and cleaning and safety procedures to reduce onboarding time",
+            ],
         }
     ]);
     const [projectsInfo, setProjectsInfo] = useState([
         {
             id: 0,
-            projectName: "Retaking Wall Maria",
-            startDate: "846",
-            endDate: "846",
-            descriptions: ["Led 5+ survey corps regiments to regain Wall Maria from 200+ titans"],
+            projectName: "Serve Bubble Bass",
+            startDate: "June 2010",
+            endDate: "June 2010",
+            descriptions: [
+                "Served Bubble Bass a complicated order twice, once after failing to do so correctly the first time", 
+                "Uncovered Bubble Bass's ulterior motives to get a free Krabby Patty"
+            ],
         }
     ]);
     const [skillsInfo, setSkillsInfo] = useState([
         {
             id: 0,
-            category: "Special",
-            listedSkills: "High agility, decision-making, problem-solving"
+            category: "Soft Skills",
+            listedSkills: "Time management, decision-making, problem-solving, communication"
         }
     ]);
     const [editedEntries, setEditedEntries] = useState(
         [...Array(5).fill("")]
     );
     const [buttonHoverStyle, setButtonHoverStyle] = useState([
-        ...Array(5).fill([{ display: "none" }])
+        [{ display: "none" }],
+        [{ display: "none" }],
+        [{ display: "none" }, { display: "none" }],
+        [{ display: "none" }],
+        [{ display: "none" }]
     ]);
     const [entryHoverStyle, setEntryHoverStyle] = useState([
-        ...Array(5).fill([{}])
+        [{}], [{}], [{}, {}], [{}], [{}]
     ]);
 
     function handleMouseEnterEntry(sectionId, entryId) {
