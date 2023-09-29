@@ -41,7 +41,7 @@ function SkillsSection({ skillsInfo, handleEditSkill, handleDeleteSkill, handleM
                                     className="deleteInfo"
                                     onClick={(e) => {
                                         const entryId = e.target.closest(".skillsEntry").id.slice(-1);
-                                        handleDeleteSkill(entryId);
+                                        handleDeleteSkill("skill", entryId);
                                     }}
                                     style={{margin: "10px"}}
                                     type="button"

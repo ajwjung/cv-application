@@ -50,7 +50,7 @@ function ProjectsSection({ projectsInfo, handleEditProject, handleDeleteProject,
                                 className="deleteInfo"
                                 onClick={(e) => {
                                     const entryId = e.target.closest(".projectEntry").id.slice(-1);
-                                    handleDeleteProject(entryId);
+                                    handleDeleteProject("project", entryId);
                                 }}
                                 style={{margin: "10px"}}
                                 type="button"

@@ -56,7 +56,7 @@ function ExperienceSection({ experienceInfo, handleEditExperience, handleDeleteE
                                 className="deleteInfo"
                                 onClick={(e) => {
                                     const entryId = e.target.closest(".jobEntry").id.slice(-1);
-                                    handleDeleteExperience(entryId);
+                                    handleDeleteExperience("experience", entryId);
                                 }}
                                 style={{margin: "10px"}}
                                 type="button"

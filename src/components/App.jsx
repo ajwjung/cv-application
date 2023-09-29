@@ -3,6 +3,50 @@ import AllForms from "./AllForms";
 import AllSections from "./AllSections";
 
 function App() {
+    const [generalInfo, setGeneralInfo] = useState({
+        firstName: "John",
+        lastName: "Doe",
+        email: "johndoe@email.com",
+        phoneNumber: "111-111-1111",
+    });
+    const [educationInfo, setEducationInfo] = useState([
+        {
+            id: 0,
+            schoolName: "University of California, Los Angeles",
+            location: "Los Angeles, CA",
+            titleOfStudy: "Bachelor of Arts in Business",
+            startDate: "June 2019",
+            endDate: "May 2023",
+            additionalInfo: [""],
+        }
+    ]);
+    const [experienceInfo, setExperienceInfo] = useState([
+        {
+            id: 0,
+            position: "Commander",
+            company: "Scout Regiment",
+            location: "Paradis",
+            startDate: "Year 850",
+            endDate: "Present",
+            responsibilities: ["Repsonsibility 1", "Responsibility 2", "Responsibility 3"],
+        }
+    ]);
+    const [projectsInfo, setProjectsInfo] = useState([
+        {
+            id: 0,
+            projectName: "Retaking Wall Maria",
+            startDate: "846",
+            endDate: "846",
+            descriptions: ["Led 5+ survey corps regiments to regain Wall Maria from 200+ titans"],
+        }
+    ]);
+    const [skillsInfo, setSkillsInfo] = useState([
+        {
+            id: 0,
+            category: "Special",
+            listedSkills: "High agility, decision-making, problem-solving"
+        }
+    ]);
     const [editedEntries, setEditedEntries] = useState([...Array(5).fill("")]);
 
     function updateEditedEntryId(entryId, newValue) {
@@ -49,14 +93,32 @@ function App() {
         }
     }
 
-    /* ========== GENERAL ========== */
-    const [generalInfo, setGeneralInfo] = useState({
-        firstName: "John",
-        lastName: "Doe",
-        email: "johndoe@email.com",
-        phoneNumber: "111-111-1111",
-    });
+    function handleDeleteEntry(sectionName, entryId) {
+        switch (sectionName) {
+            case "education":
+                setEducationInfo(
+                    educationInfo.filter((_, index) => Number(entryId) !== index)
+                );
+                break;
+            case "experience":
+                setExperienceInfo(
+                    experienceInfo.filter((_, index) => Number(entryId) !== index)
+                );
+                break;
+            case "project":
+                setProjectsInfo(
+                    projectsInfo.filter((_, index) => Number(entryId) !== index)
+                );
+                break;
+            case "skill":
+                setSkillsInfo(
+                    skillsInfo.filter((_, index) => Number(entryId) !== index)
+                );
+                break;
+        }
+    }
 
+    /* ========== GENERAL ========== */
     function handleGeneralSubmit() {
         const form = document.forms.generalForm;
         const formData = new FormData(form);
@@ -104,17 +166,6 @@ function App() {
     }
 
     /* ========== EDUCATION ========== */
-    const [educationInfo, setEducationInfo] = useState([
-        {
-            id: 0,
-            schoolName: "University of California, Los Angeles",
-            location: "Los Angeles, CA",
-            titleOfStudy: "Bachelor of Arts in Business",
-            startDate: "June 2019",
-            endDate: "May 2023",
-            additionalInfo: [""],
-        }
-    ]);
     const [buttonHoverEducation, setButtonHoverEducation] = useState([{ display: "none" }]);
     const [entryHoverEducation, setEntryHoverEducation] = useState([{}]);
 
@@ -275,24 +326,7 @@ function App() {
         });
     }
 
-    function handleDeleteEducation(entryId) {
-        setEducationInfo(
-            educationInfo.filter((_, index) => Number(entryId) !== index)
-        );
-    }
-
     /* ========== EXPERIENCE ========== */
-    const [experienceInfo, setExperienceInfo] = useState([
-        {
-            id: 0,
-            position: "Commander",
-            company: "Scout Regiment",
-            location: "Paradis",
-            startDate: "Year 850",
-            endDate: "Present",
-            responsibilities: ["Repsonsibility 1", "Responsibility 2", "Responsibility 3"],
-        }
-    ]);
     const [buttonHoverExperience, setButtonHoverExperience] = useState([{ display: "none" }]);
     const [entryHoverExperience, setEntryHoverExperience] = useState([{}]);
 
@@ -457,22 +491,7 @@ function App() {
         });
     }
 
-    function handleDeleteExperience(entryId) {
-        setExperienceInfo(
-            experienceInfo.filter((_, index) => Number(entryId) !== index)
-        );
-    }
-
     /* ========== PROJECTS ========== */
-    const [projectsInfo, setProjectsInfo] = useState([
-        {
-            id: 0,
-            projectName: "Retaking Wall Maria",
-            startDate: "846",
-            endDate: "846",
-            descriptions: ["Led 5+ survey corps regiments to regain Wall Maria from 200+ titans"],
-        }
-    ]);
     const [buttonHoverProject, setButtonHoverProject] = useState([{ display: "none" }]);
     const [entryHoverProject, setEntryHoverProject] = useState([{}]);
 
@@ -627,20 +646,7 @@ function App() {
         });
     }
 
-    function handleDeleteProject(entryId) {
-        setProjectsInfo(
-            projectsInfo.filter((_, index) => Number(entryId) !== index)
-        );
-    }
-
     /* ========== SKILLS ========== */
-    const [skillsInfo, setSkillsInfo] = useState([
-        {
-            id: 0,
-            category: "Special",
-            listedSkills: "High agility, decision-making, problem-solving"
-        }
-    ]);
     const [buttonHoverSkill, setButtonHoverSkill] = useState([{ display: "none" }]);
     const [entryHoverSkill, setEntryHoverSkill] = useState([{}]);
 
@@ -762,12 +768,6 @@ function App() {
         });
     }
 
-    function handleDeleteSkill(entryId) {
-        setSkillsInfo(
-            skillsInfo.filter((_, index) => Number(entryId) !== index)
-        );
-    }
-
     return (
         <>
             <AllForms 
@@ -791,13 +791,14 @@ function App() {
                 editSkillStatus={typeof(editedEntries[4]) === "number"}
             />
             <AllSections 
+                // Shared Props                
+                handleDeleteEntry={handleDeleteEntry} 
                 // General
                 generalInfo={generalInfo}
                 handleEditGeneral={handleEditGeneral}
                 // Education
                 educationInfo={educationInfo}
                 handleEditEducation={handleEditEducation}
-                handleDeleteEducation={handleDeleteEducation}
                 handleMouseEnterEducation={handleMouseEnterEducation}
                 handleMouseLeaveEducation={handleMouseLeaveEducation}
                 buttonHoverEducation={buttonHoverEducation}
@@ -805,7 +806,6 @@ function App() {
                 // Experience
                 experienceInfo={experienceInfo} 
                 handleEditExperience={handleEditExperience}
-                handleDeleteExperience={handleDeleteExperience}
                 handleMouseEnterExperience={handleMouseEnterExperience}
                 handleMouseLeaveExperience={handleMouseLeaveExperience}
                 buttonHoverExperience={buttonHoverExperience}
@@ -813,7 +813,6 @@ function App() {
                 // Projects
                 projectsInfo={projectsInfo}
                 handleEditProject={handleEditProject}
-                handleDeleteProject={handleDeleteProject}
                 handleMouseEnterProject={handleMouseEnterProject}
                 handleMouseLeaveProject={handleMouseLeaveProject}
                 buttonHoverProject={buttonHoverProject}
@@ -821,7 +820,6 @@ function App() {
                 // Skills
                 skillsInfo={skillsInfo} 
                 handleEditSkill={handleEditSkill}
-                handleDeleteSkill={handleDeleteSkill}
                 handleMouseEnterSkill={handleMouseEnterSkill}
                 handleMouseLeaveSkill={handleMouseLeaveSkill}
                 buttonHoverSkill={buttonHoverSkill}

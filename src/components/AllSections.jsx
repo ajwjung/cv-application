@@ -7,7 +7,7 @@ import SkillsSection from "./Skills"
 function AllSections({ 
     generalInfo, educationInfo, experienceInfo, projectsInfo, skillsInfo,
     handleEditGeneral, handleEditEducation, handleEditExperience, handleEditProject, handleEditSkill, 
-    handleDeleteEducation, handleDeleteExperience, handleDeleteProject, handleDeleteSkill, 
+    handleDeleteEntry,
     handleMouseEnterEducation, handleMouseEnterExperience, handleMouseEnterProject, handleMouseEnterSkill, 
     handleMouseLeaveEducation, handleMouseLeaveExperience, handleMouseLeaveProject, handleMouseLeaveSkill,
     buttonHoverEducation, buttonHoverExperience, buttonHoverProject, buttonHoverSkill, 
@@ -24,7 +24,7 @@ function AllSections({
                 <EducationSection
                     educationInfo={educationInfo}
                     handleEditEducation={handleEditEducation}
-                    handleDeleteEducation={handleDeleteEducation}
+                    handleDeleteEducation={handleDeleteEntry}
                     handleMouseEnterEducation={handleMouseEnterEducation}
                     handleMouseLeaveEducation={handleMouseLeaveEducation}
                     buttonHoverEducation={buttonHoverEducation}
@@ -33,7 +33,7 @@ function AllSections({
                 <ExperienceSection
                     experienceInfo={experienceInfo}
                     handleEditExperience={handleEditExperience}
-                    handleDeleteExperience={handleDeleteExperience}
+                    handleDeleteExperience={handleDeleteEntry}
                     handleMouseEnterExperience={handleMouseEnterExperience}
                     handleMouseLeaveExperience={handleMouseLeaveExperience}
                     buttonHoverExperience={buttonHoverExperience}
@@ -42,7 +42,7 @@ function AllSections({
                 <ProjectsSection
                     projectsInfo={projectsInfo}
                     handleEditProject={handleEditProject}
-                    handleDeleteProject={handleDeleteProject}
+                    handleDeleteProject={handleDeleteEntry}
                     handleMouseEnterProject={handleMouseEnterProject}
                     handleMouseLeaveProject={handleMouseLeaveProject}
                     buttonHoverProject={buttonHoverProject}
@@ -51,7 +51,7 @@ function AllSections({
                 <SkillsSection
                     skillsInfo={skillsInfo}
                     handleEditSkill={handleEditSkill}
-                    handleDeleteSkill={handleDeleteSkill}
+                    handleDeleteSkill={handleDeleteEntry}
                     handleMouseEnterSkill={handleMouseEnterSkill}
                     handleMouseLeaveSkill={handleMouseLeaveSkill}
                     buttonHoverSkill={buttonHoverSkill}

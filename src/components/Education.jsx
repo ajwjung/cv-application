@@ -55,7 +55,7 @@ function EducationSection({ educationInfo, handleEditEducation, handleDeleteEduc
                                 className="deleteInfo"
                                 onClick={(e) => {
                                     const entryId = e.target.closest(".educationEntry").id.slice(-1);
-                                    handleDeleteEducation(entryId);
+                                    handleDeleteEducation("education", entryId);
                                 }}
                                 style={{margin: "10px"}}
                                 type="button"
