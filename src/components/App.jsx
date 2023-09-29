@@ -771,24 +771,21 @@ function App() {
     return (
         <>
             <AllForms 
+                // Shared Props
+                editedEntries={editedEntries}
                 // General
-                handleSubmitGeneral={handleGeneralSubmit}  
-                editGeneralStatus={editedEntries[0]}
+                handleSubmitGeneral={handleGeneralSubmit}
                 // Education
                 handleSubmitEducation={handleEducationSubmit}
                 handleAddAdditionalInfo={handleAddAdditionalInfo}
-                editEducationStatus={typeof(editedEntries[1]) === "number"}
                 // Experience
                 handleSubmitExperience={handleJobSubmit}
                 handleAddJobDuty={handleAddJobDuty}
-                editJobStatus={typeof(editedEntries[2]) === "number"}
                 // Projects
                 handleSubmitProject={handleSubmitProject}
                 handleAddDescription={handleAddDescription}
-                editProjectStatus={typeof(editedEntries[3]) === "number"}
                 // Skills
                 handleSubmitSkill={handleSubmitSkill}
-                editSkillStatus={typeof(editedEntries[4]) === "number"}
             />
             <AllSections 
                 // Shared Props                

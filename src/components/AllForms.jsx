@@ -1,7 +1,7 @@
 import { GeneralFields, EducationFields, ExperienceFields, ProjectsFields, SkillsFields } from "../components/FormFields"
 
 function AllForms({ 
-    editGeneralStatus, editEducationStatus, editJobStatus, editProjectStatus, editSkillStatus, handleSubmitGeneral, handleSubmitEducation, handleSubmitExperience, handleSubmitProject, handleSubmitSkill,
+    editedEntries, handleSubmitGeneral, handleSubmitEducation, handleSubmitExperience, handleSubmitProject, handleSubmitSkill,
     handleAddAdditionalInfo, handleAddJobDuty, handleAddDescription, 
  }) {
     return (
@@ -10,26 +10,34 @@ function AllForms({
              <div className="formsWrapper">
                  <GeneralFields
                     handleSubmitGeneral={handleSubmitGeneral}
-                    editGeneralStatus={editGeneralStatus}
+                    editGeneralStatus={editedEntries[0]}
                 />
                 <EducationFields
                     handleSubmitEducation={handleSubmitEducation}
                     handleAddAdditionalInfo={handleAddAdditionalInfo}
-                    editEducationStatus={editEducationStatus}
+                    editEducationStatus={
+                        typeof(editedEntries[1]) === "number"
+                    }
                 />
                 <ExperienceFields
                     handleSubmitExperience={handleSubmitExperience}
                     handleAddJobDuty={handleAddJobDuty}
-                    editJobStatus={editJobStatus}
+                    editJobStatus={
+                        typeof(editedEntries[2]) === "number"
+                    }
                 />
                 <ProjectsFields
                     handleSubmitProject={handleSubmitProject}
                     handleAddDescription={handleAddDescription}
-                    editProjectStatus={editProjectStatus}
+                    editProjectStatus={
+                        typeof(editedEntries[3]) === "number"
+                    }
                 />
                 <SkillsFields
                     handleSubmitSkill={handleSubmitSkill}
-                    editSkillStatus={editSkillStatus}
+                    editSkillStatus={
+                        typeof(editedEntries[4]) === "number"
+                    }
                 />
              </div>
         </div>
