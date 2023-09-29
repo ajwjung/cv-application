@@ -41,8 +41,33 @@ fieldset input {
     width: 100%;
 }
 
+input:focus {
+    outline: 2px solid rgb(136, 168, 228);
+    border: 1px solid rgb(37, 55, 92);
+    border-radius: 1px;
+    padding: 2px;
+}
+
+input:invalid {
+    border: 1px solid rgb(165, 10, 10);
+    border-radius: 1px;
+    padding: 2px;
+}
+
+input:invalid:focus {
+    outline: 2px solid rgb(235, 184, 184);
+}
+
 button {
     margin-top: 10px;
+}
+
+.requiredAsterisk {
+    color: rgb(165, 10, 10);
+}
+
+.formHelp {
+    text-align: center;
 }
 
 .addField,
@@ -109,7 +134,7 @@ button {
     }
 
     .sectionsWrapper {
-        border: 1px solid #283e5c;
+        border: 1px solid rgb(40, 62, 92);
         padding: 1rem calc(1rem + 10px);
     }
 }

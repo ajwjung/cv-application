@@ -20,7 +20,10 @@ function GeneralFields({ handleSubmitGeneral, editGeneralStatus }) {
             <h2 className="generalHeading">General Information</h2>
             <fieldset className="fullName">
                 <div className="first">
-                    <label htmlFor="firstName">First Name</label>
+                    <label htmlFor="firstName">
+                        First Name
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                        </label>
                     <input
                         type="text"
                         name="firstName"
@@ -30,7 +33,10 @@ function GeneralFields({ handleSubmitGeneral, editGeneralStatus }) {
                     />
                 </div>
                 <div className="last">
-                    <label htmlFor="lastName">Last Name</label>
+                    <label htmlFor="lastName">
+                        Last Name
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                    </label>
                     <input
                         type="text"
                         name="lastName"
@@ -40,7 +46,10 @@ function GeneralFields({ handleSubmitGeneral, editGeneralStatus }) {
                     />
                 </div>
             </fieldset>
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">
+                Email Address
+                <span className="requiredAsterisk" aria-label="required">*</span>
+            </label>
             <input 
                 type="email" 
                 name="email" 
@@ -48,7 +57,10 @@ function GeneralFields({ handleSubmitGeneral, editGeneralStatus }) {
                 placeholder="Email Address" 
                 required
             />
-            <label htmlFor="phoneNumber">Phone Number</label>
+            <label htmlFor="phoneNumber">
+                Phone Number
+                <span className="requiredAsterisk" aria-label="required">*</span>
+            </label>
             <input 
                 type="tel" 
                 name="phoneNumber" 
@@ -82,7 +94,10 @@ function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editE
             }} 
         >
             <h2 className="educationHeading">Education</h2>
-            <label htmlFor="schoolName">Name of Institution</label>
+            <label htmlFor="schoolName">
+                Name of Institution
+                <span className="requiredAsterisk" aria-label="required">*</span>
+            </label>
             <input 
                 type="text" 
                 name="schoolName" 
@@ -90,7 +105,10 @@ function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editE
                 placeholder="Name of Institution" 
                 required
             />
-            <label htmlFor="location">Location</label>
+            <label htmlFor="location">
+                Location
+                <span className="requiredAsterisk" aria-label="required">*</span>
+            </label>
             <input 
                 type="text" 
                 name="location" 
@@ -99,7 +117,10 @@ function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editE
                 pattern="[- A-Za-z]+, [- A-Za-z]+"
                 required
             />
-            <label htmlFor="titleOfStudy">Title of Study</label>
+            <label htmlFor="titleOfStudy">
+                Title of Study
+                <span className="requiredAsterisk" aria-label="required">*</span>
+            </label>
             <input 
                 type="text" 
                 name="titleOfStudy" 
@@ -109,7 +130,10 @@ function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editE
             />
             <fieldset>
                 <div className="start">
-                    <label htmlFor="startDate">Start Date</label>
+                    <label htmlFor="startDate">
+                        Start Date
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                    </label>
                     <input
                         type="text"
                         name="startDate"
@@ -119,7 +143,10 @@ function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editE
                     />
                 </div>
                 <div className="end">
-                    <label htmlFor="endDate">End Date</label>
+                    <label htmlFor="endDate">
+                        End Date
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                    </label>
                     <input
                         type="text"
                         name="endDate"
@@ -170,7 +197,10 @@ function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobSta
             }} 
         >
             <h2 className="experienceHeading">Experience</h2>
-            <label htmlFor="company">Company Name</label>
+            <label htmlFor="company">
+                Company Name
+                <span className="requiredAsterisk" aria-label="required">*</span>
+            </label>
             <input 
                 type="text" 
                 name="company" 
@@ -178,7 +208,10 @@ function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobSta
                 placeholder="Company Name"
                 required
             />
-            <label htmlFor="companyLocation">Location</label>
+            <label htmlFor="companyLocation">
+                Location
+                <span className="requiredAsterisk" aria-label="required">*</span>
+            </label>
             <input 
                 type="text" 
                 name="companyLocation" 
@@ -187,7 +220,10 @@ function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobSta
                 pattern="[ \-A-Za-z]+, [ \-A-Za-z]+"
                 required
             />
-            <label htmlFor="position">Position</label>
+            <label htmlFor="position">
+                Position
+                <span className="requiredAsterisk" aria-label="required">*</span>
+            </label>
             <input 
                 type="text" 
                 name="position" 
@@ -197,7 +233,10 @@ function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobSta
             />
             <fieldset>
                 <div className="start">
-                    <label htmlFor="jobStartDate">Start Date</label>
+                    <label htmlFor="jobStartDate">
+                        Start Date
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                    </label>
                     <input
                         type="text"
                         name="jobStartDate"
@@ -207,7 +246,10 @@ function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobSta
                     />
                 </div>
                 <div className="end">
-                    <label htmlFor="jobEndDate">End Date</label>
+                    <label htmlFor="jobEndDate">
+                        End Date
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                    </label>
                     <input
                         type="text"
                         name="jobEndDate"
@@ -218,7 +260,10 @@ function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobSta
                 </div>
             </fieldset>
             <fieldset className="jobDuties">
-                <legend>Core Responsibilities (3 required)</legend>
+                <legend>
+                    Core Responsibilities (3 required)
+                    <span className="requiredAsterisk" aria-label="required">*</span>
+                </legend>
                 <input
                     type="text"
                     name="jobDuty"
@@ -271,7 +316,10 @@ function ProjectsFields({ handleSubmitProject, handleAddDescription, editProject
             }} 
         >
             <h2 className="projectsHeading">Projects</h2>
-            <label htmlFor="projectName">Project Name</label>
+            <label htmlFor="projectName">
+                Project Name
+                <span className="requiredAsterisk" aria-label="required">*</span>
+            </label>
             <input 
                 type="text" 
                 name="projectName" 
@@ -281,7 +329,10 @@ function ProjectsFields({ handleSubmitProject, handleAddDescription, editProject
             />
             <fieldset>
                 <div className="start">
-                    <label htmlFor="projectStartDate">Start Date</label>
+                    <label htmlFor="projectStartDate">
+                        Start Date
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                    </label>
                     <input
                         type="text"
                         name="projectStartDate"
@@ -291,7 +342,10 @@ function ProjectsFields({ handleSubmitProject, handleAddDescription, editProject
                     />
                 </div>
                 <div className="end">
-                    <label htmlFor="projectEndDate">End Date</label>
+                    <label htmlFor="projectEndDate">
+                        End Date
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                    </label>
                     <input
                         type="text"
                         name="projectEndDate"
@@ -302,7 +356,10 @@ function ProjectsFields({ handleSubmitProject, handleAddDescription, editProject
                 </div>
             </fieldset>
             <fieldset className="projectDescriptions">
-                <legend>Project Description (at least 1 required)</legend>
+                <legend>
+                    Project Description (at least 1 required)
+                    <span className="requiredAsterisk" aria-label="required">*</span>
+                </legend>
                 <input
                     type="text"
                     name="projectDescription"
@@ -344,7 +401,10 @@ function SkillsFields({ handleSubmitSkill, editSkillStatus }) {
             <h2 className="skillsHeading">Skills</h2>
             <fieldset className="skillsList">
                 <div className="skillCategory">
-                    <label htmlFor="skillCategory">Category</label>
+                    <label htmlFor="skillCategory">
+                        Category
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                    </label>
                     <input
                         type="text"
                         name="skillCategory"
@@ -354,7 +414,10 @@ function SkillsFields({ handleSubmitSkill, editSkillStatus }) {
                     />
                 </div>
                 <div className="skillInfo">
-                    <label htmlFor="listOfSkills">Skill</label>
+                    <label htmlFor="listOfSkills">
+                        Skill
+                        <span className="requiredAsterisk" aria-label="required">*</span>
+                    </label>
                     <input
                         type="text"
                         name="listOfSkills"

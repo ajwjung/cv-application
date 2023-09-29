@@ -7,8 +7,15 @@ function AllForms({
     return (
         <div className="formsContainer">
             <h1 className="formHeading">Form Fields</h1>
-             <div className="formsWrapper">
-                 <GeneralFields
+            <div className="formHelp">
+                <p>All required fields are indicated with an asterisk (
+                    <span className="requiredAsterisk" aria-label="required field">*</span>
+                    ). 
+                </p>
+                <p>The Projects and Skills sections are optional.</p>
+            </div>
+            <div className="formsWrapper">
+                <GeneralFields
                     handleSubmitGeneral={handleSubmitGeneral}
                     editGeneralStatus={editedEntries[0]}
                 />
@@ -39,7 +46,7 @@ function AllForms({
                         typeof(editedEntries[4]) === "number"
                     }
                 />
-             </div>
+            </div>
         </div>
     )
 }
