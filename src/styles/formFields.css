@@ -116,12 +116,16 @@ button {
     fieldset {
         display: flex;
     }
+
+    .sectionsWrapper {
+        border: 1px solid rgb(40, 62, 92);
+        padding: 1rem calc(1rem + 10px);
+    }
 }
 
 @media (min-width: 1000px) {
     #root {
         display: grid;
-        grid-template-columns: repeat(1fr, 1.5fr);
         gap: 2rem;
     }
 
@@ -131,10 +135,5 @@ button {
 
     .sectionsContainer {
         grid-column: 2;
-    }
-
-    .sectionsWrapper {
-        border: 1px solid rgb(40, 62, 92);
-        padding: 1rem calc(1rem + 10px);
     }
 }
