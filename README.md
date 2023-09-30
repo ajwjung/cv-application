@@ -1,6 +1,6 @@
 # CV Application
 
-* Live demo
+* [Live demo](https://main--lucky-pothos-a8c3ff.netlify.app/)
 
 ## Objective
 
