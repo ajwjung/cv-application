@@ -11,6 +11,9 @@ function AllSections({
     return (
         <div className="sectionsContainer">
             <h1 className="sectionsHeading">Generated CV</h1>
+            <div className="cvInfo">
+                <p>Hover over a section's entry to edit or delete it.</p>
+            </div>
             <div className="sectionsWrapper">
                 <GeneralSection
                     generalInfo={generalInfo}
