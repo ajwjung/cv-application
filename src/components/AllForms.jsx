@@ -1,4 +1,5 @@
-import { GeneralFields, EducationFields, ExperienceFields, ProjectsFields, SkillsFields } from "../components/FormFields"
+import PropTypes from "prop-types";
+import { GeneralFields, EducationFields, ExperienceFields, ProjectsFields, SkillsFields } from "../components/FormFields";
 
 function AllForms({ 
     editedEntries, handleSubmitGeneral, handleSubmitEducation, handleSubmitExperience, handleSubmitProject, handleSubmitSkill,
@@ -49,6 +50,18 @@ function AllForms({
             </div>
         </div>
     )
+}
+
+AllForms.propTypes = {
+    editedEntries: PropTypes.array,
+    handleSubmitGeneral: PropTypes.func,
+    handleSubmitEducation: PropTypes.func,
+    handleSubmitExperience: PropTypes.func,
+    handleSubmitProject: PropTypes.func,
+    handleSubmitSkill: PropTypes.func,
+    handleAddAdditionalInfo: PropTypes.func,
+    handleAddJobDuty: PropTypes.func,
+    handleAddDescription: PropTypes.func,
 }
 
 export default AllForms;

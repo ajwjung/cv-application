@@ -1,9 +1,11 @@
+import PropTypes from "prop-types";
+
 function GeneralSection({ generalInfo, handleEditGeneral, handleMouseEnterGeneral, handleMouseLeaveGeneral, buttonHoverGeneral, entryHoverGeneral }) {
     return (
         <section 
             className="generalWrapper"
             onMouseEnter={() => {
-                // sectionId = 0 and entryId = 0 (always only one entry)
+                // sectionId = 0 and entryId = 0 (there's always only one entry)
                 handleMouseEnterGeneral(0, 0)
             }} 
             onMouseLeave={() => {
@@ -24,6 +26,20 @@ function GeneralSection({ generalInfo, handleEditGeneral, handleMouseEnterGenera
             </button>
         </section>
     )
+}
+
+GeneralSection.propTypes = {
+    generalInfo: PropTypes.shape({
+        email: PropTypes.string,
+        firstName: PropTypes.string,
+        lastName: PropTypes.string, 
+        phoneNumber: PropTypes.string,
+    }),
+    handleEditGeneral: PropTypes.func,
+    handleMouseEnterGeneral: PropTypes.func,
+    handleMouseLeaveGeneral: PropTypes.func,
+    buttonHoverGeneral: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
+    entryHoverGeneral: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
 }
 
 export default GeneralSection;

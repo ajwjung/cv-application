@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function EducationSection({ educationInfo, handleEditEducation, handleDeleteEducation, handleMouseEnterEducation, handleMouseLeaveEducation, buttonHoverEducation, entryHoverEducation }) {
     return (
         <section className="educationWrapper">
@@ -68,6 +70,16 @@ function EducationSection({ educationInfo, handleEditEducation, handleDeleteEduc
             })}
         </section>
     )
+}
+
+EducationSection.propTypes = {
+    educationInfo: PropTypes.arrayOf(PropTypes.object),
+    handleEditEducation: PropTypes.func,
+    handleDeleteEducation: PropTypes.func,
+    handleMouseEnterEducation: PropTypes.func,
+    handleMouseLeaveEducation: PropTypes.func,
+    buttonHoverEducation: PropTypes.arrayOf(PropTypes.array),
+    entryHoverEducation: PropTypes.arrayOf(PropTypes.array),
 }
 
 export default EducationSection;

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function SkillsSection({ skillsInfo, handleEditSkill, handleDeleteSkill, handleMouseEnterSkill, handleMouseLeaveSkill, buttonHoverSkill, entryHoverSkill }) {
     return (
         skillsInfo.length > 0 && <section className="skillsWrapper">
@@ -55,6 +57,20 @@ function SkillsSection({ skillsInfo, handleEditSkill, handleDeleteSkill, handleM
             </ul>
         </section>
     )
+}
+
+SkillsSection.propTypes = {
+    skillsInfo: PropTypes.arrayOf(PropTypes.shape({
+        category: PropTypes.string,
+        id: PropTypes.number,
+        listedSkills: PropTypes.string,
+    })),
+    handleEditSkill: PropTypes.func,
+    handleDeleteSkill: PropTypes.func,
+    handleMouseEnterSkill: PropTypes.func,
+    handleMouseLeaveSkill: PropTypes.func,
+    buttonHoverSkill: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
+    entryHoverSkill: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
 }
 
 export default SkillsSection;

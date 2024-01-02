@@ -1,8 +1,9 @@
 import GeneralSection from "./General";
-import EducationSection from "./Education"
-import ExperienceSection from "./Experience"
-import ProjectsSection from "./Projects"
-import SkillsSection from "./Skills"
+import EducationSection from "./Education";
+import ExperienceSection from "./Experience";
+import ProjectsSection from "./Projects";
+import SkillsSection from "./Skills";
+import PropTypes from "prop-types";
 
 function AllSections({ 
     generalInfo, educationInfo, experienceInfo, projectsInfo, skillsInfo,
@@ -62,6 +63,29 @@ function AllSections({
             </div>
         </div>
     )
+}
+
+AllSections.propTypes = {
+    generalInfo: PropTypes.shape({
+        email: PropTypes.string,
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        phoneNumber: PropTypes.string,
+    }),
+    educationInfo: PropTypes.arrayOf(PropTypes.object),
+    experienceInfo: PropTypes.arrayOf(PropTypes.object),
+    projectsInfo: PropTypes.arrayOf(PropTypes.object),
+    skillsInfo: PropTypes.arrayOf(PropTypes.object),
+    handleEditGeneral: PropTypes.func,
+    handleEditEducation: PropTypes.func,
+    handleEditExperience: PropTypes.func,
+    handleEditProject: PropTypes.func,
+    handleEditSkill: PropTypes.func,
+    handleDeleteEntry: PropTypes.func,
+    handleMouseEnterEntry: PropTypes.func,
+    handleMouseLeaveEntry: PropTypes.func,
+    buttonHoverStyle: PropTypes.arrayOf(PropTypes.array),
+    entryHoverStyle: PropTypes.arrayOf(PropTypes.array),
 }
 
 export default AllSections;

@@ -1,5 +1,6 @@
-import "../styles/formFields.css"
-import "../styles/generatedCv.css"
+import PropTypes from "prop-types";
+import "../styles/formFields.css";
+import "../styles/generatedCv.css";
 
 function GeneralFields({ handleSubmitGeneral, editGeneralStatus }) {
     function clearFormFields() {
@@ -75,6 +76,11 @@ function GeneralFields({ handleSubmitGeneral, editGeneralStatus }) {
             }</button>
         </form>
     )
+}
+
+GeneralFields.propTypes = {
+    handleSubmitGeneral: PropTypes.func,
+    editGeneralStatus: PropTypes.bool,
 }
 
 function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editEducationStatus }) {
@@ -178,6 +184,12 @@ function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editE
             }</button>
         </form>
     )
+}
+
+EducationFields.propTypes = {
+    handleSubmitEducation: PropTypes.func,
+    handleAddAdditionalInfo: PropTypes.func,
+    editEducationStatus: PropTypes.bool,
 }
 
 function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobStatus }) {
@@ -299,6 +311,12 @@ function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobSta
     )
 }
 
+ExperienceFields.propTypes = {
+    handleSubmitExperience: PropTypes.func,
+    handleAddJobDuty: PropTypes.func,
+    editJobStatus: PropTypes.bool,
+}
+
 function ProjectsFields({ handleSubmitProject, handleAddDescription, editProjectStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#projectsForm input")
@@ -382,6 +400,12 @@ function ProjectsFields({ handleSubmitProject, handleAddDescription, editProject
     )
 }
 
+ProjectsFields.propTypes = {
+    handleSubmitProject: PropTypes.func,
+    handleAddDescription: PropTypes.func,
+    editProjectStatus: PropTypes.bool,
+}
+
 function SkillsFields({ handleSubmitSkill, editSkillStatus }) {
     function clearFormFields() {
         const inputFields = document.querySelectorAll("#skillsForm input")
@@ -434,6 +458,11 @@ function SkillsFields({ handleSubmitSkill, editSkillStatus }) {
             }</button>
         </form>
     )
+}
+
+SkillsFields.propTypes = {
+    handleSubmitSkill: PropTypes.func,
+    editSkillStatus: PropTypes.bool,
 }
 
 export { GeneralFields, EducationFields, ExperienceFields, ProjectsFields, SkillsFields };

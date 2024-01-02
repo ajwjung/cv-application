@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function ProjectsSection({ projectsInfo, handleEditProject, handleDeleteProject, handleMouseEnterProject, handleMouseLeaveProject, buttonHoverProject, entryHoverProject }) {
     return (
         projectsInfo.length > 0 && <section className="projectsWrapper">
@@ -63,6 +65,16 @@ function ProjectsSection({ projectsInfo, handleEditProject, handleDeleteProject,
             })}
         </section>
     )
+}
+
+ProjectsSection.propTypes = {
+    projectsInfo: PropTypes.arrayOf(PropTypes.object),
+    handleEditProject: PropTypes.func,
+    handleDeleteProject: PropTypes.func,
+    handleMouseEnterProject: PropTypes.func,
+    handleMouseLeaveProject: PropTypes.func,
+    buttonHoverProject: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
+    entryHoverProject: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
 }
 
 export default ProjectsSection;

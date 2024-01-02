@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function ExperienceSection({ experienceInfo, handleEditExperience, handleDeleteExperience, handleMouseEnterExperience, handleMouseLeaveExperience, buttonHoverExperience, entryHoverExperience }) {
     return (
         <section className="experienceWrapper">
@@ -66,6 +68,16 @@ function ExperienceSection({ experienceInfo, handleEditExperience, handleDeleteE
             })}
         </section>
     )
+}
+
+ExperienceSection.propTypes = {
+    experienceInfo: PropTypes.arrayOf(PropTypes.object),
+    handleEditExperience: PropTypes.func,
+    handleDeleteExperience: PropTypes.func,
+    handleMouseEnterExperience: PropTypes.func,
+    handleMouseLeaveExperience: PropTypes.func,
+    buttonHoverExperience: PropTypes.arrayOf(PropTypes.array),
+    entryHoverExperience: PropTypes.arrayOf(PropTypes.array),
 }
 
 export default ExperienceSection;
