@@ -1,3 +1,13 @@
+:root {
+    --red: rgb(165, 10, 10);
+    --white: rgb(249, 249, 249);
+    --off-white: rgb(239, 243, 247);
+    --pale-blue: rgb(201, 215, 233);
+    --baby-blue: rgb(136, 168, 228);
+    --dark-blue: rgb(37, 55, 92);
+    --gap: 10px;
+}
+
 #root {
     margin: 0 auto;
     padding: 2rem;
@@ -9,12 +19,12 @@
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    background: rgb(239, 243, 247);
+    gap: var(--gap);
+    background: var(--off-white);
     border: 1px solid rgb(142, 161, 180);
     border-radius: 10px;
     padding: 1rem;
-    margin: 10px 0;
+    margin: var(--gap) 0;
 }
 
 label {
@@ -33,7 +43,7 @@ fieldset {
     display: flex;
     padding: 0;
     border: none;
-    gap: 10px;
+    gap: var(--gap);
     width: 100%;
 }
 
@@ -42,28 +52,28 @@ fieldset input {
 }
 
 input:focus {
-    outline: 2px solid rgb(136, 168, 228);
-    border: 1px solid rgb(37, 55, 92);
+    outline: 2px solid var(--baby-blue);
+    border: 1px solid var(--dark-blue);
     border-radius: 1px;
     padding: 2px;
 }
 
 input:invalid {
-    border: 1px solid rgb(165, 10, 10);
+    border: 1px solid var(--red);
     border-radius: 1px;
     padding: 2px;
 }
 
 input:invalid:focus {
-    outline: 2px solid rgb(235, 184, 184);
+    outline: 2px solid var(--hover-pink);
 }
 
 button {
-    margin-top: 10px;
+    margin-top: var(--gap);
 }
 
 .requiredAsterisk {
-    color: rgb(165, 10, 10);
+    color: var(--red);
 }
 
 .formHelp {
@@ -72,18 +82,13 @@ button {
 
 .addField,
 .saveInfo {
-    background-color: rgb(201, 215, 233);
+    background-color: var(--pale-blue);
 }
 
 .first,
 .last,
 .start,
-.end {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
+.end,
 .skillCategory,
 .skillInfo {
     display: flex;
@@ -118,7 +123,7 @@ button {
     }
 
     .sectionsWrapper {
-        border: 1px solid rgb(40, 62, 92);
+        border: 1px solid var(--blue);
         padding: 1rem calc(1rem + 10px);
     }
 }
@@ -137,3 +142,50 @@ button {
         grid-column: 2;
     }
 }
+
+/* Styles for dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light-gray: rgb(100, 100, 100);
+        --gray: rgb(80, 80, 80);
+        --dark-gray: rgb(50, 50, 50);
+        --black: rgb(30, 30, 30);
+        --light-red: rgb(225, 125, 125);
+    }
+
+    form {
+        background: var(--dark-gray);
+        border: 1px solid var(--light-gray);
+    }
+
+    .requiredAsterisk {
+        color: var(--light-red);
+    }
+
+    input:invalid {
+        border: 1px solid var(--light-red);
+    }
+    
+    input:invalid:focus {
+        outline: 2px solid var(--hover-pink);
+    }
+
+    .saveInfo,
+    .addField {
+        color: var(--off-white);
+        background: var(--gray);
+    }
+
+    .saveInfo:hover,
+    .saveInfo:focus,
+    .addField:hover,
+    .addField:focus {
+        background: var(--black);
+        border: 1px solid var(--off-white); 
+    }
+
+    .sectionsWrapper {
+        border: 1px solid var(--light-gray);
+    }
+  }
+  

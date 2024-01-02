@@ -10,6 +10,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --blue: rgb(40, 62, 92);
+  --mid-blue: rgb(85, 120, 165);
 }
 
 * {
@@ -37,7 +40,7 @@ button {
 }
 
 button:hover {
-  border-color: rgb(85, 120, 165);
+  border-color: var(--mid-blue);
   background: lightsteelblue;
 }
 
@@ -48,16 +51,38 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: rgb(40, 62, 92);
+    color: var(--blue);
     background-color: rgb(255, 255, 255);
   }
 
   button {
-    color: rgb(40, 62, 92);
+    color: var(--blue);
   }
 
   section button {
-    background-color: rgb(249, 249, 249);
-    border: 1px solid rgb(85, 120, 165);
+    background-color: var(--white);
+    border: 1px solid var(--mid-blue);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--off-white);
+    background-color:  rgb(36, 36, 36);
+  }
+
+  #root {
+    background-color:  rgb(36, 36, 36);
+  }
+
+  button {
+    color: var(--off-white);
+    background: var(--gray);
+  }
+
+  button:hover,
+  button:focus {
+    background: var(--dark-gray);
+    border: 1px solid var(--light-gray);  
   }
 }

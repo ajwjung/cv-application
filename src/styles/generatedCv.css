@@ -1,3 +1,9 @@
+:root {
+    --hover-pink: rgb(248, 193, 193);
+    --hover-blue: rgb(198, 219, 250);
+    --hover-border-blue: rgb(19, 92, 201);
+}
+
 /* Styles the generated CV */
 .educationDivider,
 .experienceDivider,
@@ -62,18 +68,45 @@ ul {
 }
 
 .editInfo:hover {
-    background:rgb(198, 219, 250);
-    border: 1px solid rgb(19, 92, 201);
+    background: var(--hover-blue);
+    border: 1px solid var(--hover-border-blue);
     text-transform: uppercase;
 }
 
 .deleteInfo:hover {
-    background: rgb(248, 193, 193);
-    border: 1px solid rgb(165, 10, 10);
+    background: var(--hover-pink);
+    border: 1px solid var(--red);
     text-transform: uppercase;
 }
 
 .skillsEntry .editInfo,
 .skillsEntry .deleteInfo {
     padding: 0.3rem 1.2rem;
+}
+
+/* Styles for dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dark-mode-red: rgb(56, 30, 30);
+        --dark-mode-blue: rgb(43, 50, 73);
+    }
+
+    .editInfo,
+    .deleteInfo {
+        color: var(--off-white);
+        background: var(--gray);
+    }
+
+    .editInfo:hover,
+    .editInfo:focus {
+        background: var(--dark-gray);
+        border: 1px solid var(--off-white); 
+    }
+
+    .deleteInfo:hover,
+    .deleteInfo:focus {
+        background: var(--dark-mode-red);
+        border: 1px solid var(--hover-pink);      
+    }
+
 }
