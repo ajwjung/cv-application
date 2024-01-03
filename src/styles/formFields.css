@@ -125,6 +125,7 @@ button {
 .collapse {
     display: none;
 }
+
 /* Styles the added additional fields */
 .additionalInfoFields,
 .jobDuties,
@@ -132,6 +133,7 @@ button {
     flex-direction: column;
 }
 
+/* Styles for tablets */
 @media (min-width: 800px) {
     .formsWrapper {
         display: grid;
@@ -150,6 +152,7 @@ button {
     }
 }
 
+/* Styles for desktop */
 @media (min-width: 1000px) {
     #root {
         display: grid;

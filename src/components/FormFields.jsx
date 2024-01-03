@@ -15,7 +15,7 @@ function GeneralFields({ handleSubmitGeneral, editGeneralStatus }) {
     }
 
     return (
-        <>
+        <div>
             <button
                 onClick={() => {
                     expandCollapseForm("generalForm");
@@ -98,7 +98,7 @@ function GeneralFields({ handleSubmitGeneral, editGeneralStatus }) {
                         : "Add Information"
                 }</button>
             </form>
-        </>
+        </div>
     )
 }
 
@@ -116,7 +116,7 @@ function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editE
     }
 
     return (
-        <>
+        <div>
             <button
                 onClick={() => {
                     expandCollapseForm("educationForm");
@@ -226,7 +226,7 @@ function EducationFields({ handleSubmitEducation, handleAddAdditionalInfo, editE
                         : "Add Information"
                 }</button>
             </form>
-        </>
+        </div>
     )
 }
 
@@ -245,7 +245,7 @@ function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobSta
     }
 
     return (
-        <>
+        <div>
             <button
                 onClick={() => {
                     expandCollapseForm("experienceForm");
@@ -371,7 +371,7 @@ function ExperienceFields({ handleSubmitExperience, handleAddJobDuty, editJobSta
                         : "Add Information"
                 }</button>
             </form>
-        </>
+        </div>
     )
 }
 
@@ -390,7 +390,7 @@ function ProjectsFields({ handleSubmitProject, handleAddDescription, editProject
     }
 
     return (
-        <>
+        <div>
             <button
                 onClick={() => {
                     expandCollapseForm("projectsForm");
@@ -480,7 +480,7 @@ function ProjectsFields({ handleSubmitProject, handleAddDescription, editProject
                         : "Add Information"
                 }</button>
             </form>
-        </>
+        </div>
     )
 }
 
@@ -499,7 +499,7 @@ function SkillsFields({ handleSubmitSkill, editSkillStatus }) {
     }
 
     return (
-        <>
+        <div>
             <button
                 onClick={() => {
                     expandCollapseForm("skillsForm");
@@ -560,7 +560,7 @@ function SkillsFields({ handleSubmitSkill, editSkillStatus }) {
                         : "Add Information"
                 }</button>
             </form>
-        </>
+        </div>
     )
 }
 
