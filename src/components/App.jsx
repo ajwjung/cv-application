@@ -277,15 +277,14 @@ function App() {
             ...formValues, 
         });
 
-        // setEditGeneralStatus(false);
         updateEditedEntryId(0, false);
     }
 
     function handleEditGeneral() {
         const allGeneralInputs = document.querySelectorAll("#generalForm input");
         const generalForm = document.getElementById("generalForm");
+        const toggleGeneralBtn = generalForm.previousSibling;
 
-        // setEditGeneralStatus(true);
         updateEditedEntryId(0, true);
 
         allGeneralInputs.forEach(input => {
@@ -306,7 +305,11 @@ function App() {
             }
         })
 
-        generalForm.scrollIntoView({
+        if (generalForm.classList.contains("collapse")) {
+            generalForm.classList.remove("collapse");
+        }
+
+        toggleGeneralBtn.scrollIntoView({
             behavior: "smooth",
             block: "start",
             inline: "start"
@@ -374,6 +377,7 @@ function App() {
         const allAdditionalInputs = document.querySelectorAll(".additionalInfoFields input");
         const numOfInfoValues = entryToEdit.additionalInfo.length;
         const educationForm = document.getElementById("educationForm");
+        const toggleEducationBtn = educationForm.previousSibling;
 
         updateEditedEntryId(1, Number(entryDivId));
 
@@ -413,7 +417,11 @@ function App() {
             input.value = correspondingText ? correspondingText : "";
         })
 
-        educationForm.scrollIntoView({
+        if (educationForm.classList.contains("collapse")) {
+            educationForm.classList.remove("collapse");
+        }
+
+        toggleEducationBtn.scrollIntoView({
             behavior: "smooth",
             block: "start",
             inline: "start"
@@ -485,6 +493,7 @@ function App() {
         const allJobDutyInputs = document.querySelectorAll(".jobDuties input");
         const numOfInfoValues = entryToEdit.responsibilities.length;
         const experienceForm = document.getElementById("experienceForm");
+        const toggleExperienceBtn = experienceForm.previousSibling;
         
         updateEditedEntryId(2, Number(entryDivId));
 
@@ -524,7 +533,11 @@ function App() {
             input.value = correspondingText ? correspondingText : "";
         })
 
-        experienceForm.scrollIntoView({
+        if (experienceForm.classList.contains("collapse")) {
+            experienceForm.classList.remove("collapse");
+        }
+
+        toggleExperienceBtn.scrollIntoView({
             behavior: "smooth",
             block: "start",
             inline: "start"
@@ -592,6 +605,7 @@ function App() {
         const allDescriptions = document.querySelectorAll(".projectDescriptions input");
         const numOfInfoValues = entryToEdit.descriptions.length;
         const projectsForm = document.getElementById("projectsForm");
+        const toggleProjectsBtn = projectsForm.previousSibling;
 
         updateEditedEntryId(3, Number(entryDivId));
 
@@ -625,7 +639,11 @@ function App() {
             input.value = correspondingText ? correspondingText : "";
         })
 
-        projectsForm.scrollIntoView({
+        if (projectsForm.classList.contains("collapse")) {
+            projectsForm.classList.remove("collapse");
+        }
+
+        toggleProjectsBtn.scrollIntoView({
             behavior: "smooth",
             block: "start",
             inline: "start"
@@ -676,6 +694,7 @@ function App() {
         const entryToEdit = skillsInfo[entryDivId];
         const allInputFields = document.querySelectorAll("#skillsForm input");
         const skillsForm = document.getElementById("skillsForm");
+        const toggleSkillsBtn = skillsForm.previousSibling;
         
         updateEditedEntryId(4, Number(entryDivId));
 
@@ -693,7 +712,11 @@ function App() {
             }
         });
 
-        skillsForm.scrollIntoView({
+        if (skillsForm.classList.contains("collapse")) {
+            skillsForm.classList.remove("collapse");
+        }
+
+        toggleSkillsBtn.scrollIntoView({
             behavior: "smooth",
             block: "start",
             inline: "start"

@@ -103,6 +103,28 @@ button {
     margin: 2rem;
 }
 
+/* Styles for button to expand/collapse form fields */
+.toggleFormField {
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    background: var(--pale-blue);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.expandCollapseIcon {
+    height: 30px;
+    width: 30px;
+}
+
+
+.collapse {
+    display: none;
+}
 /* Styles the added additional fields */
 .additionalInfoFields,
 .jobDuties,
@@ -160,6 +182,10 @@ button {
 
     .requiredAsterisk {
         color: var(--light-red);
+    }
+
+    .toggleFormField {
+        background: var(--gray);
     }
 
     input:invalid {
